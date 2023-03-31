@@ -90,9 +90,9 @@ public class Matrix {
 		int n = c;
 		double sum;
 		
-		for (int i = 0; i < r; i++) // this matrix' rows
+		for (int j = 0; j< thatMatrix.c; j++) // this matrix' rows
 		{
-			for (int j = 0; j< thatMatrix.c; j++) // that Matrix' cols 
+			for (int i = 0; i< r; i++) // that Matrix' cols 
 			{
 				sum = 0; 
 				for (int k = 0; k < n; k++) {
@@ -111,10 +111,12 @@ public class Matrix {
 	public String toString() {
 		String result = ""; 
 		
-		for(int i = 0; i < c; i++) {
+	
+		// rows 
+		for(int row = 0; row< r; row++) {
 			result += "[ ";
-			for (int j = 0; j < r; j++) {
-				result += elements[j][i] + " ";
+			for (int col = 0; col < c; col++) {
+				result += elements[row][col] + " ";
 			}
 			result += "]\n"; 
 		}
@@ -130,28 +132,36 @@ public class Matrix {
 	 */
 	public static void main(String[] args) throws Exception {
 		int size = 2;
-		Matrix A = new Matrix(2,2); 
-		Matrix B = new Matrix(2,2);
+		Matrix A = new Matrix(3,4); 
+		Matrix B = new Matrix(4,2);
 		
 		int a = 0; 
-		for(int i = 0; i < size; i++)
-			for(int j= 0; j < size; j++)
+		for(int i = 0; i < 4; i++)
+			for(int j= 0; j < 3; j++)
 			{
 				A.set(j, i, a++);
 			}
+		System.out.println("Matrix A:");
 		System.out.println(A);
 		
 		
 		int b = 0; 
-		for(int i = 0; i < size; i++)
-			for(int j= 0; j < size; j++)
+		for(int i = 0; i < 4; i++)
+			for(int j= 0; j < 2; j++)
 			{
 				B.set(i, j, b++);
 			}
+		System.out.println("Matrix B:");
 		System.out.println(B);
 
 		Matrix C = A.multiply(B);
+		System.out.println("Matrix C= A.B:");
 		System.out.println(C);
+		
+		A.add(A);
+		System.out.println("Matrix A+A:");
+		System.out.println(A);
+		
 	}
 
 }
