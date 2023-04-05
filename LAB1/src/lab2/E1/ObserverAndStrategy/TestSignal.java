@@ -1,7 +1,6 @@
 package lab2.E1.ObserverAndStrategy;
 
-import lab2.E1.strategy.Sampler;
-import lab2.E1.strategy.SinusSampler;
+
 
 public class TestSignal {
 	public static void main(String[] args) throws InterruptedException {
@@ -9,8 +8,10 @@ public class TestSignal {
 		Signal s = new Signal();
 		s.addSignalObserver(new StarObserver());
 		s.addSignalObserver(sw);
-		Thread.sleep(2000);
-		s.setSampler(new SinusSampler(3, 0.1));
+		Thread.sleep(4000);
+		s.setSampler(new SinusSampler(0, 0.1));
+		Thread.sleep(4000);
+		s.setSampler(new CosinSampler(0, 0.1));
 		
 	}
 }
