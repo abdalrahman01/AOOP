@@ -1,4 +1,4 @@
-package lab2.E1;
+package lab2.E1.observer;
 
 import javax.swing.*;
 
@@ -13,7 +13,7 @@ public class SignalWindow extends JFrame implements SignalObserver {
 	private JTextArea jta;
 	public  SignalWindow() {
 		jta = new JTextArea(100,20);
-		jta.append("The Signal Amplitude.\n");
+		jta.append("The Signal Amplitude BY Abd Alrahman.\n");
 		add(jta); // this.add
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
