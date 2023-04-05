@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Exercise14;
+package lab1.E14;
 
 import java.util.*;
 

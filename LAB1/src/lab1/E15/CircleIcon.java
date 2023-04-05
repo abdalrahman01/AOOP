@@ -1,4 +1,4 @@
-package Exercise15;
+package lab1.E15;
 
 import java.awt.Component;
 import java.awt.Graphics;

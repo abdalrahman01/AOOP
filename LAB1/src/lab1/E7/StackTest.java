@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Excersice7;
+package lab1.E7;
 
 /**
  * @author Abd Alrahman

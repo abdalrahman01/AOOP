@@ -1,7 +1,7 @@
 /**
  * A message left by the caller.
  */
-package Excersice9;
+package lab1.E9;
 public class Message {
 	
 	/**
