@@ -1,4 +1,4 @@
-package Exercise8;
+package lab1.E8;
 
 /**
  * A first-in, first-out bounded collection of MessageQueues.

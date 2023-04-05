@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Exercise15;
+package lab1.E15;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
