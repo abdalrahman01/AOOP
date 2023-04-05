@@ -12,8 +12,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
-import lab2.E1.strategy.DefaultSampler;
-import lab2.E1.strategy.Sampler;
+
 
 public class Signal {
 	private double amplitude;
