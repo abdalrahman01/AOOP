@@ -17,7 +17,7 @@ public class ObserverTester
 
      
       
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 9; i++) {
     	  data.add(new Double(i));
 	}
 
@@ -28,5 +28,6 @@ public class ObserverTester
       BarFrame barFrame = new BarFrame(model);
 
       model.attach(barFrame);
+      model.attach(frame);
    }
 }
