@@ -1,6 +1,7 @@
 package lab2.E9;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,32 +22,39 @@ public abstract class Presenter {
 	public abstract void southButtonPressed();
 	public abstract void westButtonPressed();
 	
-	public Presenter() {
+	private String msg = "Default Message is Very Bet!";
+	private JLabel textfield;
+	public Presenter(){
+		
+		
 		// setup layout manager for frame
-		JFrame frame = new JFrame();
-		frame.setLayout(new BoxLayout(frame, BoxLayout.Y_AXIS));
+		JFrame frame = new JFrame("Presenter");
+		
+		frame.setLayout(new GridLayout());
 		
 		
 		JButton northButton = new JButton("North");
+		
 		northButton.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
 				northButtonPressed();				
 			}
 		});
+		
 		JButton southButton = new JButton("South");
-		northButton.addActionListener(new ActionListener() {			
+		southButton.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
 				southButtonPressed();				
 			}
 		});
 		JButton eastButton = new JButton("East");
-		northButton.addActionListener(new ActionListener() {			
+		eastButton.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
 				eastButtonPressed();				
 			}
 		});
 		JButton westButton = new JButton("West");
-		northButton.addActionListener(new ActionListener() {			
+		westButton.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
 				westButtonPressed();				
 			}
@@ -54,8 +62,8 @@ public abstract class Presenter {
 		
 		
 		// add Buttons to a JPanel, add that panel to frame
-		JPanel buttonsPanel = new JPanel(); 
-		buttonsPanel.setLayout(new BorderLayout());
+		JPanel buttonsPanel = new JPanel(new BorderLayout()); 
+		
 		buttonsPanel.add(northButton, BorderLayout.NORTH);
 		buttonsPanel.add(southButton, BorderLayout.SOUTH);
 		buttonsPanel.add(westButton, BorderLayout.WEST);
@@ -64,24 +72,28 @@ public abstract class Presenter {
 		
 		
 		// add centerComponent to frame
-		JComponent centerComponent = createCenterComponent();
-		frame.add(centerComponent);
+		// JComponent centerComponent = createCenterComponent();
+		// frame.add(centerComponent,1);
 		
 		// create other components (text component, e.g.), add them to frame
-		JLabel textfield = new JLabel("TEST!!");
+		textfield = new JLabel(msg);
 		frame.add(textfield);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		// show frame		
+		// show frame	
+		
 		frame.pack();
 		frame.setVisible(true);
+		
+		
 		
 		
 	}
 	
 	public void showText(String text) {
-		// update the text component
+		msg = text;
+		textfield.setText(msg);
 	}
 	
 }
