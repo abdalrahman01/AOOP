@@ -1,14 +1,23 @@
 package lab2.E9;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JComponent;
 
 public class SlideShow extends Presenter {
 
+	private List<File> images; 
+	private String[] texts;
+	
 	private JComponent pictureComponent = null;
 	
 	public SlideShow(File[] imageFiles, String[] texts) {
+		images = Arrays.asList(imageFiles);
+		
+		this.texts = Arrays.copyOf(texts, texts.length);
+		
 		// read and remember (create instance variables)
 		// images from the indicated files
 		// and also remember texts in an instance field
