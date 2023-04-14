@@ -98,6 +98,10 @@ public class Stack<T> {
 		
 		return Arrays.asList(result);
 	}
+	
+	public int size() {
+		return n; 
+	}
 
 	/**
 	 * @param args
