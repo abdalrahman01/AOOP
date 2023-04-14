@@ -30,6 +30,4 @@ public class CheckLengthFilter1 implements Filter {
     }
 }
 
-interface Filter {
-    boolean accept(String x);
-}
+
