@@ -23,7 +23,9 @@ public abstract class Presenter {
 	public abstract void westButtonPressed();
 	
 	private String msg = "Default Message is Very Bet!";
+	
 	private JLabel textfield;
+	
 	public Presenter(){
 		
 		
