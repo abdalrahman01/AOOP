@@ -1,37 +1,27 @@
 package lab2.E9;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JComponent;
+import javax.swing.JLabel;
 
-public class PictureComponent extends JComponent {
+public class Picture2Component extends JLabel {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
+
+	
 	private BufferedImage displayedImage;
 	
-	public PictureComponent() {
-		setSize(200,200);
-	}
-	
-	public PictureComponent(File imageFile) {
-		try {
-			displayedImage = ImageIO.read(imageFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		setSize(200,200);
-	}
-	
-	
+	@Override
 	public void paintComponent(Graphics g) {
 		
 		Graphics2D g2 = (Graphics2D)g;
@@ -53,10 +43,4 @@ public class PictureComponent extends JComponent {
 		repaint();
 	}
 	
-	
-	
-	
-	
-	
-
 }
