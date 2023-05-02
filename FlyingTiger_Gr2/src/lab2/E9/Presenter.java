@@ -25,7 +25,7 @@ public abstract class Presenter {
 	private String msg = "Default Message is Very Bet!";
 	
 	private JLabel textfield;
-	
+	public JComponent centerComponent;
 	public Presenter(){
 		
 		
@@ -73,9 +73,9 @@ public abstract class Presenter {
 		frame.add(buttonsPanel);
 		
 		
-		// add centerComponent to frame
-		// JComponent centerComponent = createCenterComponent();
-		// frame.add(centerComponent,1);
+//		 add centerComponent to frame
+		 centerComponent = createCenterComponent();
+		 frame.add(centerComponent,1);
 		
 		// create other components (text component, e.g.), add them to frame
 		textfield = new JLabel(msg);
@@ -87,7 +87,7 @@ public abstract class Presenter {
 		
 		frame.pack();
 		frame.setVisible(true);
-		
+		System.out.println( "in Pres" + centerComponent);
 		
 		
 		
