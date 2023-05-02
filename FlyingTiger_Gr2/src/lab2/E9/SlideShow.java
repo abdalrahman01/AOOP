@@ -24,7 +24,7 @@ public class SlideShow extends Presenter {
 	
 	private int currentImage = -1; // indicates which image is displayed from list.
 	
-	private JComponent pictureComponent = null;
+	private JComponent pictureComponent;
 	
 	public SlideShow(File[] imageFiles, String[] texts) {
 		super();
@@ -36,6 +36,7 @@ public class SlideShow extends Presenter {
 		// read and remember (create instance variables)
 		// images from the indicated files
 		// and also remember texts in an instance field
+		System.out.println("in slideShow Const " + pictureComponent);
 	}
 	
 	@Override
@@ -47,11 +48,11 @@ public class SlideShow extends Presenter {
 		
 		pictureComponent = new JLabel("Empty");
 		
-		if (images == null)
-			return pictureComponent;
+		//if (images == null)
+		//	return pictureComponent;
 		
 		
-		
+		System.out.println("in slideShow" + pictureComponent);
 		return pictureComponent;
 	}
 
@@ -69,10 +70,15 @@ public class SlideShow extends Presenter {
 		}
 		
 
-		((JLabel)centerComponent).setText("");
-		((JLabel)centerComponent).setIcon(new ImageIcon(displayedImage));
+		((JLabel)pictureComponent).setText("");
+		((JLabel)pictureComponent).setIcon(new ImageIcon(displayedImage));
 		
-		centerComponent.repaint();
+		pictureComponent.repaint();
+		
+//		((JLabel)centerComponent).setText("");
+//		((JLabel)centerComponent).setIcon(new ImageIcon(displayedImage));
+//		
+//		centerComponent.repaint();
 	}
 	
 	public void eastButtonPressed() {

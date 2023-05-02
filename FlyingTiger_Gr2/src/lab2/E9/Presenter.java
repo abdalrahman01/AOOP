@@ -87,7 +87,7 @@ public abstract class Presenter {
 		
 		frame.pack();
 		frame.setVisible(true);
-		
+		System.out.println( "in Pres" + centerComponent);
 		
 		
 		
