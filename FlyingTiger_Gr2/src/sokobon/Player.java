@@ -1,7 +1,7 @@
 package sokobon;
 
-public class Player {
-	int posX, posY; // player position
+public class Player extends GameObject {
+	
 	
 	public void moveUp() {};
 	public void moveDown() {};
