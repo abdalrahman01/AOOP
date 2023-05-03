@@ -1,6 +1,6 @@
 package sokobon;
 
-public class MovingBox extends GameObject {
+public class MovingBox extends GameObject implements GameBox {
 	
 	
 	public void moveUp() {};

@@ -1,6 +1,6 @@
 package sokobon;
 
-public class Wall extends GameObject {
+public class Wall extends GameObject implements GameBox {
 
 	@Override
 	public void moveUp() {
