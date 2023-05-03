@@ -1,13 +1,9 @@
 package sokobon;
 
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.File;
-import javax.imageio.ImageIO;
+
 
 public class Player extends GameObject {
 	
