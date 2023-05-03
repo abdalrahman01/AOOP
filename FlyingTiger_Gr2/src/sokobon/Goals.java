@@ -1,6 +1,10 @@
 package sokobon;
 
-
+/**
+ * The Red circle that the boxes must come to or occur
+ * @author aliab
+ *
+ */
 // RedDots
 public class Goals extends GameObject{
 	
