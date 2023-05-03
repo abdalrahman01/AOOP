@@ -6,7 +6,7 @@ package sokobon;
  *
  */
 // RedDots
-public class Goals extends GameObject{
+public class Goal extends GameObject{
 	
 	public void notifyObserver() {}
 
