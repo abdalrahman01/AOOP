@@ -1,4 +1,4 @@
-package TestingGoal;
+package TestingSokobon;
 
 import java.awt.FlowLayout;
 
@@ -11,7 +11,7 @@ public class TestingGoal {
 		frame.setLayout(new FlowLayout());
 		
 		Goal goal = new Goal();
-		frame.add(goal); 
+		frame.add(goal.getIcon()); 
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
