@@ -1,5 +1,7 @@
 package sokobon;
 
+import javax.swing.JComponent;
+
 /**
 Super class for the whole code
  */
@@ -7,7 +9,12 @@ Super class for the whole code
 
 import javax.swing.JLabel;
 
-public abstract class GameObject {
+public abstract class GameObject extends JComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int posX, posY;
 	private int width, height;
 	private JLabel icon;
