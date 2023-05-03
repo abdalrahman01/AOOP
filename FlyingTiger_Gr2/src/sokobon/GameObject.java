@@ -108,6 +108,7 @@ public abstract class GameObject {
 		}
 		
 		icon.setIcon(new ImageIcon(displayedImage)); // label 
+		icon.setText("");
 		
 	}
 	
