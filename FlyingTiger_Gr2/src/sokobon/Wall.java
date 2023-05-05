@@ -1,6 +1,14 @@
 package sokobon;
 
+import java.io.File;
+
 public class Wall extends GameObject implements GameBox {
+	
+	private static final long serialVersionUID = 1L;
+	public Wall() {
+		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/wall.png"));
+	}
+	
 
 	@Override
 	public void moveUp() {
