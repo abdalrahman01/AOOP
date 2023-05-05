@@ -14,8 +14,18 @@ public class TestingGameMap{
 												   {X," "," "," "," "," "," ",X},
 												   {X," "," "," "," "," "," ",X},
 												   {X,X,X,X,X,X,X,X}};
+    GameMap gMap;
+    
+    public TestingGameMap() {
+    	gMap = new GameMap(map);
+    }
+    
 	public static void main(String[] args) {
 		GameMap gMap = new GameMap(map);
 		System.out.println(gMap);
+	}
+	
+	public void TestingAddPlayers() {
+		// 
 	}
 }
