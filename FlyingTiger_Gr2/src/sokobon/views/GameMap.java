@@ -18,17 +18,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	private GraphicalView graphicalView;
 
 	public GameMap(char[][] map) {
-
-		width = map[0].length;
-		hieght = map.length;
-		this.map = new char[hieght][width];
-
-		// store the map
-		for (int h = 0; h < map.length; h++) {
-			for (int w = 0; w < map[0].length; w++) {
-				this.map[h][w] = map[h][w];
-			}
-		}
+		setMap(map);
 	}
 
 	private int playerX, playerY;
@@ -102,8 +92,26 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	}
 
-	public void stateChanged(ChangeEvent arg0) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'stateChanged'");
+	public void setMap(char[][] map) {
+		width = map[0].length;
+		hieght = map.length;
+		this.map = new char[hieght][width];
+
+		// store the map
+		for (int h = 0; h < map.length; h++) {
+			for (int w = 0; w < map[0].length; w++) {
+				this.map[h][w] = map[h][w];
+			}
+		}
 	}
+
+	public void stateChanged(ChangeEvent arg) {
+		setMap(dataModel.getData());
+		repaint();
+	}
+
+	private void updateGraph(int i, double x) {
+
+	}
+
 }
