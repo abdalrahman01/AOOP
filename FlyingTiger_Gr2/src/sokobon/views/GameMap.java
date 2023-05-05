@@ -3,6 +3,8 @@ package sokobon.views;
 import java.util.Arrays;
 
 import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -14,11 +16,20 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	private int width, hieght;
 
+	private JLabel textField;
 	private DataModel dataModel;
 	private GraphicalView graphicalView;
 
-	public GameMap(char[][] map) {
-		setMap(map);
+	public GameMap(DataModel model) {
+		dataModel = model;
+		JFrame frame = new JFrame("Game Map");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		setMap(model.getData());
+		textField = new JLabel(toMultiLineHTML(map));
+		frame.pack();
+		frame.setVisible(true);
+
 	}
 
 	private int playerX, playerY;
@@ -107,11 +118,20 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	public void stateChanged(ChangeEvent arg) {
 		setMap(dataModel.getData());
-		repaint();
+		textField.setText(toMultiLineHTML(map));
 	}
 
-	private void updateGraph(int i, double x) {
+	private void update(int i, double x) {
 
 	}
 
+	private String toMultiLineHTML(char[][] text) {
+		String result = "<html>";
+
+		for (int i = 0; i < text.length; i++) {
+			result += Arrays.toString(text[i]) + "<br>";
+		}
+
+		return result + "<html/>";
+	}
 }
