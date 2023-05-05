@@ -78,7 +78,7 @@ public class GameMap {
 	};
 
 	public void movePlayerleft() {
-		if(playerY > 0 && map[playerX][playerY-1] == ' ') {
+		if(playerY-1 > 0 && map[playerX][playerY-1] == ' ') {
 			map[playerX][playerY] = ' ';
 			map[playerX][playerY-1] = 'P';
 			playerY--;
@@ -86,7 +86,7 @@ public class GameMap {
 	}
 
 	public void movePlayerDown() {
-		if(playerX > 0 && map[playerX+1][playerY] == ' ') {
+		if(playerX+1 < hieght && map[playerX+1][playerY] == ' ') {
 			map[playerX][playerY] = ' ';
 			map[playerX+1][playerY] = 'P';
 			playerX++;
@@ -94,7 +94,7 @@ public class GameMap {
 	}
 
 	public void movePlayerRight() {
-		if(playerY > 0 && map[playerX][playerY+1] == ' ') {
+		if(playerY < width && map[playerX][playerY+1] == ' ') {
 			map[playerX][playerY] = ' ';
 			map[playerX][playerY+1] = 'P';
 			playerY++;
