@@ -3,16 +3,16 @@ package TestingSokobon.views;
 import sokobon.views.GameMap;
 
 public class TestingGameMap {
-	private static final String X = "x";
-	private static final String P = "p";
-	private static final String O = "o";
+	private static final char X = 'x';
+	private static final char P = 'p';
+	private static final char O = 'o';
 
-	private static String[][] map = new String[][] { { X, X, X, X, X, X, X, X },
-			{ X, " ", " ", " ", " ", " ", " ", X },
-			{ X, " ", " ", " ", " ", " ", " ", X },
-			{ X, " ", " ", " ", " ", " ", " ", X },
-			{ X, " ", " ", " ", " ", " ", " ", X },
-			{ X, " ", " ", " ", " ", " ", " ", X },
+	private static char[][] map = new char[][] { { X, X, X, X, X, X, X, X },
+			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
+			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
+			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
+			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
+			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
 			{ X, X, X, X, X, X, X, X } };
 
 	public static void main(String[] args) {
