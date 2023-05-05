@@ -4,11 +4,41 @@ package sokobon.views;
 import java.util.Arrays;
 
 public class GameMap {
-	String[][] map;
+	char[][] map = {
+	        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+	        {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+	        {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+	        {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+	        {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+	        {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+	        {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+	        {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+	        {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+	        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}
+	    };
 	private int width, hieght;
-	public void addPlayer(int x, int y) {}; 
-	public void addMovingBox(int x, int y) {}; 
-	public void addWall(int x, int y) {}; 
+	private int playerX, playerY;
+	public void addPlayer(int x, int y) {
+		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length && map[y][x] == ' ') {
+			map[x][y] = 'P';
+			playerX = x;
+			playerY = y;
+		}
+	}; 
+	
+	public void addMovingBox(int x, int y) {
+
+		if (map[x][y] != ' ') {
+			System.out.println("Non empty space!");
+		}
+		else {map[x][y] = 'O';}
+	}; 
+	
+	public void addWall(int x, int y) {
+		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length) {
+		map[y][x] = '#';
+		}
+	}; 
 	public int getWidth() {
 		return width;
 	}
@@ -21,6 +51,18 @@ public class GameMap {
 	public void setHieght(int hieght) {
 		this.hieght = hieght;
 	}
-	public String toString() {return Arrays.toString(map);}; 
+	public String toString() {
+
+		 String result = "";
+
+		 for (int i = 0; i < map.length; i++) {
+
+		 result += Arrays.toString(map[i]) + "\n";
+
+		 }
+
+		 return result;
+
+		 };
 	
 }
