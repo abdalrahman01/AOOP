@@ -77,4 +77,19 @@ public class GameMap {
 
 	};
 
+	public void movePlayerleft() {
+
+	}
+
+	public void movePlayerDown() {
+
+	}
+
+	public void movePlayerRight() {
+
+	}
+
+	public void movePlayerUp() {
+
+	}
 }
