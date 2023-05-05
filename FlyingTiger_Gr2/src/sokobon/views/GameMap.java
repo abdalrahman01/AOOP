@@ -15,6 +15,9 @@ public class GameMap {
 	private String w ="w";
 	
 	public void addPlayer(int x, int y) {
+		if (x < 0 || x >= width || y < 0 || y >= hieght) {
+			return;
+		}
 		for(int i = 0; i < map.length; i ++) { 
 			for(int j= 0; j < map[0].length; j ++) {
 				if(map[x][y] == p);
@@ -26,6 +29,10 @@ public class GameMap {
 	};
 	
 	public void addMovingBox(int x, int y) {
+		if (x < 0 || x >= width || y < 0 || y >= hieght) {
+			return;
+		}
+		
 		for(int i = 0; i < map.length; i ++) { 
 			for(int j= 0; j < map[0].length; j ++) {
 				if(map[x][y] == o);
@@ -36,7 +43,11 @@ public class GameMap {
 		
 	}; 
 	public void addWall(int x, int y) {
+		if (x < 0 || x >= width || y < 0 || y >= hieght) {
+			return;
+		}
 		for(int i = 0; i < map.length; i ++) { 
+			
 			for(int j= 0; j < map[0].length; j ++) {
 				if(map[x][y] == w);
 					
@@ -45,6 +56,22 @@ public class GameMap {
 	map[x][y]=w;
 		
 	}; 
+	
+
+	
+	public GameMap(String[][] map) {
+		
+		width = map[0].length;
+		hieght= map.length;
+		this.map = new String[hieght][width];
+		
+		// store the map 
+		for (int h = 0; h < map.length; h++) {
+			for (int w = 0; w < map[0].length; w++) {
+				this.map[h][w] = map[h][w];
+			}
+		}
+	}
 	
 	public int getWidth() {
 		return width;
@@ -61,17 +88,15 @@ public class GameMap {
 	public void setHieght(int hieght) {
 		this.hieght = hieght;
 	}
-	
-	public String toString() {String result = "";
 
-	 for (int i = 0; i < map.length; i++) {
 
-	 result += Arrays.toString(map[i]) + "\n";
-
-	 }
-
-	 return result;
+	public String toString() {
+		String result = "";
+		for (int i = 0; i < map.length; i++) {
+			result += Arrays.toString(map[i]) + "\n";
+		}
+		return result;
+	}; 
 	 
-	 }; 
 	
 }
