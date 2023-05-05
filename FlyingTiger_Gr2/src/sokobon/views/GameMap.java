@@ -2,11 +2,19 @@ package sokobon.views;
 
 import java.util.Arrays;
 
-public class GameMap {
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-	char[][] map;
+import sokobon.models.*;;
+
+public class GameMap implements ChangeListener {
+
+	private char[][] map;
 
 	private int width, hieght;
+
+	private DataModel dataModel;
+	private GraphicalView graphicalView;
 
 	public GameMap(char[][] map) {
 
@@ -91,5 +99,10 @@ public class GameMap {
 
 	public void movePlayerUp() {
 
+	}
+
+	public void stateChanged(ChangeEvent arg0) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'stateChanged'");
 	}
 }
