@@ -40,11 +40,11 @@ public class GameMap {
 		this.hieght = hieght;
 	}
 	public String toString() {
-	String result = "";
-	for (int i = 0; i < map.length; i++) {
-		result += Arrays.toString(map[i]) + "\n";
-	}
-	return result;
+		String result = "";
+		for (int i = 0; i < map.length; i++) {
+			result += Arrays.toString(map[i]) + "\n";
+		}
+		return result;
 	}; 
 	
 }
