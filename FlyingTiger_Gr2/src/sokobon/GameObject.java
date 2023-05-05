@@ -1,5 +1,15 @@
 package sokobon;
 
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import javax.swing.ImageIcon;
+
+
 /**
 Super class for the whole code
  */
@@ -8,11 +18,20 @@ Super class for the whole code
 import javax.swing.JLabel;
 
 public abstract class GameObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int posX, posY;
 	private int width, height;
 	private JLabel icon;
 	public int getPosX() {
 		return posX;
+	}
+	
+	public GameObject() {
+		icon = new JLabel("Empty");
 	}
 	
 	/**
@@ -78,8 +97,19 @@ public abstract class GameObject {
 	 * Set the icon or image for the object
 	 * @param icon
 	 */
-	public void setIcon(JLabel icon) {
-		this.icon = icon;
+	public void setIconGameObject(File img) {
+		
+		
+		BufferedImage displayedImage = null;
+		try {
+			displayedImage = ImageIO.read(img);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		icon.setIcon(new ImageIcon(displayedImage)); // label 
+		icon.setText("");
+		
 	}
 	
 	/**
