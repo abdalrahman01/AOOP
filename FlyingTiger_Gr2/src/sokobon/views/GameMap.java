@@ -2,12 +2,13 @@ package sokobon.views;
 
 import java.util.Arrays;
 
+import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import sokobon.models.*;;
 
-public class GameMap implements ChangeListener {
+public class GameMap extends JComponent implements ChangeListener {
 
 	private char[][] map;
 
