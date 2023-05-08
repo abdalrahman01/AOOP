@@ -76,37 +76,127 @@ public class GameMap {
 		return result;
 
 	};
-
+	
+	public boolean mPL(){
+		return playerY-1 > 0 && map[playerX][playerY-1]== ' ';
+	}
+	public boolean isBoxLeft(){
+		return map[playerX][playerY-1]== 'O';
+	}
+	public boolean isWallLeft(){
+		return map[playerX][playerY-1]== 'x';
+	}
+	
 	public void movePlayerleft() {
-		if(playerY-1 > 0 && map[playerX][playerY-1] == ' ') {
-			map[playerX][playerY] = ' ';
-			map[playerX][playerY-1] = 'P';
-			playerY--;
-		}
+	    if (mPL()) {
+	        map[playerX][playerY] = ' ';
+	        map[playerX][playerY - 1] = 'P';
+	        playerY--;
+	    } else if (isBoxLeft()) {
+	        if (playerY - 2 > 0 && map[playerX][playerY - 2] == ' ') {
+	            map[playerX][playerY] = ' ';
+	            map[playerX][playerY - 1] = 'P';
+	            map[playerX][playerY - 2] = 'O';
+	            playerY--;
+	        } else {
+	            return;
+	        }
+	    } else if (isWallLeft()) {
+	        return;
+	    }
+	}
+	
+	
+	
+	public boolean mPD(){
+		return playerX+1 < hieght && map[playerX+1][playerY] == ' ';
+	}
+	public boolean isBoxDown(){
+		return map[playerX+1][playerY]== 'O';
+	}
+	public boolean isWallDown(){
+		return map[playerX+1][playerY]== 'x';
 	}
 
 	public void movePlayerDown() {
-		if(playerX+1 < hieght && map[playerX+1][playerY] == ' ') {
+		if(mPD()) {
 			map[playerX][playerY] = ' ';
 			map[playerX+1][playerY] = 'P';
 			playerX++;
 		}
+		else if (isBoxDown()) {
+	        if (playerY - 2 > 0 && map[playerX + 2][playerY] == ' ') {
+	            map[playerX][playerY] = ' ';
+	            map[playerX + 1][playerY] = 'P';
+	            map[playerX + 2][playerY] = 'O';
+	            playerX++;
+	        } else {
+	            return;
+	        }
+	    } else if (isWallDown()) {
+	        return;
+	    }
+	}
+	
+	
+	public boolean mPR(){
+		return playerY < width && map[playerX][playerY+1] == ' ';
+	}
+	public boolean isBoxRight(){
+		return map[playerX][playerY + 1]== 'O';
+	}
+	public boolean isWallRight(){
+		return map[playerX][playerY + 1]== 'x';
 	}
 
 	public void movePlayerRight() {
-		if(playerY < width && map[playerX][playerY+1] == ' ') {
-			map[playerX][playerY] = ' ';
-			map[playerX][playerY+1] = 'P';
-			playerY++;
-		}
+	    if (mPR()) {
+	        map[playerX][playerY] = ' ';
+	        map[playerX][playerY+1] = 'P';
+	        playerY++;
+	    } else if (isBoxRight()) {
+	        if (playerY + 2 < width && map[playerX][playerY + 2] == ' ') {
+	            map[playerX][playerY] = ' ';
+	            map[playerX][playerY + 1] = 'P';
+	            map[playerX][playerY + 2] = 'O';
+	            playerY++;
+	        } else {
+	            return;
+	        }
+	    } else if (isWallRight()) {
+	        return;
+	    }
 	}
-
-	public void movePlayerUp() {
-		if(playerX > 0 && map[playerX-1][playerY] == ' ') {
-			map[playerX][playerY] = ' ';
-			map[playerX-1][playerY] = 'P';
-			playerX--;
-		}
+	
+	
+	
+	public boolean mPU(){
+		return playerX > 0 && map[playerX-1][playerY] == ' ';
+	}
+	public boolean isBoxUp(){
+		return playerX - 1 >= 0 && map[playerX-1][playerY] == 'O';
 		
+	}
+	public boolean isWallUp(){
+		return map[playerX- 1][playerY]== 'x';
+	}
+	public void movePlayerUp() {
+	    if (mPU()) {
+	        map[playerX][playerY] = ' ';
+	        map[playerX-1][playerY] = 'P';
+	        playerX--;
+	    }
+	    else if (isBoxUp()) {
+	        if (playerX - 2 >= 0 && map[playerX - 2][playerY] == ' ') {
+	            map[playerX][playerY] = ' ';
+	            map[playerX - 1][playerY] = 'P';
+	            map[playerX - 2][playerY] = 'O';
+	            playerX--;
+	        } else {
+	            return;
+	        }
+	    } else if (isWallUp()) {
+	        return;
+	    }
 	}
 }
