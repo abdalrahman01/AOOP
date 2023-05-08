@@ -23,6 +23,11 @@ public class TestingGameMap {
 		gMap.moveBoxLeft(3, 3);
 		gMap.moveBoxLeft(3, 2);
 		gMap.moveBoxLeft(3, 1);
+		gMap.moveBoxRight(3, 1);
+		gMap.moveBoxRight(3, 2);
+		gMap.moveBoxRight(3, 3);
+		gMap.moveBoxRight(3, 4);
+		gMap.moveBoxRight(3, 1);
 		//gMap.moveBoxRight(3, 3);
 		//gMap.moveBoxDown(3, 3);
 		//gMap.moveBoxUp(3, 3);

@@ -102,7 +102,7 @@ public class GameMap {
 		if (isPlayer(row, col))
 			return;
 
-		map[col][row] = '#';
+		map[row][col] = '#';
 
 	};
 
@@ -186,6 +186,35 @@ public class GameMap {
 	}
 
 	public void moveBoxRight(int boxRow, int boxCol) {
+		
+		
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol))
+		{
+			int newBoxRow = boxRow;
+			int newBoxCol = boxCol + 1;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+			
+		}
+		
+		
+		
 		if (playerRow == boxRow && playerCol < boxCol) {
 			if (boxCol + 1 < width && map[boxRow][boxCol + 1] == ' ') {
 				map[boxRow][boxCol] = ' ';
