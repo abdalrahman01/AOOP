@@ -27,6 +27,7 @@ public class GameMap extends JComponent implements ChangeListener {
 
 		setMap(model.getData());
 		textField = new JLabel(toMultiLineHTML(map));
+		frame.add(textField);
 		frame.pack();
 		frame.setVisible(true);
 
@@ -40,6 +41,7 @@ public class GameMap extends JComponent implements ChangeListener {
 			playerX = x;
 			playerY = y;
 		}
+		update(map);
 	};
 
 	public void addMovingBox(int x, int y) {
@@ -49,12 +51,15 @@ public class GameMap extends JComponent implements ChangeListener {
 		} else {
 			map[x][y] = 'O';
 		}
+		update(map);
+
 	};
 
 	public void addWall(int x, int y) {
 		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length) {
 			map[y][x] = '#';
 		}
+		update(map);
 	};
 
 	public int getWidth() {
@@ -119,10 +124,15 @@ public class GameMap extends JComponent implements ChangeListener {
 	public void stateChanged(ChangeEvent arg) {
 		setMap(dataModel.getData());
 		textField.setText(toMultiLineHTML(map));
+		repaint();
 	}
 
-	private void update(int i, double x) {
+	private void update(char[][] map) {
+		dataModel.update(map);
+	}
 
+	private void update(int oldX, int oldY, int newX, int newY) {
+		dataModel.update(oldX, oldY, newX, newY);
 	}
 
 	private String toMultiLineHTML(char[][] text) {

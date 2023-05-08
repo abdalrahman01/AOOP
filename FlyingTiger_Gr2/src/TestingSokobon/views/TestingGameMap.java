@@ -1,5 +1,6 @@
 package TestingSokobon.views;
 
+import sokobon.models.DataModel;
 import sokobon.views.GameMap;
 
 public class TestingGameMap {
@@ -16,9 +17,17 @@ public class TestingGameMap {
 			{ X, X, X, X, X, X, X, X } };
 
 	public static void main(String[] args) {
-		GameMap gMap = new GameMap(map);
-		gMap.addPlayer(7, 7);
+		DataModel dataModel = new DataModel(map);
+
+		GameMap gMap = new GameMap(dataModel);
+
+		dataModel.attach(gMap);
+		gMap.addPlayer(4, 1);
+		System.out.println(gMap);
+
 		gMap.addMovingBox(3, 4);
+		System.out.println(gMap);
+
 		gMap.addWall(3, 5);
 		System.out.println(gMap);
 	}
