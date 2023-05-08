@@ -102,7 +102,7 @@ public class GameMap {
 		if (isPlayer(row, col))
 			return;
 
-		map[col][row] = '#';
+		map[row][col] = '#';
 
 	};
 
@@ -156,39 +156,123 @@ public class GameMap {
 	}
 
 	public void moveBoxLeft(int boxRow, int boxCol) {
-		if (playerRow == boxRow && playerCol > boxCol) {
-			if (boxCol - 1 >= 0 && map[boxRow][boxCol - 1] == ' ') {
-				map[boxRow][boxCol] = ' ';
-				map[boxRow][boxCol - 1] = 'O';
-			}
+		
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol))
+		{
+			int newBoxRow = boxRow;
+			int newBoxCol = boxCol - 1;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+			
 		}
+		
+		
 	}
 
 	public void moveBoxRight(int boxRow, int boxCol) {
-		if (playerRow == boxRow && playerCol < boxCol) {
-			if (boxCol + 1 < width && map[boxRow][boxCol + 1] == ' ') {
-				map[boxRow][boxCol] = ' ';
-				map[boxRow][boxCol + 1] = 'O';
-			}
+		
+		
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol))
+		{
+			int newBoxRow = boxRow;
+			int newBoxCol = boxCol + 1;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+			
 		}
+		
+		
+		
+		
 	}
 
 	public void moveBoxUp(int boxRow, int boxCol) {
-		if (playerCol == boxCol && playerRow > boxRow) {
-			if (boxRow - 1 >= 0 && map[boxRow - 1][boxCol] == ' ') {
-				map[boxRow][boxCol] = ' ';
-				map[boxRow - 1][boxCol] = 'O';
-			}
-		}
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol))
+		{
+			int newBoxRow = boxRow - 1 ;
+			int newBoxCol = boxCol;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+			
+		}	
 	}
 
 	public void moveBoxDown(int boxRow, int boxCol) {
-		if (playerCol == boxCol && playerRow < boxRow) {
-			if (boxRow + 1 < height && map[boxRow + 1][boxCol] == ' ') {
-				map[boxRow][boxCol] = ' ';
-				map[boxRow + 1][boxCol] = 'O';
-			}
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol))
+		{
+			int newBoxRow = boxRow +1;
+			int newBoxCol = boxCol;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+			
 		}
+		
+		
+
 	}
 
 	public String toString() {
