@@ -25,13 +25,51 @@ public class GameMap {
 	private int playerRow, playerCol;
 	
 
+	private boolean isEmpty(int row, int col) {
+		return map[row][col] == ' ';
+	}
+	private boolean isWall(int row, int col) {
+		return map[row][col] == '#';
+	}
+	
+	private boolean isInRange(int row, int col) {
+		if(row >= hieght)
+			return false;
+		
+		if(col >= width)
+			return false;
+		
+		if (row < 0 || col < 0)
+			return false;
+		
+		return true;
+		
+	}
+	private boolean isMovingBox(int row, int col) {
+		return map[row][col] == ' ';
+	}
+	
 	public void addPlayer(int row, int col) {
-		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length && map[col][row] == ' ') {
-			map[row][col] = 'P';
-			playerRow = row;
-			playerCol = col;
-		}
-	};
+		
+		if(!isInRange(row, col))
+			return;
+		
+		if (!isEmpty(row, col))
+			return;
+		
+		if(isWall(row, col))
+			return; 
+		
+		if(isMovingBox(row, col))
+			return;
+		
+		
+		
+		map[row][col] = 'P';
+		playerRow = row;
+		playerCol = col;
+		
+	}
 
 	public void addMovingBox(int row, int col) {
 
