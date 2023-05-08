@@ -246,12 +246,33 @@ public class GameMap {
 	}
 
 	public void moveBoxDown(int boxRow, int boxCol) {
-		if (playerCol == boxCol && playerRow < boxRow) {
-			if (boxRow + 1 < height && map[boxRow + 1][boxCol] == ' ') {
-				map[boxRow][boxCol] = ' ';
-				map[boxRow + 1][boxCol] = 'O';
-			}
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol))
+		{
+			int newBoxRow = boxRow +1;
+			int newBoxCol = boxCol;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+			
 		}
+		
+		
+
 	}
 
 	public String toString() {
