@@ -23,6 +23,7 @@ public class GameMap {
 	}
 
 	private int playerX, playerY;
+	
 
 	public void addPlayer(int x, int y) {
 		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length && map[y][x] == ' ') {
@@ -109,4 +110,45 @@ public class GameMap {
 		}
 		
 	}
+	
+	public void moveBoxLeft(int boxX, int boxY) {
+	    if (playerX == boxX && playerY > boxY) {
+	        if (boxY - 1 >= 0 && map[boxX][boxY - 1] == ' ') {
+	            map[boxX][boxY] = ' ';
+	            map[boxX][boxY - 1] = 'O';
+	        }
+	    }
+	}
+
+	
+	public void moveBoxRight(int boxX, int boxY) {
+	    if (playerX == boxX && playerY < boxY) {
+	        if (boxY + 1 < width && map[boxX][boxY + 1] == ' ') {
+	            map[boxX][boxY] = ' ';
+	            map[boxX][boxY + 1] = 'O';
+	        }
+	    }
+	}
+
+	public void moveBoxUp(int boxX, int boxY) {
+	    if (playerY == boxY && playerX > boxX) {
+	        if (boxX - 1 >= 0 && map[boxX - 1][boxY] == ' ') {
+	            map[boxX][boxY] = ' ';
+	            map[boxX - 1][boxY] = 'O';
+	        }
+	    }
+	}
+
+	public void moveBoxDown(int boxX, int boxY) {
+	    if (playerY == boxY && playerX < boxX) {
+	        if (boxX + 1 < hieght && map[boxX + 1][boxY] == ' ') {
+	            map[boxX][boxY] = ' ';
+	            map[boxX + 1][boxY] = 'O';
+	        }
+	    }
+	}
+
+
+
+
 }
