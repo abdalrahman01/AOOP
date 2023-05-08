@@ -208,6 +208,11 @@ public class GameMap {
 			map[playerX + 1][playerY] = 'P';
 			playerX++;
 		}
+		else if(map[playerX - 1][playerY] == 'O' &&map[playerX + 1][playerY] == 'O' ){
+			return;
+		}
+		
+		
 		else {
 			return;
 			}
