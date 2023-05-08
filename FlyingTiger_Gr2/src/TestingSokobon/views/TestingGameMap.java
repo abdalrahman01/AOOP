@@ -17,9 +17,21 @@ public class TestingGameMap {
 
 	public static void main(String[] args) {
 		GameMap gMap = new GameMap(map);
-		gMap.addPlayer(7, 7);
+		gMap.addPlayer(3, 2);
 		gMap.addMovingBox(3, 4);
 		gMap.addWall(3, 5);
 		System.out.println(gMap);
+		gMap.movePlayerUp();
+		System.out.println(gMap);
+		gMap.movePlayerUp();
+		System.out.println(gMap);
+		gMap.movePlayerUp();
+		System.out.println(gMap);
+		gMap.movePlayerUp();
+		System.out.println(gMap);
+		
+		
+	
+
 	}
 }
