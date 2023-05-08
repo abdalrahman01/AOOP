@@ -22,30 +22,89 @@ public class GameMap {
 		}
 	}
 
-	private int playerX, playerY;
+	private int playerRow, playerCol;
 	
 
-	public void addPlayer(int x, int y) {
-		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length && map[y][x] == ' ') {
-			map[x][y] = 'P';
-			playerX = x;
-			playerY = y;
-		}
+	private boolean isEmpty(int row, int col) {
+		return map[row][col] == ' ';
+	}
+	private boolean isWall(int row, int col) {
+		return map[row][col] == '#';
+	}
+	
+	private boolean isInRange(int row, int col) {
+		if(row >= hieght)
+			return false;
+		
+		if(col >= width)
+			return false;
+		
+		if (row < 0 || col < 0)
+			return false;
+		
+		return true;
+		
+	}
+	private boolean isMovingBox(int row, int col) {
+		return map[row][col] == ' ';
+	}
+	private boolean isPlayer(int row, int col) {
+		return playerCol == col && playerRow == row;
+	}
+	
+	public void addPlayer(int row, int col) {
+		
+		if(!isInRange(row, col))
+			return;
+		
+		if (!isEmpty(row, col))
+			return;
+		
+		if(isWall(row, col))
+			return; 
+		
+		if(isMovingBox(row, col))
+			return;
+		
+		
+		
+		map[row][col] = 'P';
+		playerRow = row;
+		playerCol = col;
+		
+	}
+
+	public void addMovingBox(int row, int col) {
+		if(!isInRange(row, col))
+			return;
+		
+		if (!isEmpty(row, col))
+			return;
+		
+		if(isWall(row, col))
+			return; 
+		if(isPlayer(row, col))
+			return; 
+		
+		map[row][col] = 'o';
+		
 	};
 
-	public void addMovingBox(int x, int y) {
-
-		if (map[x][y] != ' ') {
-			System.out.println("Non empty space!");
-		} else {
-			map[x][y] = 'O';
-		}
-	};
-
-	public void addWall(int x, int y) {
-		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length) {
-			map[y][x] = '#';
-		}
+	public void addWall(int row, int col) {
+		if(!isInRange(row, col))
+			return;
+		
+		if (!isEmpty(row, col))
+			return;
+		
+		if(isMovingBox(row, col))
+			return; 
+		if(isPlayer(row, col))
+			return; 
+		
+		map[col][row] = '#';
+		
+		
 	};
 
 	public int getWidth() {
@@ -64,86 +123,73 @@ public class GameMap {
 		this.hieght = hieght;
 	}
 
-	public String toString() {
-
-		String result = "";
-
-		for (int i = 0; i < map.length; i++) {
-
-			result += Arrays.toString(map[i]) + "\n";
-
-		}
-
-		return result;
-
-	};
 
 	public void movePlayerleft() {
-		if(playerY-1 > 0 && map[playerX][playerY-1] == ' ') {
-			map[playerX][playerY] = ' ';
-			map[playerX][playerY-1] = 'P';
-			playerY--;
+		if(playerCol-1 > 0 && map[playerRow][playerCol-1] == ' ') {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow][playerCol-1] = 'P';
+			playerCol--;
 		}
 	}
 
 	public void movePlayerDown() {
-		if(playerX+1 < hieght && map[playerX+1][playerY] == ' ') {
-			map[playerX][playerY] = ' ';
-			map[playerX+1][playerY] = 'P';
-			playerX++;
+		if(playerRow+1 < hieght && map[playerRow+1][playerCol] == ' ') {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow+1][playerCol] = 'P';
+			playerRow++;
 		}
 	}
 
 	public void movePlayerRight() {
-		if(playerY < width && map[playerX][playerY+1] == ' ') {
-			map[playerX][playerY] = ' ';
-			map[playerX][playerY+1] = 'P';
-			playerY++;
+		if(playerCol < width && map[playerRow][playerCol+1] == ' ') {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow][playerCol+1] = 'P';
+			playerCol++;
 		}
 	}
 
 	public void movePlayerUp() {
-		if(playerX > 0 && map[playerX-1][playerY] == ' ') {
-			map[playerX][playerY] = ' ';
-			map[playerX-1][playerY] = 'P';
-			playerX--;
+		if(playerRow > 0 && map[playerRow-1][playerCol] == ' ') {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow-1][playerCol] = 'P';
+			playerRow--;
 		}
 		
 	}
 	
-	public void moveBoxLeft(int boxX, int boxY) {
-	    if (playerX == boxX && playerY > boxY) {
-	        if (boxY - 1 >= 0 && map[boxX][boxY - 1] == ' ') {
-	            map[boxX][boxY] = ' ';
-	            map[boxX][boxY - 1] = 'O';
+	public void moveBoxLeft(int boxRow, int boxCol) {
+	    if (playerRow == boxRow && playerCol > boxCol) {
+	        if (boxCol - 1 >= 0 && map[boxRow][boxCol - 1] == ' ') {
+	            map[boxRow][boxCol] = ' ';
+	            map[boxRow][boxCol - 1] = 'O';
 	        }
 	    }
 	}
 
 	
-	public void moveBoxRight(int boxX, int boxY) {
-	    if (playerX == boxX && playerY < boxY) {
-	        if (boxY + 1 < width && map[boxX][boxY + 1] == ' ') {
-	            map[boxX][boxY] = ' ';
-	            map[boxX][boxY + 1] = 'O';
+	public void moveBoxRight(int boxRow, int boxCol) {
+	    if (playerRow == boxRow && playerCol < boxCol) {
+	        if (boxCol + 1 < width && map[boxRow][boxCol + 1] == ' ') {
+	            map[boxRow][boxCol] = ' ';
+	            map[boxRow][boxCol + 1] = 'O';
 	        }
 	    }
 	}
 
-	public void moveBoxUp(int boxX, int boxY) {
-	    if (playerY == boxY && playerX > boxX) {
-	        if (boxX - 1 >= 0 && map[boxX - 1][boxY] == ' ') {
-	            map[boxX][boxY] = ' ';
-	            map[boxX - 1][boxY] = 'O';
+	public void moveBoxUp(int boxRow, int boxCol) {
+	    if (playerCol == boxCol && playerRow > boxRow) {
+	        if (boxRow - 1 >= 0 && map[boxRow - 1][boxCol] == ' ') {
+	            map[boxRow][boxCol] = ' ';
+	            map[boxRow - 1][boxCol] = 'O';
 	        }
 	    }
 	}
 
-	public void moveBoxDown(int boxX, int boxY) {
-	    if (playerY == boxY && playerX < boxX) {
-	        if (boxX + 1 < hieght && map[boxX + 1][boxY] == ' ') {
-	            map[boxX][boxY] = ' ';
-	            map[boxX + 1][boxY] = 'O';
+	public void moveBoxDown(int boxRow, int boxCol) {
+	    if (playerCol == boxCol && playerRow < boxRow) {
+	        if (boxRow + 1 < hieght && map[boxRow + 1][boxCol] == ' ') {
+	            map[boxRow][boxCol] = ' ';
+	            map[boxRow + 1][boxCol] = 'O';
 	        }
 	    }
 	}
@@ -151,4 +197,17 @@ public class GameMap {
 
 
 
+	public String toString() {
+		
+		String result = "";
+		
+		for (int i = 0; i < map.length; i++) {
+			
+			result += Arrays.toString(map[i]) + "\n";
+			
+		}
+		
+		return result;
+		
+	};
 }
