@@ -199,4 +199,55 @@ public class GameMap {
 	        return;
 	    }
 	}
+	
+
+	public void pullBoxDown() {
+		if(isBoxUp()){
+			map[playerX-1][playerY] = ' ';
+			map[playerX][playerY] = 'O';
+			map[playerX + 1][playerY] = 'P';
+			playerX++;
+		}
+		else {
+			return;
+			}
+	}
+	
+	
+	public void pullBoxLeft() {
+		if(isBoxRight()){
+			map[playerX][playerY + 1] = ' ';
+			map[playerX][playerY] = 'O';
+			map[playerX][playerY - 1] = 'P';
+			playerY--;
+		}
+		else {
+			return;
+			}
+	}
+	
+	
+	public void pullBoxUp() {
+		if(isBoxDown()){
+			map[playerX + 1][playerY] = ' ';
+			map[playerX][playerY] = 'O';
+			map[playerX - 1][playerY] = 'P';
+			playerX--;
+		}
+		else {
+			return;
+			}
+	}
+	
+	public void pullBoxRight() {
+		if(isBoxLeft()){
+			map[playerX][playerY - 1] = ' ';
+			map[playerX][playerY] = 'O';
+			map[playerX][playerY + 1] = 'P';
+			playerX--;
+		}
+		else {
+			return;
+			}
+	}
 }
