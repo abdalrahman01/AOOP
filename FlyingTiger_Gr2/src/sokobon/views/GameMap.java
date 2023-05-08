@@ -6,13 +6,13 @@ public class GameMap {
 
 	char[][] map;
 
-	private int width, hieght;
+	private int width, height;
 
 	public GameMap(char[][] map) {
 
 		width = map[0].length;
-		hieght = map.length;
-		this.map = new char[hieght][width];
+		height = map.length;
+		this.map = new char[height][width];
 
 		// store the map
 		for (int h = 0; h < map.length; h++) {
@@ -56,12 +56,12 @@ public class GameMap {
 		this.width = width;
 	}
 
-	public int getHieght() {
-		return hieght;
+	public int getHeight() {
+		return height;
 	}
 
-	public void setHieght(int hieght) {
-		this.hieght = hieght;
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
 	public String toString() {
@@ -87,7 +87,7 @@ public class GameMap {
 	}
 
 	public void movePlayerDown() {
-		if(playerX+1 < hieght && map[playerX+1][playerY] == ' ') {
+		if(playerX+1 < height && map[playerX+1][playerY] == ' ') {
 			map[playerX][playerY] = ' ';
 			map[playerX+1][playerY] = 'P';
 			playerX++;
@@ -141,13 +141,12 @@ public class GameMap {
 
 	public void moveBoxDown(int boxX, int boxY) {
 	    if (playerY == boxY && playerX < boxX) {
-	        if (boxX + 1 < hieght && map[boxX + 1][boxY] == ' ') {
+	        if (boxX + 1 < height && map[boxX + 1][boxY] == ' ') {
 	            map[boxX][boxY] = ' ';
 	            map[boxX + 1][boxY] = 'O';
 	        }
 	    }
 	}
-
 
 
 
