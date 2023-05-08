@@ -84,19 +84,27 @@ public class GameMap {
 		if(isWall(row, col))
 			return; 
 		if(isPlayer(row, col))
+			return; 
 		
+		map[row][col] = 'o';
 		
-		if (map[row][col] != ' ') {
-			System.out.println("Non empty space!");
-		} else {
-			map[row][col] = 'O';
-		}
 	};
 
 	public void addWall(int row, int col) {
-		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length) {
-			map[col][row] = '#';
-		}
+		if(!isInRange(row, col))
+			return;
+		
+		if (!isEmpty(row, col))
+			return;
+		
+		if(isMovingBox(row, col))
+			return; 
+		if(isPlayer(row, col))
+			return; 
+		
+		map[col][row] = '#';
+		
+		
 	};
 
 	public int getWidth() {
