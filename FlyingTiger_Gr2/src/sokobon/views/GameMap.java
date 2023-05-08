@@ -48,6 +48,9 @@ public class GameMap {
 	private boolean isMovingBox(int row, int col) {
 		return map[row][col] == ' ';
 	}
+	private boolean isPlayer(int row, int col) {
+		return playerCol == col && playerRow == row;
+	}
 	
 	public void addPlayer(int row, int col) {
 		
@@ -72,7 +75,17 @@ public class GameMap {
 	}
 
 	public void addMovingBox(int row, int col) {
-
+		if(!isInRange(row, col))
+			return;
+		
+		if (!isEmpty(row, col))
+			return;
+		
+		if(isWall(row, col))
+			return; 
+		if(isPlayer(row, col))
+		
+		
 		if (map[row][col] != ' ') {
 			System.out.println("Non empty space!");
 		} else {
