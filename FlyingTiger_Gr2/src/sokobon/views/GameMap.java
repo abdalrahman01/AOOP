@@ -25,27 +25,86 @@ public class GameMap {
 	private int playerRow, playerCol;
 	
 
+	private boolean isEmpty(int row, int col) {
+		return map[row][col] == ' ';
+	}
+	private boolean isWall(int row, int col) {
+		return map[row][col] == '#';
+	}
+	
+	private boolean isInRange(int row, int col) {
+		if(row >= hieght)
+			return false;
+		
+		if(col >= width)
+			return false;
+		
+		if (row < 0 || col < 0)
+			return false;
+		
+		return true;
+		
+	}
+	private boolean isMovingBox(int row, int col) {
+		return map[row][col] == ' ';
+	}
+	private boolean isPlayer(int row, int col) {
+		return playerCol == col && playerRow == row;
+	}
+	
 	public void addPlayer(int row, int col) {
-		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length && map[col][row] == ' ') {
-			map[row][col] = 'P';
-			playerRow = row;
-			playerCol = col;
-		}
-	};
+		
+		if(!isInRange(row, col))
+			return;
+		
+		if (!isEmpty(row, col))
+			return;
+		
+		if(isWall(row, col))
+			return; 
+		
+		if(isMovingBox(row, col))
+			return;
+		
+		
+		
+		map[row][col] = 'P';
+		playerRow = row;
+		playerCol = col;
+		
+	}
 
 	public void addMovingBox(int row, int col) {
-
-		if (map[row][col] != ' ') {
-			System.out.println("Non empty space!");
-		} else {
-			map[row][col] = 'O';
-		}
+		if(!isInRange(row, col))
+			return;
+		
+		if (!isEmpty(row, col))
+			return;
+		
+		if(isWall(row, col))
+			return; 
+		if(isPlayer(row, col))
+			return; 
+		
+		map[row][col] = 'o';
+		
 	};
 
 	public void addWall(int row, int col) {
-		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length) {
-			map[col][row] = '#';
-		}
+		if(!isInRange(row, col))
+			return;
+		
+		if (!isEmpty(row, col))
+			return;
+		
+		if(isMovingBox(row, col))
+			return; 
+		if(isPlayer(row, col))
+			return; 
+		
+		map[col][row] = '#';
+		
+		
 	};
 
 	public int getWidth() {
@@ -64,19 +123,6 @@ public class GameMap {
 		this.hieght = hieght;
 	}
 
-	public String toString() {
-
-		String result = "";
-
-		for (int i = 0; i < map.length; i++) {
-
-			result += Arrays.toString(map[i]) + "\n";
-
-		}
-
-		return result;
-
-	};
 
 	public void movePlayerleft() {
 		if(playerCol-1 > 0 && map[playerRow][playerCol-1] == ' ') {
@@ -151,4 +197,17 @@ public class GameMap {
 
 
 
+	public String toString() {
+		
+		String result = "";
+		
+		for (int i = 0; i < map.length; i++) {
+			
+			result += Arrays.toString(map[i]) + "\n";
+			
+		}
+		
+		return result;
+		
+	};
 }
