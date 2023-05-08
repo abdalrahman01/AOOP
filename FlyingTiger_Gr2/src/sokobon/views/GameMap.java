@@ -202,15 +202,17 @@ public class GameMap {
 	
 
 	public void pullBoxDown() {
-		if(isBoxUp()){
+		
+		if(map[playerX - 1][playerY] == 'O' && map[playerX + 1][playerY] == 'O'){
+				return;
+			}
+	else if(isBoxUp()){
 			map[playerX-1][playerY] = ' ';
 			map[playerX][playerY] = 'O';
 			map[playerX + 1][playerY] = 'P';
 			playerX++;
 		}
-		else if(map[playerX - 1][playerY] == 'O' &&map[playerX + 1][playerY] == 'O' ){
-			return;
-		}
+		
 		
 		
 		else {
@@ -220,7 +222,10 @@ public class GameMap {
 	
 	
 	public void pullBoxLeft() {
-		if(isBoxRight()){
+		if(map[playerX][playerY + 1] == 'O' && map[playerX][playerY - 1] == 'O'){
+			return;
+		}
+		else if(isBoxRight()){
 			map[playerX][playerY + 1] = ' ';
 			map[playerX][playerY] = 'O';
 			map[playerX][playerY - 1] = 'P';
@@ -233,7 +238,10 @@ public class GameMap {
 	
 	
 	public void pullBoxUp() {
-		if(isBoxDown()){
+		if(map[playerX - 1][playerY] == 'O' && map[playerX + 1][playerY] == 'O'){
+			return;
+		}
+			else if(isBoxDown()){
 			map[playerX + 1][playerY] = ' ';
 			map[playerX][playerY] = 'O';
 			map[playerX - 1][playerY] = 'P';
@@ -245,7 +253,10 @@ public class GameMap {
 	}
 	
 	public void pullBoxRight() {
-		if(isBoxLeft()){
+		if(map[playerX][playerY + 1] == 'O' && map[playerX][playerY - 1] == 'O'){
+			return;
+		}
+		else if(isBoxLeft()){
 			map[playerX][playerY - 1] = ' ';
 			map[playerX][playerY] = 'O';
 			map[playerX][playerY + 1] = 'P';
