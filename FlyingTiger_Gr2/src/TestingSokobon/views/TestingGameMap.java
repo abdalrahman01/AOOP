@@ -30,6 +30,58 @@ public class TestingGameMap {
 
 		gMap.addWall(3, 5);
 		System.out.println(gMap);
+		gMap.addMovingBox(2, 3);
+		gMap.addPlayer(2, 4);
+		gMap.addMovingBox(2, 5);
+		System.out.println(gMap);
+		gMap.movePlayerDown();
+		// System.out.println(gMap);
+		gMap.movePlayerleft();
+		// System.out.println(gMap);
+		gMap.movePlayerDown();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerDown();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.pullBoxDown();
+		// System.out.println(gMap);
+		gMap.movePlayerleft();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.pullBoxLeft();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerDown();
+		// System.out.println(gMap);
+		gMap.pullBoxUp();
+		System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerDown();
+		System.out.println(gMap);
+		gMap.movePlayerleft();
+		System.out.println(gMap);
+		gMap.pullBoxRight();
+		System.out.println(gMap);
+		gMap.pullBoxLeft();
+		System.out.println(gMap);
 	}
 
 	public void TestingAddPlayers() {
