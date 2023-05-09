@@ -10,31 +10,30 @@ public class Wall extends GameObject implements GameBox {
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/wall.png"));
 	}
 
-	@Override
+	/*
+	 * Wall is stationary doesn't move
+	 */
 	public void moveUp() {
-		// TODO Auto-generated method stub
-
 	}
 
-	@Override
+	/*
+	 * Wall is stationary doesn't move
+	 */
 	public void moveDown() {
-		// TODO Auto-generated method stub
-
 	}
 
-	@Override
+	/*
+	 * Wall is stationary doesn't move
+	 */
 	public void moveLeft() {
-		// TODO Auto-generated method stub
-
 	}
 
-	@Override
+	/*
+	 * Wall is stationary doesn't move
+	 */
 	public void moveRight() {
-		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public char getID() {
 		return '#';
 	}
