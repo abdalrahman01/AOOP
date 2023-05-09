@@ -12,7 +12,7 @@ import sokobon.models.*;;
 
 public class GameMap extends JComponent implements ChangeListener {
 
-	private char[][] map;
+	private GameMap[][] map;
 
 	private int width, height;
 
