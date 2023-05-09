@@ -14,7 +14,7 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	private char[][] map;
 
-	private int width, hieght;
+	private int width, height;
 
 	private JLabel textField;
 	private DataModel dataModel;
@@ -35,31 +35,88 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	private int playerRow, playerCol;
 
+	private boolean isEmpty(int row, int col) {
+		return map[row][col] == ' ';
+	}
+
+	private boolean isWall(int row, int col) {
+		return map[row][col] == '#';
+	}
+
+	private boolean isInRange(int row, int col) {
+		if (row >= height)
+			return false;
+
+		if (col >= width)
+			return false;
+
+		if (row < 0 || col < 0)
+			return false;
+
+		return true;
+
+	}
+
+	private boolean isMovingBox(int row, int col) {
+		return map[row][col] == 'o';
+	}
+
+	private boolean isPlayer(int row, int col) {
+		return playerCol == col && playerRow == row;
+	}
+
 	public void addPlayer(int row, int col) {
-		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length && map[col][row] == ' ') {
-			map[row][col] = 'P';
-			playerRow = row;
-			playerCol = col;
-		}
+
+		if (!isInRange(row, col))
+			return;
+
+		if (!isEmpty(row, col))
+			return;
+
+		if (isWall(row, col))
+			return;
+
+		if (isMovingBox(row, col))
+			return;
+
+		map[row][col] = 'P';
+		playerRow = row;
+		playerCol = col;
 		update(map);
-	};
+	}
 
 	public void addMovingBox(int row, int col) {
+		if (!isInRange(row, col))
+			return;
 
-		if (map[row][col] != ' ') {
-			System.out.println("Non empty space!");
-		} else {
-			map[row][col] = 'O';
-		}
+		if (!isEmpty(row, col))
+			return;
+
+		if (isWall(row, col))
+			return;
+		if (isPlayer(row, col))
+			return;
+
+		map[row][col] = 'o';
 		update(map);
 
 	};
 
 	public void addWall(int row, int col) {
-		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length) {
-			map[col][row] = '#';
-		}
+		if (!isInRange(row, col))
+			return;
+
+		if (!isEmpty(row, col))
+			return;
+
+		if (isMovingBox(row, col))
+			return;
+		if (isPlayer(row, col))
+			return;
+
+		map[row][col] = '#';
 		update(map);
+
 	};
 
 	public int getWidth() {
@@ -70,12 +127,154 @@ public class GameMap extends JComponent implements ChangeListener {
 		this.width = width;
 	}
 
-	public int getHieght() {
-		return hieght;
+	public int getHeight() {
+		return height;
 	}
 
-	public void setHieght(int hieght) {
-		this.hieght = hieght;
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public void movePlayerleft() {
+		if (playerCol - 1 > 0 && map[playerRow][playerCol - 1] == ' ') {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow][playerCol - 1] = 'P';
+			playerCol--;
+		}
+	}
+
+	public void movePlayerDown() {
+		if (playerRow + 1 < height && map[playerRow + 1][playerCol] == ' ') {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow + 1][playerCol] = 'P';
+			playerRow++;
+		}
+	}
+
+	public void movePlayerRight() {
+		if (playerCol < width && map[playerRow][playerCol + 1] == ' ') {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow][playerCol + 1] = 'P';
+			playerCol++;
+		}
+	}
+
+	public void movePlayerUp() {
+		if (playerRow > 0 && map[playerRow - 1][playerCol] == ' ') {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow - 1][playerCol] = 'P';
+			playerRow--;
+		}
+
+	}
+
+	public void moveBoxLeft(int boxRow, int boxCol) {
+
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol)) {
+			int newBoxRow = boxRow;
+			int newBoxCol = boxCol - 1;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+
+		}
+
+	}
+
+	public void moveBoxRight(int boxRow, int boxCol) {
+
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol)) {
+			int newBoxRow = boxRow;
+			int newBoxCol = boxCol + 1;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+
+		}
+
+	}
+
+	public void moveBoxUp(int boxRow, int boxCol) {
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol)) {
+			int newBoxRow = boxRow - 1;
+			int newBoxCol = boxCol;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+
+		}
+	}
+
+	public void moveBoxDown(int boxRow, int boxCol) {
+		if (!isInRange(boxRow, boxCol))
+			return;
+
+		if (isEmpty(boxRow, boxCol))
+			return;
+
+		if (isWall(boxRow, boxCol))
+			return;
+		if (isPlayer(boxRow, boxCol))
+			return;
+		if (isMovingBox(boxRow, boxCol)) {
+			int newBoxRow = boxRow + 1;
+			int newBoxCol = boxCol;
+			if (!isInRange(newBoxRow, newBoxCol))
+				return;
+
+			if (!isEmpty(newBoxRow, newBoxCol))
+				return;
+
+			map[boxRow][boxCol] = ' ';
+			map[newBoxRow][newBoxCol] = 'o';
+
+		}
+
 	}
 
 	public String toString() {
@@ -92,26 +291,10 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	};
 
-	public void movePlayerleft() {
-
-	}
-
-	public void movePlayerDown() {
-
-	}
-
-	public void movePlayerRight() {
-
-	}
-
-	public void movePlayerUp() {
-
-	}
-
 	public void setMap(char[][] map) {
 		width = map[0].length;
-		hieght = map.length;
-		this.map = new char[hieght][width];
+		height = map.length;
+		this.map = new char[height][width];
 
 		// store the map
 		for (int h = 0; h < map.length; h++) {
