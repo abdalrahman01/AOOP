@@ -36,10 +36,14 @@ public class GameMap extends JComponent implements ChangeListener {
 	private int playerRow, playerCol;
 
 	private boolean isEmpty(int row, int col) {
+		if (!isInRange(row, col))
+			return false;
 		return map[row][col] == ' ';
 	}
 
 	private boolean isWall(int row, int col) {
+		if (!isInRange(row, col))
+			return false;
 		return map[row][col] == '#';
 	}
 
@@ -58,6 +62,8 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	private boolean isMovingBox(int row, int col) {
+		if (!isInRange(row, col))
+			return false;
 		return map[row][col] == 'o';
 	}
 
@@ -299,11 +305,11 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public boolean isBoxLeft() {
-		return map[playerRow][playerCol - 1] == 'o';
+		return isMovingBox(playerRow, playerCol - 1);
 	}
 
 	public boolean isWallLeft() {
-		return map[playerRow][playerCol - 1] == 'x';
+		return isWall(playerRow, playerCol - 1);
 	}
 
 	public void movePlayerleft() {
@@ -332,11 +338,11 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public boolean isBoxDown() {
-		return map[playerRow + 1][playerCol] == 'o';
+		return isMovingBox(playerRow + 1, playerCol);
 	}
 
 	public boolean isWallDown() {
-		return map[playerRow + 1][playerCol] == 'x';
+		return isWall(playerRow + 1, playerCol);
 	}
 
 	public void movePlayerDown() {
@@ -365,11 +371,11 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public boolean isBoxRight() {
-		return map[playerRow][playerCol + 1] == 'o';
+		return isMovingBox(playerRow, playerCol + 1);
 	}
 
 	public boolean isWallRight() {
-		return map[playerRow][playerCol + 1] == 'x';
+		return isWall(playerRow, playerCol + 1);
 	}
 
 	public void movePlayerRight() {
@@ -398,12 +404,12 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public boolean isBoxUp() {
-		return playerRow - 1 >= 0 && map[playerRow - 1][playerCol] == 'o';
+		return isMovingBox(playerRow - 1, playerCol);
 
 	}
 
 	public boolean isWallUp() {
-		return map[playerRow - 1][playerCol] == 'x';
+		return isWall(playerRow - 1, playerCol);
 	}
 
 	public void movePlayerUp() {
@@ -459,7 +465,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public void pullBoxUp() {
-		if (map[playerRow - 1][playerCol] == 'o' && map[playerRow + 1][playerCol] == 'o') {
+		if (isStuckInMiddle(playerRow, playerCol)) {
 			return;
 		} else if (isBoxDown()) {
 			map[playerRow + 1][playerCol] = ' ';
@@ -471,8 +477,17 @@ public class GameMap extends JComponent implements ChangeListener {
 		}
 	}
 
+	public boolean isStuckInMiddle(int row, int col) {
+		if (isMovingBox(row, col + 1) && isMovingBox(row, col - 1))
+			return true;
+		if (isMovingBox(row + 1, col) && isMovingBox(row - 1, col))
+			return true;
+		return false;
+	}
+
 	public void pullBoxRight() {
-		if (map[playerRow][playerCol + 1] == 'o' && map[playerRow][playerCol - 1] == 'o') {
+
+		if (isStuckInMiddle(playerRow, playerCol)) {
 			return;
 		} else if (isBoxLeft()) {
 			map[playerRow][playerCol - 1] = ' ';
