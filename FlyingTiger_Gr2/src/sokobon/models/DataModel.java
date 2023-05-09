@@ -59,7 +59,7 @@ public class DataModel {
         }
     }
 
-    public void update(char[][] map2) {
+    public void update(char[][] map) {
         width = map[0].length;
         hieght = map.length;
         this.map = new char[hieght][width];
