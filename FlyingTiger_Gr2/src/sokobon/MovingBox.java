@@ -1,9 +1,6 @@
 package sokobon;
 
 import java.io.File;
-import javax.imageio.ImageIO;
-
-import java.io.File;
 
 public class MovingBox extends GameObject implements GameBox {
 
@@ -12,15 +9,19 @@ public class MovingBox extends GameObject implements GameBox {
 	}
 
 	public void moveUp() {
+		posRow--;
 	};
 
 	public void moveDown() {
+		posRow++;
 	};
 
 	public void moveLeft() {
+		posCol--;
 	};
 
 	public void moveRight() {
+		posCol++;
 	};
 
 	/**

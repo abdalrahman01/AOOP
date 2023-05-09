@@ -14,21 +14,26 @@ public class Player extends GameObject {
 	}
 
 	public void moveUp() {
+		posRow++;
 	};
 
 	public void moveDown() {
+		posRow--;
 	};
 
 	public void moveLeft() {
+		posCol--;
 	};
 
 	public void moveRight() {
+		posCol++;
 	};
 
 	/**
 	 * Push the object using the player
 	 */
-	public void push() {
+	public void push(GameBox box) {
+
 	};
 
 	/**
