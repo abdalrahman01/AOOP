@@ -20,13 +20,14 @@ public abstract class GameObject {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int posX, posY;
+	protected int posRow;
+
+	protected int posCol;
 	private int width, height;
 	private JLabel icon;
-	private char id;
 
-	public int getPosX() {
-		return posX;
+	public int getPosRow() {
+		return posRow;
 	}
 
 	public GameObject() {
@@ -34,25 +35,26 @@ public abstract class GameObject {
 	}
 
 	/**
-	 * Set the x coordinate for the object
+	 * Set the y coordinate for the object
 	 * 
-	 * @param posX
+	 * @param posRow
 	 */
-	public void setPosX(int posX) {
-		this.posX = posX;
+	public void setPosRow(int posRow) {
+		this.posRow = posRow;
 	}
 
 	/**
-	 * Set the y coordinate for the object
+	 * Set the x coordinate for the object
 	 * 
 	 * @return
 	 */
-	public int getPosY() {
-		return posY;
+	public int getPosCol() {
+		return posCol;
 	}
 
-	public void setPosY(int posY) {
-		this.posY = posY;
+	public void setPosCol(int posCol) {
+
+		this.posCol = posCol;
 	}
 
 	/**
