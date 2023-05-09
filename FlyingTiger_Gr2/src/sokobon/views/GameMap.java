@@ -22,28 +22,28 @@ public class GameMap {
 		}
 	}
 
-	private int playerX, playerY;
+	private int playerRow, playerCol;
 
-	public void addPlayer(int x, int y) {
-		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length && map[y][x] == ' ') {
-			map[x][y] = 'P';
-			playerX = x;
-			playerY = y;
+	public void addPlayer(int row, int col) {
+		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length && map[col][row] == ' ') {
+			map[row][col] = 'P';
+			playerRow = row;
+			playerCol = col;
 		}
 	};
 
-	public void addMovingBox(int x, int y) {
+	public void addMovingBox(int row, int col) {
 
-		if (map[x][y] != ' ') {
+		if (map[row][col] != ' ') {
 			System.out.println("Non empty space!");
 		} else {
-			map[x][y] = 'O';
+			map[row][col] = 'o';
 		}
 	};
 
-	public void addWall(int x, int y) {
-		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length) {
-			map[y][x] = '#';
+	public void addWall(int row, int col) {
+		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length) {
+			map[col][row] = '#';
 		}
 	};
 
@@ -76,194 +76,184 @@ public class GameMap {
 		return result;
 
 	};
-	
-	public boolean mPL(){
-		return playerY-1 > 0 && map[playerX][playerY-1]== ' ';
+
+	public boolean mPL() {
+		return playerCol - 1 > 0 && map[playerRow][playerCol - 1] == ' ';
 	}
-	public boolean isBoxLeft(){
-		return map[playerX][playerY-1]== 'O';
+
+	public boolean isBoxLeft() {
+		return map[playerRow][playerCol - 1] == 'o';
 	}
-	public boolean isWallLeft(){
-		return map[playerX][playerY-1]== 'x';
+
+	public boolean isWallLeft() {
+		return map[playerRow][playerCol - 1] == 'x';
 	}
-	
+
 	public void movePlayerleft() {
-	    if (mPL()) {
-	        map[playerX][playerY] = ' ';
-	        map[playerX][playerY - 1] = 'P';
-	        playerY--;
-	    } else if (isBoxLeft()) {
-	        if (playerY - 2 > 0 && map[playerX][playerY - 2] == ' ') {
-	            map[playerX][playerY] = ' ';
-	            map[playerX][playerY - 1] = 'P';
-	            map[playerX][playerY - 2] = 'O';
-	            playerY--;
-	        } else {
-	            return;
-	        }
-	    } else if (isWallLeft()) {
-	        return;
-	    }
+		if (mPL()) {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow][playerCol - 1] = 'P';
+			playerCol--;
+		} else if (isBoxLeft()) {
+			if (playerCol - 2 > 0 && map[playerRow][playerCol - 2] == ' ') {
+				map[playerRow][playerCol] = ' ';
+				map[playerRow][playerCol - 1] = 'P';
+				map[playerRow][playerCol - 2] = 'o';
+				playerCol--;
+			} else {
+				return;
+			}
+		} else if (isWallLeft()) {
+			return;
+		}
 	}
-	
-	
-	
-	public boolean mPD(){
-		return playerX+1 < hieght && map[playerX+1][playerY] == ' ';
+
+	public boolean mPD() {
+		return playerRow + 1 < hieght && map[playerRow + 1][playerCol] == ' ';
 	}
-	public boolean isBoxDown(){
-		return map[playerX+1][playerY]== 'O';
+
+	public boolean isBoxDown() {
+		return map[playerRow + 1][playerCol] == 'o';
 	}
-	public boolean isWallDown(){
-		return map[playerX+1][playerY]== 'x';
+
+	public boolean isWallDown() {
+		return map[playerRow + 1][playerCol] == 'x';
 	}
 
 	public void movePlayerDown() {
-		if(mPD()) {
-			map[playerX][playerY] = ' ';
-			map[playerX+1][playerY] = 'P';
-			playerX++;
+		if (mPD()) {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow + 1][playerCol] = 'P';
+			playerRow++;
+		} else if (isBoxDown()) {
+			if (playerCol - 2 > 0 && map[playerRow + 2][playerCol] == ' ') {
+				map[playerRow][playerCol] = ' ';
+				map[playerRow + 1][playerCol] = 'P';
+				map[playerRow + 2][playerCol] = 'o';
+				playerRow++;
+			} else {
+				return;
+			}
+		} else if (isWallDown()) {
+			return;
 		}
-		else if (isBoxDown()) {
-	        if (playerY - 2 > 0 && map[playerX + 2][playerY] == ' ') {
-	            map[playerX][playerY] = ' ';
-	            map[playerX + 1][playerY] = 'P';
-	            map[playerX + 2][playerY] = 'O';
-	            playerX++;
-	        } else {
-	            return;
-	        }
-	    } else if (isWallDown()) {
-	        return;
-	    }
 	}
-	
-	
-	public boolean mPR(){
-		return playerY < width && map[playerX][playerY+1] == ' ';
+
+	public boolean mPR() {
+		return playerCol < width && map[playerRow][playerCol + 1] == ' ';
 	}
-	public boolean isBoxRight(){
-		return map[playerX][playerY + 1]== 'O';
+
+	public boolean isBoxRight() {
+		return map[playerRow][playerCol + 1] == 'o';
 	}
-	public boolean isWallRight(){
-		return map[playerX][playerY + 1]== 'x';
+
+	public boolean isWallRight() {
+		return map[playerRow][playerCol + 1] == 'x';
 	}
 
 	public void movePlayerRight() {
-	    if (mPR()) {
-	        map[playerX][playerY] = ' ';
-	        map[playerX][playerY+1] = 'P';
-	        playerY++;
-	    } else if (isBoxRight()) {
-	        if (playerY + 2 < width && map[playerX][playerY + 2] == ' ') {
-	            map[playerX][playerY] = ' ';
-	            map[playerX][playerY + 1] = 'P';
-	            map[playerX][playerY + 2] = 'O';
-	            playerY++;
-	        } else {
-	            return;
-	        }
-	    } else if (isWallRight()) {
-	        return;
-	    }
-	}
-	
-	
-	
-	public boolean mPU(){
-		return playerX > 0 && map[playerX-1][playerY] == ' ';
-	}
-	public boolean isBoxUp(){
-		return playerX - 1 >= 0 && map[playerX-1][playerY] == 'O';
-		
-	}
-	public boolean isWallUp(){
-		return map[playerX- 1][playerY]== 'x';
-	}
-	public void movePlayerUp() {
-	    if (mPU()) {
-	        map[playerX][playerY] = ' ';
-	        map[playerX-1][playerY] = 'P';
-	        playerX--;
-	    }
-	    else if (isBoxUp()) {
-	        if (playerX - 2 >= 0 && map[playerX - 2][playerY] == ' ') {
-	            map[playerX][playerY] = ' ';
-	            map[playerX - 1][playerY] = 'P';
-	            map[playerX - 2][playerY] = 'O';
-	            playerX--;
-	        } else {
-	            return;
-	        }
-	    } else if (isWallUp()) {
-	        return;
-	    }
-	}
-	
-
-	public void pullBoxDown() {
-		
-		if(map[playerX - 1][playerY] == 'O' && map[playerX + 1][playerY] == 'O'){
+		if (mPR()) {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow][playerCol + 1] = 'P';
+			playerCol++;
+		} else if (isBoxRight()) {
+			if (playerCol + 2 < width && map[playerRow][playerCol + 2] == ' ') {
+				map[playerRow][playerCol] = ' ';
+				map[playerRow][playerCol + 1] = 'P';
+				map[playerRow][playerCol + 2] = 'o';
+				playerCol++;
+			} else {
 				return;
 			}
-	else if(isBoxUp()){
-			map[playerX-1][playerY] = ' ';
-			map[playerX][playerY] = 'O';
-			map[playerX + 1][playerY] = 'P';
-			playerX++;
+		} else if (isWallRight()) {
+			return;
 		}
-		
-		
-		
+	}
+
+	public boolean mPU() {
+		return playerRow > 0 && map[playerRow - 1][playerCol] == ' ';
+	}
+
+	public boolean isBoxUp() {
+		return playerRow - 1 >= 0 && map[playerRow - 1][playerCol] == 'o';
+
+	}
+
+	public boolean isWallUp() {
+		return map[playerRow - 1][playerCol] == 'x';
+	}
+
+	public void movePlayerUp() {
+		if (mPU()) {
+			map[playerRow][playerCol] = ' ';
+			map[playerRow - 1][playerCol] = 'P';
+			playerRow--;
+		} else if (isBoxUp()) {
+			if (playerRow - 2 >= 0 && map[playerRow - 2][playerCol] == ' ') {
+				map[playerRow][playerCol] = ' ';
+				map[playerRow - 1][playerCol] = 'P';
+				map[playerRow - 2][playerCol] = 'o';
+				playerRow--;
+			} else {
+				return;
+			}
+		} else if (isWallUp()) {
+			return;
+		}
+	}
+
+	public void pullBoxDown() {
+
+		if (map[playerRow - 1][playerCol] == 'o' && map[playerRow + 1][playerCol] == 'o') {
+			return;
+		} else if (isBoxUp()) {
+			map[playerRow - 1][playerCol] = ' ';
+			map[playerRow][playerCol] = 'o';
+			map[playerRow + 1][playerCol] = 'P';
+			playerRow++;
+		}
+
 		else {
 			return;
-			}
+		}
 	}
-	
-	
+
 	public void pullBoxLeft() {
-		if(map[playerX][playerY + 1] == 'O' && map[playerX][playerY - 1] == 'O'){
+		if (map[playerRow][playerCol + 1] == 'o' && map[playerRow][playerCol - 1] == 'o') {
+			return;
+		} else if (isBoxRight()) {
+			map[playerRow][playerCol + 1] = ' ';
+			map[playerRow][playerCol] = 'o';
+			map[playerRow][playerCol - 1] = 'P';
+			playerCol--;
+		} else {
 			return;
 		}
-		else if(isBoxRight()){
-			map[playerX][playerY + 1] = ' ';
-			map[playerX][playerY] = 'O';
-			map[playerX][playerY - 1] = 'P';
-			playerY--;
-		}
-		else {
-			return;
-			}
 	}
-	
-	
+
 	public void pullBoxUp() {
-		if(map[playerX - 1][playerY] == 'O' && map[playerX + 1][playerY] == 'O'){
+		if (map[playerRow - 1][playerCol] == 'o' && map[playerRow + 1][playerCol] == 'o') {
+			return;
+		} else if (isBoxDown()) {
+			map[playerRow + 1][playerCol] = ' ';
+			map[playerRow][playerCol] = 'o';
+			map[playerRow - 1][playerCol] = 'P';
+			playerRow--;
+		} else {
 			return;
 		}
-			else if(isBoxDown()){
-			map[playerX + 1][playerY] = ' ';
-			map[playerX][playerY] = 'O';
-			map[playerX - 1][playerY] = 'P';
-			playerX--;
-		}
-		else {
-			return;
-			}
 	}
-	
+
 	public void pullBoxRight() {
-		if(map[playerX][playerY + 1] == 'O' && map[playerX][playerY - 1] == 'O'){
+		if (map[playerRow][playerCol + 1] == 'o' && map[playerRow][playerCol - 1] == 'o') {
+			return;
+		} else if (isBoxLeft()) {
+			map[playerRow][playerCol - 1] = ' ';
+			map[playerRow][playerCol] = 'o';
+			map[playerRow][playerCol + 1] = 'P';
+			playerRow--;
+		} else {
 			return;
 		}
-		else if(isBoxLeft()){
-			map[playerX][playerY - 1] = ' ';
-			map[playerX][playerY] = 'O';
-			map[playerX][playerY + 1] = 'P';
-			playerX--;
-		}
-		else {
-			return;
-			}
 	}
 }
