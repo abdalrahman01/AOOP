@@ -33,31 +33,31 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	}
 
-	private int playerX, playerY;
+	private int playerRow, playerCol;
 
-	public void addPlayer(int x, int y) {
-		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length && map[y][x] == ' ') {
-			map[x][y] = 'P';
-			playerX = x;
-			playerY = y;
+	public void addPlayer(int row, int col) {
+		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length && map[col][row] == ' ') {
+			map[row][col] = 'P';
+			playerRow = row;
+			playerCol = col;
 		}
 		update(map);
 	};
 
-	public void addMovingBox(int x, int y) {
+	public void addMovingBox(int row, int col) {
 
-		if (map[x][y] != ' ') {
+		if (map[row][col] != ' ') {
 			System.out.println("Non empty space!");
 		} else {
-			map[x][y] = 'O';
+			map[row][col] = 'O';
 		}
 		update(map);
 
 	};
 
-	public void addWall(int x, int y) {
-		if (x >= 0 && x < map[0].length && y >= 0 && y < map.length) {
-			map[y][x] = '#';
+	public void addWall(int row, int col) {
+		if (row >= 0 && row < map[0].length && col >= 0 && col < map.length) {
+			map[col][row] = '#';
 		}
 		update(map);
 	};
