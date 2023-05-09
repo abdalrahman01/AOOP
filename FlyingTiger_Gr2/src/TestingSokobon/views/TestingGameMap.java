@@ -1,5 +1,6 @@
 package TestingSokobon.views;
 
+import sokobon.models.DataModel;
 import sokobon.views.GameMap;
 
 public class TestingGameMap {
@@ -16,37 +17,74 @@ public class TestingGameMap {
 			{ X, X, X, X, X, X, X, X } };
 
 	public static void main(String[] args) {
-		GameMap gMap = new GameMap(map);
-		gMap.addPlayer(3, 5);
-		gMap.addMovingBox(3, 3);
-		gMap.addWall(4, 5);
-		gMap.moveBoxLeft(3, 3);
-		gMap.moveBoxLeft(3, 2);
-		gMap.moveBoxLeft(3, 1);
-		gMap.moveBoxRight(3, 1);
-		gMap.moveBoxRight(3, 2);
-		gMap.moveBoxRight(3, 3);
-		gMap.moveBoxRight(3, 4);
-		gMap.moveBoxUp(3, 4);
-		gMap.moveBoxDown(2, 4);
-		gMap.moveBoxRight(3, 1);
-		//gMap.moveBoxRight(3, 3);
-		//gMap.moveBoxDown(3, 3);
-		//gMap.moveBoxUp(3, 3);
-	
-			System.out.println(gMap);
-			
-//		gMap.movePlayerUp();
-//		System.out.println(gMap);
-//		gMap.movePlayerUp();
-//		System.out.println(gMap);
-//		gMap.movePlayerUp();
-//		System.out.println(gMap);
-//		gMap.movePlayerUp();
-//		System.out.println(gMap);
-		
-		
-	
+		DataModel dataModel = new DataModel(map);
 
+		GameMap gMap = new GameMap(dataModel);
+
+		dataModel.attach(gMap);
+		gMap.addPlayer(4, 1);
+		System.out.println(gMap);
+
+		gMap.addMovingBox(3, 4);
+		System.out.println(gMap);
+
+		gMap.addWall(3, 5);
+		System.out.println(gMap);
+		gMap.addMovingBox(2, 3);
+		gMap.addPlayer(2, 4);
+		gMap.addMovingBox(2, 5);
+		System.out.println(gMap);
+		gMap.movePlayerDown();
+		// System.out.println(gMap);
+		gMap.movePlayerleft();
+		// System.out.println(gMap);
+		gMap.movePlayerDown();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerDown();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.pullBoxDown();
+		// System.out.println(gMap);
+		gMap.movePlayerleft();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.pullBoxLeft();
+		// System.out.println(gMap);
+		gMap.movePlayerUp();
+		// System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerDown();
+		// System.out.println(gMap);
+		gMap.pullBoxUp();
+		System.out.println(gMap);
+		gMap.movePlayerRight();
+		// System.out.println(gMap);
+		gMap.movePlayerDown();
+		System.out.println(gMap);
+		gMap.movePlayerleft();
+		System.out.println(gMap);
+		gMap.pullBoxRight();
+		System.out.println(gMap);
+		gMap.pullBoxLeft();
+		System.out.println(gMap);
+	}
+
+	public void TestingAddPlayers() {
+		//
 	}
 }
