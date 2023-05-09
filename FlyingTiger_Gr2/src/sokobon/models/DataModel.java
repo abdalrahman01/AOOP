@@ -6,23 +6,24 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import sokobon.GameBox;
+import sokobon.GameObject;
 import sokobon.views.GameMap;
 import sokobon.views.GraphicalView;
 
 public class DataModel {
     ArrayList<ChangeListener> listeners;
-    private char[][] map; // data
+    private GameObject[][] map; // data
     private int width;
     private int hieght;
 
     private GameMap gameMap;
     private GraphicalView graphicalView;
 
-    public DataModel(char[][] map) {
+    public DataModel(GameObject[][] map) {
         listeners = new ArrayList<ChangeListener>();
         width = map[0].length;
         hieght = map.length;
-        this.map = new char[hieght][width];
+        this.map = new GameObject[hieght][width];
 
         // store the map
         for (int h = 0; h < map.length; h++) {
@@ -37,8 +38,8 @@ public class DataModel {
      * 
      * @return the map in an char[][]
      */
-    public char[][] getData() {
-        return (char[][]) (map.clone());
+    public GameObject[][] getData() {
+        return (GameObject[][]) (map.clone());
     }
 
     /**
@@ -59,10 +60,10 @@ public class DataModel {
         }
     }
 
-    public void update(char[][] map) {
+    public void update(GameObject[][] map) {
         width = map[0].length;
         hieght = map.length;
-        this.map = new char[hieght][width];
+        this.map = new GameObject[hieght][width];
 
         // store the map
         for (int h = 0; h < map.length; h++) {
@@ -75,7 +76,4 @@ public class DataModel {
         }
 
     }
-
-    // TODO add movePlayerUp, movePlayerDown, movePlayerRight, movePlayerLeft
-    // instead of update.
 }

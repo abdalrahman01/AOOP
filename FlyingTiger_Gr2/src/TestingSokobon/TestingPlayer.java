@@ -6,7 +6,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import sokobon.Player;
+import sokobon.GameObjects.Player;
 public class TestingPlayer {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Testing Player");

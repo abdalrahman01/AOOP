@@ -1,6 +1,8 @@
-package sokobon;
+package sokobon.GameObjects;
 
 import java.io.File;
+
+import sokobon.GameObject;
 
 /**
  * The Red circle that the boxes must come to or occur

@@ -1,6 +1,9 @@
-package sokobon;
+package sokobon.GameObjects;
 
 import java.io.File;
+
+import sokobon.GameBox;
+import sokobon.GameObject;
 
 public class MovingBox extends GameObject implements GameBox {
 

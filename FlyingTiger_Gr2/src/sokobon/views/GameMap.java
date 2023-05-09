@@ -8,11 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import sokobon.GameObject;
 import sokobon.models.*;;
 
 public class GameMap extends JComponent implements ChangeListener {
 
-	private GameMap[][] map;
+	private GameObject[][] map;
 
 	private int width, height;
 
@@ -263,10 +264,10 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	};
 
-	public void setMap(char[][] map) {
+	public void setMap(GameObject[][] map) {
 		width = map[0].length;
 		height = map.length;
-		this.map = new char[height][width];
+		this.map = new GameObject[height][width];
 
 		// store the map
 		for (int h = 0; h < map.length; h++) {
@@ -290,7 +291,7 @@ public class GameMap extends JComponent implements ChangeListener {
 		dataModel.update(oldX, oldY, newX, newY);
 	}
 
-	private String toMultiLineHTML(char[][] text) {
+	private String toMultiLineHTML(GameObject[][] text) {
 		String result = "<html>";
 
 		for (int i = 0; i < text.length; i++) {
