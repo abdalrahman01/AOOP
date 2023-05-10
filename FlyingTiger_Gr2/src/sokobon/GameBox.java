@@ -8,4 +8,6 @@ public interface GameBox {
 
     char getID();
 
+    void setID(char id);
+
 }
