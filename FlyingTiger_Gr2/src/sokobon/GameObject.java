@@ -23,7 +23,7 @@ public abstract class GameObject implements Cloneable {
 	private static final long serialVersionUID = 1L;
 
 	protected int posRow;
-	private GameMap gameMap;
+	public GameMap gameMap;
 
 	protected int posCol;
 	private int width, height;
