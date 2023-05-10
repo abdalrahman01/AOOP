@@ -19,28 +19,29 @@ public class MovingBox extends GameObject implements GameBox {
 		setPosRow(row);
 	}
 
-	public void moveUp() {
-		move(0);
+	public boolean moveUp() {
+		return move(0);
 	};
 
-	public void moveDown() {
-		move(1);
+	public boolean moveDown() {
+		return move(1);
 	};
 
-	public void moveLeft() {
-		move(3);
+	public boolean moveLeft() {
+		return move(3);
 	};
 
-	public void moveRight() {
-		move(2);
+	public boolean moveRight() {
+		return move(2);
 	};
 
 	/**
 	 * moves the box in a chose direction
 	 * 
 	 * @param direction choose between {0: Up, 1: Down, 2: Right, 3: Left}
+	 * @return true if GameObject has moved
 	 */
-	public void move(int direction) {
+	public boolean move(int direction) {
 		int oldPosRow = posRow;
 		int oldPosCol = posCol;
 
@@ -64,7 +65,7 @@ public class MovingBox extends GameObject implements GameBox {
 		if (!gameMap.isInRange(posRow, posCol)) { // if new position is outside of range
 			posRow = oldPosRow; // go back to place
 			posCol = oldPosCol;
-			return;
+			return false;
 		}
 		if (gameMap.isMarked(posRow, posCol)) { // if new position is marked
 
@@ -90,9 +91,10 @@ public class MovingBox extends GameObject implements GameBox {
 			// go back to place and do nothing
 			posRow = oldPosRow;
 			posCol = oldPosCol;
-			return;
+			return false;
 		}
 		gameMap.setGameObject(posRow, posCol, this);
+		return true;
 	}
 
 	private void convertToMarked() {
