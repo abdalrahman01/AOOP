@@ -1,5 +1,6 @@
 package sokobon.views;
 
+import java.io.File;
 import java.util.Arrays;
 
 import javax.swing.JComponent;
@@ -10,6 +11,7 @@ import javax.swing.event.ChangeListener;
 
 import sokobon.GameBox;
 import sokobon.GameObject;
+import sokobon.GameObjects.Floor;
 import sokobon.GameObjects.MovingBox;
 import sokobon.GameObjects.Player;
 import sokobon.GameObjects.Wall;
@@ -38,6 +40,14 @@ public class GameMap extends JComponent implements ChangeListener {
 		frame.pack();
 		frame.setVisible(true);
 
+	}
+
+	public GameObject getGameObject(int row, int col) {
+		return map[row][col];
+	}
+
+	public void setGameObject(int row, int col, GameObject gameObject) {
+		map[row][col] = gameObject.clone();
 	}
 
 	private int playerRow, playerCol;
@@ -75,7 +85,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	private boolean isPlayer(int row, int col) {
-		return playerCol == col && playerRow == row;
+		return player.getPosRow() == row && player.getPosCol() == col;
 	}
 
 	public void addPlayer(int row, int col) {
@@ -133,6 +143,10 @@ public class GameMap extends JComponent implements ChangeListener {
 		update(map);
 	}
 
+	public boolean isMarked(int row, int col) {
+		return map[row][col].getID() == 'g';
+	}
+
 	public int getWidth() {
 		return width;
 	}
@@ -149,110 +163,44 @@ public class GameMap extends JComponent implements ChangeListener {
 		this.height = height;
 	}
 
-	public void moveBoxLeft(GameBox box) {
+	public <T extends GameObject & GameBox> void moveBoxDown(T box) {
+	}
 
-		if (!isInRange(box.getPosRow(), box.getPosCol()))
+	public <T extends GameObject & GameBox> void moveBoxUp(T box) {
+	}
+
+	public <T extends GameObject & GameBox> void moveBoxRight(T box) {
+	}
+
+	public <T extends GameObject & GameBox> void moveBoxLeft(T box) {
+
+		box.moveLeft();
+
+		// check if new positoin is in range
+		if (!isInRange(box.getPosRow(), box.getPosCol())) {
+			box.moveRight();
 			return;
-
-		if (isMovingBox(box)) {
-			int newBoxRow = box.getPosRow();
-			int newBoxCol = box.getPosCol() - 1;
-			if (!isInRange(newBoxRow, newBoxCol))
-				return;
-
-			if (!isEmpty(newBoxRow, newBoxCol))
-				return;
-
-			map[boxRow][boxCol] = ' ';
-			map[newBoxRow][newBoxCol] = 'o';
-
 		}
+
+		// check if place has marked floor
+		if (isMarked(box.getPosRow(), box.getPosCol())) {
+			box.setIconGameObject(
+					new File("FlyingTiger_Gr2\\src\\sokobon\\resources\\imgs\\sokoban_icons\\cratemarked.png"));
+			box.setID('m');
+		}
+
+		if (!isEmpty(box.getPosRow(), box.getPosCol())) {
+			box.moveRight();
+			return;
+		}
+		map[box.getPosRow()][box.getPosCol() - 1] = new Floor();
+		map[box.getPosRow()][box.getPosCol()] = box;
+		update(map);
 
 	}
 
 	private boolean isMovingBox(GameBox box) {
 		return box.getID() == 'o';
-	}
-
-	public void moveBoxRight(int boxRow, int boxCol) {
-
-		if (!isInRange(boxRow, boxCol))
-			return;
-
-		if (isEmpty(boxRow, boxCol))
-			return;
-
-		if (isWall(boxRow, boxCol))
-			return;
-		if (isPlayer(boxRow, boxCol))
-			return;
-		if (isMovingBox(boxRow, boxCol)) {
-			int newBoxRow = boxRow;
-			int newBoxCol = boxCol + 1;
-			if (!isInRange(newBoxRow, newBoxCol))
-				return;
-
-			if (!isEmpty(newBoxRow, newBoxCol))
-				return;
-
-			map[boxRow][boxCol] = ' ';
-			map[newBoxRow][newBoxCol] = 'o';
-
-		}
-
-	}
-
-	public void moveBoxUp(int boxRow, int boxCol) {
-		if (!isInRange(boxRow, boxCol))
-			return;
-
-		if (isEmpty(boxRow, boxCol))
-			return;
-
-		if (isWall(boxRow, boxCol))
-			return;
-		if (isPlayer(boxRow, boxCol))
-			return;
-		if (isMovingBox(boxRow, boxCol)) {
-			int newBoxRow = boxRow - 1;
-			int newBoxCol = boxCol;
-			if (!isInRange(newBoxRow, newBoxCol))
-				return;
-
-			if (!isEmpty(newBoxRow, newBoxCol))
-				return;
-
-			map[boxRow][boxCol] = ' ';
-			map[newBoxRow][newBoxCol] = 'o';
-
-		}
-	}
-
-	public void moveBoxDown(int boxRow, int boxCol) {
-		if (!isInRange(boxRow, boxCol))
-			return;
-
-		if (isEmpty(boxRow, boxCol))
-			return;
-
-		if (isWall(boxRow, boxCol))
-			return;
-		if (isPlayer(boxRow, boxCol))
-			return;
-		if (isMovingBox(boxRow, boxCol)) {
-			int newBoxRow = boxRow + 1;
-			int newBoxCol = boxCol;
-			if (!isInRange(newBoxRow, newBoxCol))
-				return;
-
-			if (!isEmpty(newBoxRow, newBoxCol))
-				return;
-
-			map[boxRow][boxCol] = ' ';
-			map[newBoxRow][newBoxCol] = 'o';
-
-		}
-
 	}
 
 	public String toString() {
