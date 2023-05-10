@@ -47,24 +47,24 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public void setGameObject(int row, int col, GameObject gameObject) {
-		map[row][col] = gameObject.clone();
+		update(row, col, gameObject.clone());
 	}
 
 	private int playerRow, playerCol;
 
-	private boolean isEmpty(int row, int col) {
+	public boolean isEmpty(int row, int col) {
 		if (!isInRange(row, col))
 			return false;
 		return map[row][col].getID() == ' ';
 	}
 
-	private boolean isWall(int row, int col) {
+	public boolean isWall(int row, int col) {
 		if (!isInRange(row, col))
 			return false;
 		return map[row][col].getID() == '#';
 	}
 
-	private boolean isInRange(int row, int col) {
+	public boolean isInRange(int row, int col) {
 		if (row >= height)
 			return false;
 
@@ -78,13 +78,13 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	}
 
-	private boolean isMovingBox(int row, int col) {
+	public boolean isMovingBox(int row, int col) {
 		if (!isInRange(row, col))
 			return false;
 		return map[row][col].getID() == 'o';
 	}
 
-	private boolean isPlayer(int row, int col) {
+	public boolean isPlayer(int row, int col) {
 		return player.getPosRow() == row && player.getPosCol() == col;
 	}
 
@@ -240,8 +240,8 @@ public class GameMap extends JComponent implements ChangeListener {
 		dataModel.update(map);
 	}
 
-	private void update(int oldX, int oldY, int newX, int newY) {
-		dataModel.update(oldX, oldY, newX, newY);
+	private void update(int row, int col, GameObject gameObject) {
+		dataModel.update(row, col, gameObject);
 	}
 
 	private String toMultiLineHTML(GameObject[][] text) {
@@ -255,7 +255,8 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public boolean mPL() {
-		return playerCol - 1 > 0 && map[playerRow][playerCol - 1] == ' ';
+		return true;
+		// return playerCol - 1 > 0 && map[playerRow][playerCol - 1] == ' ';
 	}
 
 	public boolean isBoxLeft() {
@@ -267,28 +268,28 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public void movePlayerleft() {
-		if (mPL()) {
-			map[playerRow][playerCol] = ' ';
-			map[playerRow][playerCol - 1] = 'P';
-			playerCol--;
-		} else if (isBoxLeft()) {
-			if (playerCol - 2 > 0 && map[playerRow][playerCol - 2] == ' ') {
-				map[playerRow][playerCol] = ' ';
-				map[playerRow][playerCol - 1] = 'P';
-				map[playerRow][playerCol - 2] = 'o';
-				playerCol--;
-			} else {
-				return;
-			}
-		} else if (isWallLeft()) {
-			return;
-		}
-		update(map);
+		// if (mPL()) {
+		// map[playerRow][playerCol] = ' ';
+		// map[playerRow][playerCol - 1] = 'P';
+		// playerCol--;
+		// } else if (isBoxLeft()) {
+		// if (playerCol - 2 > 0 && map[playerRow][playerCol - 2] == ' ') {
+		// map[playerRow][playerCol] = ' ';
+		// map[playerRow][playerCol - 1] = 'P';
+		// map[playerRow][playerCol - 2] = 'o';
+		// playerCol--;
+		// } else {
+		// return;
+		// }
+		// } else if (isWallLeft()) {
+		// return;
+		// }
+		// update(map);
 
 	}
 
 	public boolean mPD() {
-		return playerRow + 1 < height && map[playerRow + 1][playerCol] == ' ';
+		// return playerRow + 1 < height && map[playerRow + 1][playerCol] == ' ';
 	}
 
 	public boolean isBoxDown() {
@@ -300,65 +301,74 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public void movePlayerDown() {
-		if (mPD()) {
-			map[playerRow][playerCol] = ' ';
-			map[playerRow + 1][playerCol] = 'P';
-			playerRow++;
-		} else if (isBoxDown()) {
-			if (playerCol - 2 > 0 && map[playerRow + 2][playerCol] == ' ') {
-				map[playerRow][playerCol] = ' ';
-				map[playerRow + 1][playerCol] = 'P';
-				map[playerRow + 2][playerCol] = 'o';
-				playerRow++;
-			} else {
-				return;
-			}
-		} else if (isWallDown()) {
-			return;
-		}
-		update(map);
+		// if (mPD()) {
+		// map[playerRow][playerCol] = ' ';
+		// map[playerRow + 1][playerCol] = 'P';
+		// playerRow++;
+		// } else if (isBoxDown()) {
+		// if (playerCol - 2 > 0 && map[playerRow + 2][playerCol] == ' ') {
+		// map[playerRow][playerCol] = ' ';
+		// map[playerRow + 1][playerCol] = 'P';
+		// map[playerRow + 2][playerCol] = 'o';
+		// playerRow++;
+		// } else {
+		// return;
+		// }
+		// } else if (isWallDown()) {
+		// return;
+		// }
+		// update(map);
 
 	}
 
 	public boolean mPR() {
-		return playerCol < width && map[playerRow][playerCol + 1] == ' ';
+		return true;
+
+		// return playerCol < width && map[playerRow][playerCol + 1] == ' ';
 	}
 
 	public boolean isBoxRight() {
-		return isMovingBox(playerRow, playerCol + 1);
+		return true;
+
+		// return isMovingBox(playerRow, playerCol + 1);
 	}
 
 	public boolean isWallRight() {
-		return isWall(playerRow, playerCol + 1);
+		return true;
+
+		// return isWall(playerRow, playerCol + 1);
 	}
 
 	public void movePlayerRight() {
-		if (mPR()) {
-			map[playerRow][playerCol] = ' ';
-			map[playerRow][playerCol + 1] = 'P';
-			playerCol++;
-		} else if (isBoxRight()) {
-			if (playerCol + 2 < width && map[playerRow][playerCol + 2] == ' ') {
-				map[playerRow][playerCol] = ' ';
-				map[playerRow][playerCol + 1] = 'P';
-				map[playerRow][playerCol + 2] = 'o';
-				playerCol++;
-			} else {
-				return;
-			}
-		} else if (isWallRight()) {
-			return;
-		}
-		update(map);
+		// if (mPR()) {
+		// map[playerRow][playerCol] = ' ';
+		// map[playerRow][playerCol + 1] = 'P';
+		// playerCol++;
+		// } else if (isBoxRight()) {
+		// if (playerCol + 2 < width && map[playerRow][playerCol + 2] == ' ') {
+		// map[playerRow][playerCol] = ' ';
+		// map[playerRow][playerCol + 1] = 'P';
+		// map[playerRow][playerCol + 2] = 'o';
+		// playerCol++;
+		// } else {
+		// return;
+		// }
+		// } else if (isWallRight()) {
+		// return;
+		// }
+		// update(map);
 
 	}
 
 	public boolean mPU() {
-		return playerRow > 0 && map[playerRow - 1][playerCol] == ' ';
+		return true;
+		// return playerRow > 0 && map[playerRow - 1][playerCol] == ' ';
 	}
 
 	public boolean isBoxUp() {
-		return isMovingBox(playerRow - 1, playerCol);
+		return true;
+
+		// return isMovingBox(playerRow - 1, playerCol);
 
 	}
 
@@ -367,91 +377,93 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public void movePlayerUp() {
-		if (mPU()) {
-			map[playerRow][playerCol] = ' ';
-			map[playerRow - 1][playerCol] = 'P';
-			playerRow--;
-		} else if (isBoxUp()) {
-			if (playerRow - 2 >= 0 && map[playerRow - 2][playerCol] == ' ') {
-				map[playerRow][playerCol] = ' ';
-				map[playerRow - 1][playerCol] = 'P';
-				map[playerRow - 2][playerCol] = 'o';
-				playerRow--;
-			} else {
-				return;
-			}
-		} else if (isWallUp()) {
-			return;
-		}
-		update(map);
+		// if (mPU()) {
+		// map[playerRow][playerCol] = ' ';
+		// map[playerRow - 1][playerCol] = 'P';
+		// playerRow--;
+		// } else if (isBoxUp()) {
+		// if (playerRow - 2 >= 0 && map[playerRow - 2][playerCol] == ' ') {
+		// map[playerRow][playerCol] = ' ';
+		// map[playerRow - 1][playerCol] = 'P';
+		// map[playerRow - 2][playerCol] = 'o';
+		// playerRow--;
+		// } else {
+		// return;
+		// }
+		// } else if (isWallUp()) {
+		// return;
+		// }
+		// update(map);
 
 	}
 
 	public void pullBoxDown() {
 
-		if (map[playerRow - 1][playerCol] == 'o' && map[playerRow + 1][playerCol] == 'o') {
-			return;
-		} else if (isBoxUp()) {
-			map[playerRow - 1][playerCol] = ' ';
-			map[playerRow][playerCol] = 'o';
-			map[playerRow + 1][playerCol] = 'P';
-			playerRow++;
-		}
+		// if (map[playerRow - 1][playerCol] == 'o' && map[playerRow + 1][playerCol] ==
+		// 'o') {
+		// return;
+		// } else if (isBoxUp()) {
+		// map[playerRow - 1][playerCol] = ' ';
+		// map[playerRow][playerCol] = 'o';
+		// map[playerRow + 1][playerCol] = 'P';
+		// playerRow++;
+		// }
 
-		else {
-			return;
-		}
+		// else {
+		// return;
+		// }
 	}
 
 	public void pullBoxLeft() {
-		if (map[playerRow][playerCol + 1] == 'o' && map[playerRow][playerCol - 1] == 'o') {
-			return;
-		} else if (isBoxRight()) {
-			map[playerRow][playerCol + 1] = ' ';
-			map[playerRow][playerCol] = 'o';
-			map[playerRow][playerCol - 1] = 'P';
-			playerCol--;
-		} else {
-			return;
-		}
-		update(map);
+		// if (map[playerRow][playerCol + 1] == 'o' && map[playerRow][playerCol - 1] ==
+		// 'o') {
+		// return;
+		// } else if (isBoxRight()) {
+		// map[playerRow][playerCol + 1] = ' ';
+		// map[playerRow][playerCol] = 'o';
+		// map[playerRow][playerCol - 1] = 'P';
+		// playerCol--;
+		// } else {
+		// return;
+		// }
+		// update(map);
 
 	}
 
 	public void pullBoxUp() {
-		if (isStuckInMiddle(playerRow, playerCol)) {
-			return;
-		} else if (isBoxDown()) {
-			map[playerRow + 1][playerCol] = ' ';
-			map[playerRow][playerCol] = 'o';
-			map[playerRow - 1][playerCol] = 'P';
-			playerRow--;
-		} else {
-			return;
-		}
+		// if (isStuckInMiddle(playerRow, playerCol)) {
+		// return;
+		// } else if (isBoxDown()) {
+		// map[playerRow + 1][playerCol] = ' ';
+		// map[playerRow][playerCol] = 'o';
+		// map[playerRow - 1][playerCol] = 'P';
+		// playerRow--;
+		// } else {
+		// return;
+		// }
 	}
 
 	public boolean isStuckInMiddle(int row, int col) {
-		if (isMovingBox(row, col + 1) && isMovingBox(row, col - 1))
-			return true;
-		if (isMovingBox(row + 1, col) && isMovingBox(row - 1, col))
-			return true;
-		return false;
+		// if (isMovingBox(row, col + 1) && isMovingBox(row, col - 1))
+		// return true;
+		// if (isMovingBox(row + 1, col) && isMovingBox(row - 1, col))
+		// return true;
+		// return false;
 	}
 
 	public void pullBoxRight() {
 
-		if (isStuckInMiddle(playerRow, playerCol)) {
-			return;
-		} else if (isBoxLeft()) {
-			map[playerRow][playerCol - 1] = ' ';
-			map[playerRow][playerCol] = 'o';
-			map[playerRow][playerCol + 1] = 'P';
-			playerRow--;
-		} else {
-			return;
-		}
-		update(map);
+		// if (isStuckInMiddle(playerRow, playerCol)) {
+		// return;
+		// } else if (isBoxLeft()) {
+		// map[playerRow][playerCol - 1] = ' ';
+		// map[playerRow][playerCol] = 'o';
+		// map[playerRow][playerCol + 1] = 'P';
+		// playerRow--;
+		// } else {
+		// return;
+		// }
+		// update(map);
 
 	}
 }
