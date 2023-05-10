@@ -40,7 +40,7 @@ public class MovingBox extends GameObject implements GameBox {
 	 * 
 	 * @param direction choose between {0: Up, 1: Down, 2: Right, 3: Left}
 	 */
-	private void move(int direction) {
+	public void move(int direction) {
 		int oldPosRow = posRow;
 		int oldPosCol = posCol;
 

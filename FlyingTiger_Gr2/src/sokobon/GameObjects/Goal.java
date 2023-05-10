@@ -20,16 +20,20 @@ public class Goal extends GameObject {
 	public void notifyObserver() {
 	}
 
-	public void moveUp() {
+	public boolean moveUp() {
+		return true;
 	}
 
-	public void moveDown() {
+	public boolean moveDown() {
+		return true;
 	}
 
-	public void moveLeft() {
+	public boolean moveLeft() {
+		return true;
 	}
 
-	public void moveRight() {
+	public boolean moveRight() {
+		return true;
 	}
 
 	public char getID() {

@@ -143,13 +143,13 @@ public abstract class GameObject implements Cloneable {
 	 */
 	public abstract char getID();
 
-	public abstract void moveUp();
+	public abstract boolean moveUp();
 
-	public abstract void moveDown();
+	public abstract boolean moveDown();
 
-	public abstract void moveLeft();
+	public abstract boolean moveLeft();
 
-	public abstract void moveRight();
+	public abstract boolean moveRight();
 
 	public GameObject clone() {
 		try {

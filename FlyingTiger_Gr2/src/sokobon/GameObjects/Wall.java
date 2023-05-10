@@ -22,29 +22,28 @@ public class Wall extends GameObject implements GameBox {
 	/*
 	 * Wall is stationary doesn't move
 	 */
-	public void moveUp() {
-	}
-
-	/*
-	 * Wall is stationary doesn't move
-	 */
-	public void moveDown() {
-	}
-
-	/*
-	 * Wall is stationary doesn't move
-	 */
-	public void moveLeft() {
-	}
-
-	/*
-	 * Wall is stationary doesn't move
-	 */
-	public void moveRight() {
-	}
 
 	public char getID() {
 		return '#';
+	}
+
+	public void setID(char id) {
+	}
+
+	public boolean moveUp() {
+		return true;
+	}
+
+	public boolean moveDown() {
+		return true;
+	}
+
+	public boolean moveLeft() {
+		return true;
+	}
+
+	public boolean moveRight() {
+		return true;
 	}
 
 }
