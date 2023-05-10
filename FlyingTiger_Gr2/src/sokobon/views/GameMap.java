@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import sokobon.GameBox;
 import sokobon.GameObject;
 import sokobon.GameObjects.MovingBox;
 import sokobon.GameObjects.Player;
@@ -148,21 +149,14 @@ public class GameMap extends JComponent implements ChangeListener {
 		this.height = height;
 	}
 
-	public void moveBoxLeft(int boxRow, int boxCol) {
+	public void moveBoxLeft(GameBox box) {
 
-		if (!isInRange(boxRow, boxCol))
-			return;
-
-		if (isEmpty(boxRow, boxCol))
+		if (!isInRange(box.getPosRow(), box.getPosCol()))
 			return;
 
-		if (isWall(boxRow, boxCol))
-			return;
-		if (isPlayer(boxRow, boxCol))
-			return;
-		if (isMovingBox(boxRow, boxCol)) {
-			int newBoxRow = boxRow;
-			int newBoxCol = boxCol - 1;
+		if (isMovingBox(box)) {
+			int newBoxRow = box.getPosRow();
+			int newBoxCol = box.getPosCol() - 1;
 			if (!isInRange(newBoxRow, newBoxCol))
 				return;
 
@@ -174,6 +168,10 @@ public class GameMap extends JComponent implements ChangeListener {
 
 		}
 
+	}
+
+	private boolean isMovingBox(GameBox box) {
+		return box.getID() == 'o';
 	}
 
 	public void moveBoxRight(int boxRow, int boxCol) {
@@ -290,7 +288,7 @@ public class GameMap extends JComponent implements ChangeListener {
 		repaint();
 	}
 
-	private void update(char[][] map) {
+	private void update(GameObject[][] map) {
 		dataModel.update(map);
 	}
 
