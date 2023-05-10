@@ -14,17 +14,29 @@ Super class for the whole code
 
 import javax.swing.JLabel;
 
-public abstract class GameObject {
+import sokobon.views.GameMap;
+
+public abstract class GameObject implements Cloneable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	protected int posRow;
+	private GameMap gameMap;
 
 	protected int posCol;
 	private int width, height;
 	private JLabel icon;
+
+	public GameMap getGameObjectFromGameMap(int row, int col) {
+
+		return gameMap;
+	}
+
+	public void setGameMap(GameMap gameMap) {
+		this.gameMap = gameMap;
+	}
 
 	public int getPosRow() {
 		return posRow;
@@ -138,5 +150,13 @@ public abstract class GameObject {
 	public abstract void moveLeft();
 
 	public abstract void moveRight();
+
+	public GameObject clone() {
+		try {
+			return (GameObject) super.clone();
+		} catch (CloneNotSupportedException e) {
+			return null;
+		}
+	}
 
 }

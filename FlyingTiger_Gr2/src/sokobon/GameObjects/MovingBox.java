@@ -7,6 +7,8 @@ import sokobon.GameObject;
 
 public class MovingBox extends GameObject implements GameBox {
 
+	private char id;
+
 	public MovingBox() {
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/crate.png"));
 	}
@@ -42,8 +44,11 @@ public class MovingBox extends GameObject implements GameBox {
 		return true;
 	}
 
-	@Override
 	public char getID() {
-		return 'o';
-	};
+		return id;
+	}
+
+	public void setID(char id) {
+		this.id = id;
+	}
 }
