@@ -16,6 +16,12 @@ public class Player extends GameObject {
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/player.png"));
 	}
 
+	public Player(int row, int col) {
+		this();
+		setPosRow(row);
+		setPosCol(col);
+	}
+
 	public void moveUp() {
 		posRow++;
 	};

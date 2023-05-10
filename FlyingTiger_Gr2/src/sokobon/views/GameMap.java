@@ -9,12 +9,15 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import sokobon.GameObject;
+import sokobon.GameObjects.MovingBox;
+import sokobon.GameObjects.Player;
+import sokobon.GameObjects.Wall;
 import sokobon.models.*;;
 
 public class GameMap extends JComponent implements ChangeListener {
 
 	private GameObject[][] map;
-
+	private Player player;
 	private int width, height;
 
 	private JLabel textField;
@@ -23,6 +26,8 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	public GameMap(DataModel model) {
 		dataModel = model;
+		player = new Player();
+
 		JFrame frame = new JFrame("Game Map");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -39,13 +44,13 @@ public class GameMap extends JComponent implements ChangeListener {
 	private boolean isEmpty(int row, int col) {
 		if (!isInRange(row, col))
 			return false;
-		return map[row][col] == ' ';
+		return map[row][col].getID() == ' ';
 	}
 
 	private boolean isWall(int row, int col) {
 		if (!isInRange(row, col))
 			return false;
-		return map[row][col] == '#';
+		return map[row][col].getID() == '#';
 	}
 
 	private boolean isInRange(int row, int col) {
@@ -65,7 +70,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	private boolean isMovingBox(int row, int col) {
 		if (!isInRange(row, col))
 			return false;
-		return map[row][col] == 'o';
+		return map[row][col].getID() == 'o';
 	}
 
 	private boolean isPlayer(int row, int col) {
@@ -86,7 +91,9 @@ public class GameMap extends JComponent implements ChangeListener {
 		if (isMovingBox(row, col))
 			return;
 
-		map[row][col] = 'P';
+		player.setPosCol(col);
+		player.setPosRow(row);
+		map[row][col] = player;
 		playerRow = row;
 		playerCol = col;
 		update(map);
@@ -104,7 +111,7 @@ public class GameMap extends JComponent implements ChangeListener {
 		if (isPlayer(row, col))
 			return;
 
-		map[row][col] = 'o';
+		map[row][col] = new MovingBox(row, col);
 		update(map);
 
 	};
@@ -121,7 +128,7 @@ public class GameMap extends JComponent implements ChangeListener {
 		if (isPlayer(row, col))
 			return;
 
-		map[row][col] = '#';
+		map[row][col] = new Wall(row, col);
 		update(map);
 	}
 

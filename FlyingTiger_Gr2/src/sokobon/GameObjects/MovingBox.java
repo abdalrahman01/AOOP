@@ -11,6 +11,12 @@ public class MovingBox extends GameObject implements GameBox {
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/crate.png"));
 	}
 
+	public MovingBox(int row, int col) {
+		this();
+		setPosCol(col);
+		setPosRow(row);
+	}
+
 	public void moveUp() {
 		posRow--;
 	};

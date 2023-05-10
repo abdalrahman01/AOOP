@@ -13,6 +13,12 @@ public class Wall extends GameObject implements GameBox {
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/wall.png"));
 	}
 
+	public Wall(int row, int col) {
+		this();
+		setPosCol(col);
+		setPosRow(row);
+	}
+
 	/*
 	 * Wall is stationary doesn't move
 	 */
