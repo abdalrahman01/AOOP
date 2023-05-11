@@ -27,6 +27,7 @@ public class TestingGameMap {
 		gMap.addPlayer(2, 2);
 		gMap.player.moveDown(); 
 		gMap.player.moveRight(); 
+		gMap.player.moveRight(); 
 		gMap.player.moveDown(); 
 		
 
