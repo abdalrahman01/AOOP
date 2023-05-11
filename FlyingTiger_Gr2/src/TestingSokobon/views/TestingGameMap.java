@@ -22,66 +22,7 @@ public class TestingGameMap {
 		GameMap gMap = new GameMap(dataModel);
 
 		dataModel.attach(gMap);
-		gMap.addPlayer(4, 1);
-		System.out.println(gMap);
 
-		gMap.addMovingBox(3, 4);
-		System.out.println(gMap);
-
-		gMap.addWall(3, 5);
-		System.out.println(gMap);
-		gMap.addMovingBox(2, 3);
-		gMap.addPlayer(2, 4);
-		gMap.addMovingBox(2, 5);
-		System.out.println(gMap);
-		gMap.movePlayerDown();
-		// System.out.println(gMap);
-		gMap.movePlayerleft();
-		// System.out.println(gMap);
-		gMap.movePlayerDown();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerDown();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.pullBoxDown();
-		// System.out.println(gMap);
-		gMap.movePlayerleft();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.pullBoxLeft();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerDown();
-		// System.out.println(gMap);
-		gMap.pullBoxUp();
-		System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerDown();
-		System.out.println(gMap);
-		gMap.movePlayerleft();
-		System.out.println(gMap);
-		gMap.pullBoxRight();
-		System.out.println(gMap);
-		gMap.pullBoxLeft();
-		System.out.println(gMap);
 	}
 
 	public void TestingAddPlayers() {
