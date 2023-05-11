@@ -10,8 +10,8 @@ public class TestingGameMap {
 
 	private static char[][] map = new char[][] { { X, X, X, X, X, X, X, X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
+			{ X, ' ', P, ' ', ' ', ' ', ' ', X },
+			{ X, ' ', ' ', O, 'g', ' ', ' ', X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
 			{ X, X, X, X, X, X, X, X } };
@@ -23,9 +23,11 @@ public class TestingGameMap {
 
 		dataModel.attach(gMap);
 
+		System.out.println(gMap);
+
 	}
 
-	public void TestingAddPlayers() {
-		//
+	public void TestingToString() {
+
 	}
 }
