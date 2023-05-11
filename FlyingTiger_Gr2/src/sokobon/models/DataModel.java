@@ -23,16 +23,34 @@ public class DataModel {
 
     public DataModel(char[][] map) {
         listeners = new ArrayList<ChangeListener>();
-        width = map[0].length;
-        hieght = map.length;
-        
         // store the map
         convertCharMatrixToGameObjectMatrix(map);
     }
     
-    
+    public void addGameMap(GameMap gameMap, char[][] map)
+    {
+    	this.gameMap = gameMap;
+    	width = map[0].length;
+        hieght = map.length;
+        attachGameMapToGameObjects();
+        
+    }
 
-    private void convertCharMatrixToGameObjectMatrix(char[][] map) {
+    private void attachGameMapToGameObjects() {
+		for (int row = 0; row < width-1; row++) {
+			for (int col = 0; col < hieght-1; col++) {
+				if (map[row][col].getID() == 'p') {
+					gameMap.player = new Player(row, col);
+					map[row][col] = gameMap.player;
+				}
+				map[row][col].gameMap = gameMap; // rediculas, I know					
+				
+			}
+		}
+		
+	}
+
+	private void convertCharMatrixToGameObjectMatrix(char[][] map) {
         int rows = map.length;
         int cols = map[0].length;
 
