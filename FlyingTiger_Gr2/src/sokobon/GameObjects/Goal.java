@@ -18,6 +18,12 @@ public class Goal extends GameObject {
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/blankmarked.png"));
 	}
 
+	public Goal(int row, int col) {
+		this();
+		posCol = col;
+		posRow = row;
+	}
+
 	public void notifyObserver() {
 	}
 
