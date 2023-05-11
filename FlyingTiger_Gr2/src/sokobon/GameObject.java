@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 
 import sokobon.views.GameMap;
 
-public abstract class GameObject implements Cloneable {
+public abstract class GameObject {
 	/**
 	 * 
 	 */
@@ -162,13 +162,5 @@ public abstract class GameObject implements Cloneable {
 	public abstract boolean moveLeft();
 
 	public abstract boolean moveRight();
-
-	public GameObject clone() {
-		try {
-			return (GameObject) super.clone();
-		} catch (CloneNotSupportedException e) {
-			return null;
-		}
-	}
 
 }
