@@ -47,7 +47,7 @@ public class GameMap {
 	}
 
 	private boolean isMovingBox(int row, int col) {
-		return map[row][col] == 'o';
+		return map[row][col] == ' ';
 	}
 
 	private boolean isPlayer(int row, int col) {
