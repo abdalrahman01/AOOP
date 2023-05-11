@@ -165,12 +165,12 @@ public class GameMap extends JComponent implements ChangeListener {
 
 		String result = "";
 
-		for (int i = 0; i < map.length; i++) {
-
-			result += Arrays.toString(map[i]) + "\n";
-
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
+				result += map[row][col].getID() + " ";
+			}
+			result += "\n";
 		}
-
 		return result;
 
 	};
