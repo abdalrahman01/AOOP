@@ -29,6 +29,8 @@ public abstract class GameObject implements Cloneable {
 	private int width, height;
 	private JLabel icon;
 
+	protected char id;
+
 	public GameMap getGameObjectFromGameMap(int row, int col) {
 
 		return gameMap;
@@ -141,7 +143,13 @@ public abstract class GameObject implements Cloneable {
 	/**
 	 * These four class move the object in the four direction
 	 */
-	public abstract char getID();
+	public char getID() {
+		return id;
+	}
+
+	public void setID(char id) {
+		this.id = id;
+	}
 
 	public abstract boolean moveUp();
 
