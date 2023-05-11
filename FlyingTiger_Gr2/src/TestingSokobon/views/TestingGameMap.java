@@ -10,7 +10,7 @@ public class TestingGameMap {
 
 	private static char[][] map = new char[][] { { X, X, X, X, X, X, X, X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-			{ X, ' ', P, ' ', ' ', ' ', ' ', X },
+			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
 			{ X, ' ', ' ', O, 'g', ' ', ' ', X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
@@ -22,9 +22,12 @@ public class TestingGameMap {
 		GameMap gMap = new GameMap(dataModel);
 
 		dataModel.attach(gMap);
-
-		System.out.println(gMap);
-		
+		dataModel.addGameMap(gMap, map);
+//		System.out.println(gMap);
+		gMap.addPlayer(2, 2);
+		gMap.player.moveDown(); 
+		gMap.player.moveRight(); 
+		gMap.player.moveRight(); 
 		gMap.player.moveDown(); 
 		
 
