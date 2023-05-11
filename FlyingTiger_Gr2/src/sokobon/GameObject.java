@@ -29,7 +29,7 @@ public abstract class GameObject implements Cloneable {
 	private int width, height;
 	private JLabel icon;
 
-	protected char id;
+	protected static char id;
 
 	public GameMap getGameObjectFromGameMap(int row, int col) {
 
@@ -149,6 +149,10 @@ public abstract class GameObject implements Cloneable {
 
 	public void setID(char id) {
 		this.id = id;
+	}
+
+	public static char id() {
+		return id;
 	}
 
 	public abstract boolean moveUp();
