@@ -10,6 +10,7 @@ public class Wall extends GameObject implements GameBox {
 	private static final long serialVersionUID = 1L;
 
 	public Wall() {
+		id = '#';
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/wall.png"));
 	}
 
