@@ -98,13 +98,13 @@ public class MovingBox extends GameObject implements GameBox {
 
 	private void convertToMarked() {
 		setIconGameObject(
-				new File("FlyingTiger_Gr2\\src\\sokobon\\resources\\imgs\\sokoban_icons\\cratemarked.png"));
+				new File("src\\sokobon\\resources\\imgs\\sokoban_icons\\cratemarked.png"));
 		setID('m');
 	}
 
 	private void convertToUnMarked() {
 		setIconGameObject(
-				new File("FlyingTiger_Gr2\\src\\sokobon\\resources\\imgs\\sokoban_icons\\crate.png"));
+				new File("src\\sokobon\\resources\\imgs\\sokoban_icons\\crate.png"));
 		setID('o');
 	}
 
