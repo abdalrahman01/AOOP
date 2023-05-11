@@ -47,7 +47,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public void setGameObject(int row, int col, GameObject gameObject) {
-		update(row, col, gameObject.clone());
+		update(row, col, gameObject);
 	}
 
 	public boolean isEmpty(int row, int col) {
