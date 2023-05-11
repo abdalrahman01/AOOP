@@ -50,8 +50,6 @@ public class GameMap extends JComponent implements ChangeListener {
 		update(row, col, gameObject.clone());
 	}
 
-	private int playerRow, playerCol;
-
 	public boolean isEmpty(int row, int col) {
 		if (!isInRange(row, col))
 			return false;
@@ -105,8 +103,8 @@ public class GameMap extends JComponent implements ChangeListener {
 		player.setPosCol(col);
 		player.setPosRow(row);
 		map[row][col] = player;
-		playerRow = row;
-		playerCol = col;
+		player.setPosRow(row);
+		player.setPosCol(col);
 		update(map);
 	}
 
