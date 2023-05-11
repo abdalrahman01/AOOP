@@ -14,7 +14,7 @@ import sokobon.GameObject;
 public class Floor extends GameObject {
 
 	public Floor() {
-		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/floor.png"));
+		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/blank.png"));
 	}
 
 	public Floor(int row, int col) {
