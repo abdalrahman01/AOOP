@@ -167,7 +167,7 @@ public class GameMap extends JComponent implements ChangeListener {
 
 		for (int row = 0; row < height; row++) {
 			for (int col = 0; col < width; col++) {
-				result += map[row][col].getID() + " ";
+				result += map[row][col] + " ";
 			}
 			result += "\n";
 		}
@@ -203,13 +203,16 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	private String toMultiLineHTML(GameObject[][] text) {
-		String result = "<html>";
+		String result = "<html><pre>";
 
-		for (int i = 0; i < text.length; i++) {
-			result += Arrays.toString(text[i]) + "<br>";
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
+				result += map[row][col] + " ";
+			}
+			result += "<br>";
 		}
 
-		return result + "<html/>";
+		return result + "<pre><html/>";
 	}
 
 }
