@@ -14,6 +14,7 @@ import sokobon.GameObject;
 public class Goal extends GameObject {
 
 	public Goal() {
+		id = 'g';
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/blankmarked.png"));
 	}
 
@@ -36,7 +37,4 @@ public class Goal extends GameObject {
 		return true;
 	}
 
-	public char getID() {
-		return 'g';
-	};
 }
