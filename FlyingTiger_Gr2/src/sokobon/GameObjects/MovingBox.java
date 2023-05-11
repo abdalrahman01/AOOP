@@ -7,9 +7,8 @@ import sokobon.GameObject;
 
 public class MovingBox extends GameObject implements GameBox {
 
-	private char id;
-
 	public MovingBox() {
+		id = 'o';
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/crate.png"));
 	}
 
@@ -117,12 +116,4 @@ public class MovingBox extends GameObject implements GameBox {
 	// public boolean hasReachedRedDot() {
 	// return true;
 	// }
-
-	public char getID() {
-		return id;
-	}
-
-	public void setID(char id) {
-		this.id = id;
-	}
 }
