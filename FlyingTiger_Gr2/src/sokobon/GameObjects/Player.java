@@ -11,8 +11,14 @@ public class Player extends GameObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private char PLAYER_STANDING_ON_GOAL = 'p' + 'g';
+	private final int UP = 0;
+	private final int DOWN = 1;
+	private final int RIGHT = 2;
+	private final int LEFT = 3;
 
 	public Player() {
+		id = 'p';
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/player.png"));
 	}
 
@@ -32,16 +38,16 @@ public class Player extends GameObject {
 		int oldPosCol = posCol;
 
 		switch (direction) {
-			case 0: // moveUp
+			case UP: // moveUp
 				posRow--;
 				break;
-			case 1: // move Down
+			case DOWN: // move Down
 				posRow++;
 				break;
-			case 2: // move Right
+			case RIGHT: // move Right
 				posCol++;
 				break;
-			case 3: // move Left
+			case LEFT: // move Left
 				posCol--;
 				break;
 
@@ -55,23 +61,23 @@ public class Player extends GameObject {
 			return false;
 		}
 
-		GameObject gameObjectInNewPositon = gameMap.getGameObject(posRow, posCol);
-
+		GameObject gameObjectInNewPosition = gameMap.getGameObject(posRow, posCol);
+		GameObject gameObjectInOldPosition = gameMap.getGameObject(oldPosRow, oldPosCol);
 		// if new position has a crate (marked/unmarked)
-		if (gameObjectInNewPositon.getID() == 'o' || gameObjectInNewPositon.getID() == 'm') {
+		if (gameObjectInNewPosition.getID() == 'o' || gameObjectInNewPosition.getID() == 'm') {
 			boolean isMoved = false;
 			switch (direction) {
-				case 0: // moveUp
-					isMoved = gameObjectInNewPositon.moveUp();
+				case UP: // moveUp
+					isMoved = gameObjectInNewPosition.moveUp();
 					break;
-				case 1: // move Down
-					isMoved = gameObjectInNewPositon.moveDown();
+				case DOWN: // move Down
+					isMoved = gameObjectInNewPosition.moveDown();
 					break;
-				case 2: // move Right
-					isMoved = gameObjectInNewPositon.moveRight();
+				case RIGHT: // move Right
+					isMoved = gameObjectInNewPosition.moveRight();
 					break;
-				case 3: // move Left
-					isMoved = gameObjectInNewPositon.moveLeft();
+				case LEFT: // move Left
+					isMoved = gameObjectInNewPosition.moveLeft();
 					break;
 				default:
 					break;
@@ -83,6 +89,17 @@ public class Player extends GameObject {
 				return false;
 			}
 		}
+		if (gameObjectInNewPosition.getID() == 'g') // player now is stepping on marked floor
+			setID(PLAYER_STANDING_ON_GOAL); // change the id of the player, because we need an indecation that are tow
+											// objets are at the same postion
+
+		if (gameObjectInOldPosition.getID() == (PLAYER_STANDING_ON_GOAL)) // if the player was
+																			// standing on a marker
+		{
+			gameMap.setGameObject(oldPosRow, oldPosCol, new Goal());
+		} else {
+			gameMap.setGameObject(oldPosRow, oldPosCol, new Floor());
+		}
 
 		if (!gameMap.isEmpty(posRow, posCol)) // if new pos is not empty
 		{
@@ -90,8 +107,8 @@ public class Player extends GameObject {
 			posCol = oldPosCol;
 			return false;
 		}
-
-		// if old position //TODO:check where he was standing if it was marked
+		gameMap.setGameObject(posRow, posCol, this);
+		return true;
 
 	}
 
@@ -108,33 +125,20 @@ public class Player extends GameObject {
 	public void pull() {
 	}
 
-	@Override
-	public char getID() {
-		return 'p';
-	}
-
-	@Override
 	public boolean moveUp() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'moveUp'");
+		return move(UP);
 	}
 
-	@Override
 	public boolean moveDown() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'moveDown'");
+		return move(DOWN);
 	}
 
-	@Override
 	public boolean moveLeft() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'moveLeft'");
+		return move(LEFT);
 	}
 
-	@Override
 	public boolean moveRight() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'moveRight'");
+		return move(RIGHT);
 	};
 
 }
