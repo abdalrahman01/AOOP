@@ -97,7 +97,7 @@ public class DataModel {
         // store the map
         for (int h = 0; h < map.length; h++) {
             for (int w = 0; w < map[0].length; w++) {
-                this.map[h][w] = map[h][w].clone();
+                this.map[h][w] = map[h][w];
             }
         }
         for (ChangeListener l : listeners) {
@@ -107,7 +107,7 @@ public class DataModel {
     }
 
     public void update(int row, int col, GameObject gameObject) {
-        map[row][col] = gameObject.clone();
+        map[row][col] = gameObject;
         for (ChangeListener l : listeners) {
             l.stateChanged(new ChangeEvent(this));
         }
