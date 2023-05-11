@@ -7,6 +7,8 @@ import javax.swing.event.ChangeListener;
 
 import sokobon.GameBox;
 import sokobon.GameObject;
+import sokobon.GameObjects.*;
+
 import sokobon.views.GameMap;
 import sokobon.views.GraphicalView;
 
@@ -19,18 +21,45 @@ public class DataModel {
     private GameMap gameMap;
     private GraphicalView graphicalView;
 
-    public DataModel(GameObject[][] map) {
+    public DataModel(char[][] map) {
         listeners = new ArrayList<ChangeListener>();
         width = map[0].length;
         hieght = map.length;
-        this.map = new GameObject[hieght][width];
 
         // store the map
-        for (int h = 0; h < map.length; h++) {
-            for (int w = 0; w < map[0].length; w++) {
-                this.map[h][w] = map[h][w];
+        convertCharMatrixToGameObjectMatrix(map);
+    }
+
+    private void convertCharMatrixToGameObjectMatrix(char[][] map) {
+        int rows = map.length;
+        int cols = map[0].length;
+
+        this.map = new GameObject[rows][cols];
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                switch (map[row][col]) {
+                    case 'p':
+                        this.map[row][col] = new Player(row, col);
+                        break;
+                    case '#':
+                        this.map[row][col] = new Wall(row, col);
+                        break;
+                    case ' ':
+                        this.map[row][col] = new Floor(row, col);
+                        break;
+                    case 'o':
+                        this.map[row][col] = new MovingBox(row, col);
+                        break;
+                    case 'g':
+                        this.map[row][col] = new Goal(row, col);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
+
     }
 
     /**

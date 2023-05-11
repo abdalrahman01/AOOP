@@ -17,6 +17,12 @@ public class Floor extends GameObject {
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/floor.png"));
 	}
 
+	public Floor(int row, int col) {
+		this();
+		posCol = col;
+		posRow = row;
+	}
+
 	public char getID() {
 		return ' ';
 	}
