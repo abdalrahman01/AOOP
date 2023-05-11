@@ -79,7 +79,7 @@ public class MovingBox extends GameObject implements GameBox {
 		} else if (gameMap.isEmpty(posRow, posCol)) { // if new position is empty
 
 			// (if moved from marked to unmarked )
-			if (gameMap.isMarked(oldPosRow, oldPosCol)) { // if old position was marked
+			if (gameMap.getGameObject(oldPosRow, oldPosCol).getID() == 'm') { // if old position was marked
 				gameMap.setGameObject(oldPosRow, oldPosCol, new Goal());// old position
 			} else {
 				gameMap.setGameObject(oldPosRow, oldPosCol, new Floor());// old position
