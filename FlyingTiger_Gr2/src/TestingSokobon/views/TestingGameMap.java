@@ -24,6 +24,9 @@ public class TestingGameMap {
 		dataModel.attach(gMap);
 
 		System.out.println(gMap);
+		
+		gMap.player.moveDown(); 
+		
 
 	}
 
