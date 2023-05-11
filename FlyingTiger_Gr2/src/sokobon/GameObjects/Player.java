@@ -93,8 +93,7 @@ public class Player extends GameObject {
 			setID(PLAYER_STANDING_ON_GOAL); // change the id of the player, because we need an indecation that are tow
 											// objets are at the same postion
 
-		if (gameObjectInOldPosition.getID() == (PLAYER_STANDING_ON_GOAL)) // if the player was
-																			// standing on a marker
+		if (gameObjectInOldPosition.getID() == (PLAYER_STANDING_ON_GOAL)) // if the player was // standing on a marker
 		{
 			gameMap.setGameObject(oldPosRow, oldPosCol, new Goal());
 		} else {
