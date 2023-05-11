@@ -41,6 +41,10 @@ public class GameMap extends JComponent implements ChangeListener {
 		frame.setVisible(true);
 
 	}
+	
+	public void setDataModel(DataModel dm) {
+		dataModel = dm;
+	}
 
 	public GameObject getGameObject(int row, int col) {
 		return map[row][col];
@@ -103,9 +107,10 @@ public class GameMap extends JComponent implements ChangeListener {
 		player.setPosCol(col);
 		player.setPosRow(row);
 		map[row][col] = player;
+
 		player.setPosRow(row);
 		player.setPosCol(col);
-		update(map);
+		update(row, col, player);
 	}
 
 	public void addMovingBox(int row, int col) {
@@ -120,8 +125,7 @@ public class GameMap extends JComponent implements ChangeListener {
 		if (isPlayer(row, col))
 			return;
 
-		map[row][col] = new MovingBox(row, col);
-		update(map);
+		update(row, col, new MovingBox(row, col));
 
 	};
 

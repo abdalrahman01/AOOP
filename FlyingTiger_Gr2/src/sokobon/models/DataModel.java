@@ -25,10 +25,12 @@ public class DataModel {
         listeners = new ArrayList<ChangeListener>();
         width = map[0].length;
         hieght = map.length;
-
+        
         // store the map
         convertCharMatrixToGameObjectMatrix(map);
     }
+    
+    
 
     private void convertCharMatrixToGameObjectMatrix(char[][] map) {
         int rows = map.length;
@@ -41,18 +43,23 @@ public class DataModel {
                 switch (map[row][col]) {
                     case 'p':
                         this.map[row][col] = new Player(row, col);
+                        this.map[row][col].gameMap = gameMap;
                         break;
                     case '#':
                         this.map[row][col] = new Wall(row, col);
+                        this.map[row][col].gameMap = gameMap;
                         break;
                     case ' ':
                         this.map[row][col] = new Floor(row, col);
+                        this.map[row][col].gameMap = gameMap;
                         break;
                     case 'o':
                         this.map[row][col] = new MovingBox(row, col);
+                        this.map[row][col].gameMap = gameMap;
                         break;
                     case 'g':
                         this.map[row][col] = new Goal(row, col);
+                        this.map[row][col].gameMap = gameMap;
                         break;
                     default:
                         break;
@@ -108,6 +115,7 @@ public class DataModel {
 
     public void update(int row, int col, GameObject gameObject) {
         map[row][col] = gameObject;
+        map[row][col].gameMap = gameMap;
         for (ChangeListener l : listeners) {
             l.stateChanged(new ChangeEvent(this));
         }
