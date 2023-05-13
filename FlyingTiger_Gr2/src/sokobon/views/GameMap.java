@@ -20,7 +20,7 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	private JLabel textField;
 	private DataModel dataModel;
-	private GraphicalView graphicalView;
+	// private GraphicalView graphicalView;
 
 	public GameMap(DataModel model) {
 		dataModel = model;
