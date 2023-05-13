@@ -1,17 +1,12 @@
 package sokobon.views;
 
-import java.io.File;
-import java.util.Arrays;
-
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import sokobon.GameBox;
 import sokobon.GameObject;
-import sokobon.GameObjects.Floor;
 import sokobon.GameObjects.MovingBox;
 import sokobon.GameObjects.Player;
 import sokobon.GameObjects.Wall;
