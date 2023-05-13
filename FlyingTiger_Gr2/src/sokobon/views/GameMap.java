@@ -146,7 +146,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public boolean isMarked(int row, int col) {
-		return map[row][col].getID() == 'g';
+		return map[row][col].getID() == 'g' || map[row][col].getID() == 'm' ;
 	}
 
 	public int getWidth() {
