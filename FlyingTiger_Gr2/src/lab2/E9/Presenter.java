@@ -79,12 +79,18 @@ public abstract class Presenter {
 		
 		
 		// add Buttons to a JPanel, add that panel to frame
+	
+		
+//		 add centerComponent to frame
+		centerComponent = createCenterComponent();
+
 		buttonsPanel = new JPanel(new BorderLayout()); 
 	
 		buttonsPanel.add(northButton, BorderLayout.NORTH);
 		buttonsPanel.add(southButton, BorderLayout.SOUTH);
 		buttonsPanel.add(westButton, BorderLayout.WEST);
 		buttonsPanel.add(eastButton, BorderLayout.EAST);
+		buttonsPanel.add(centerComponent, BorderLayout.CENTER);
 		frame.add(buttonsPanel);
 		
 		
@@ -92,11 +98,6 @@ public abstract class Presenter {
 		// add main panels to frame
 		frame.add(buttonsPanel, BorderLayout.CENTER);
 		
-//		 add centerComponent to frame
-	//	centerComponent = createCenterComponent();
-	//	if(centerComponent != null) {
-		//    frame.add(centerComponent);
-	//	}
 		
 		// create other components (text component, e.g.), add them to frame
 		textfield = new JLabel(msg);
