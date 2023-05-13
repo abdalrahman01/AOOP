@@ -3,11 +3,7 @@ package sokobon.views;
 import java.io.File;
 import java.util.Arrays;
 
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+public class GameMap {
 
 import sokobon.GameBox;
 import sokobon.GameObject;
@@ -23,9 +19,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	public Player player;
 	private int width, height;
 
-	private JLabel textField;
-	private DataModel dataModel;
-	private GraphicalView graphicalView;
+	public GameMap(char[][] map) {
 
 	public GameMap(DataModel model) {
 		dataModel = model;
@@ -40,8 +34,14 @@ public class GameMap extends JComponent implements ChangeListener {
 		frame.pack();
 		frame.setVisible(true);
 
+		// store the map
+		for (int h = 0; h < map.length; h++) {
+			for (int w = 0; w < map[0].length; w++) {
+				this.map[h][w] = map[h][w];
+			}
+		}
 	}
-	
+
 	public void setDataModel(DataModel dm) {
 		dataModel = dm;
 	}
@@ -146,7 +146,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public boolean isMarked(int row, int col) {
-		return map[row][col].getID() == 'g' || map[row][col].getID() == 'm' ;
+		return map[row][col].getID() == 'g' || map[row][col].getID() == 'm';
 	}
 
 	public int getWidth() {
