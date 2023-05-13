@@ -10,7 +10,7 @@ import sokobon.GameObject;
 import sokobon.GameObjects.*;
 
 import sokobon.views.GameMap;
-import sokobon.views.GraphicalView;
+import sokobon.views.GameController;
 
 public class DataModel {
     ArrayList<ChangeListener> listeners;
@@ -19,7 +19,7 @@ public class DataModel {
     private int hieght;
 
     private GameMap gameMap;
-    private GraphicalView graphicalView;
+    private GameController gameController;
 
     public DataModel(char[][] map) {
         listeners = new ArrayList<ChangeListener>();
