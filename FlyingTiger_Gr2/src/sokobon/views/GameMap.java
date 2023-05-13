@@ -18,7 +18,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	public Player player;
 	private int width, height;
 
-	private JLabel textField;
+	public JLabel gameMap;
 	private DataModel dataModel;
 	// private GraphicalView graphicalView;
 
@@ -30,8 +30,8 @@ public class GameMap extends JComponent implements ChangeListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setMap(model.getData());
-		textField = new JLabel(toMultiLineHTML(map));
-		frame.add(textField);
+		gameMap = new JLabel(toMultiLineHTML(map));
+		frame.add(gameMap);
 		frame.pack();
 		frame.setVisible(true);
 
@@ -189,7 +189,7 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	public void stateChanged(ChangeEvent arg) {
 		setMap(dataModel.getData());
-		textField.setText(toMultiLineHTML(map));
+		gameMap.setText(toMultiLineHTML(map));
 		repaint();
 	}
 
