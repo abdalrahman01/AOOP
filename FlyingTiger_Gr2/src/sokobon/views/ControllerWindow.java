@@ -30,6 +30,8 @@ public class ControllerWindow extends JPanel {
     private static final File ICON_LEFT = new File("src/sokobon/resources/imgs/sokoban_icons/vänster.png");
     private static final File ICON_RIGHT = new File("src/sokobon/resources/imgs/sokoban_icons/höger.png");
 
+    private GameMap gameMap;
+
     public ControllerWindow() {
         // construct preComponents
         JMenu fileMenu = new JMenu("File");
@@ -80,6 +82,41 @@ public class ControllerWindow extends JPanel {
         jcomp8.setBounds(335, 170, 195, 25);
         jcomp9.setBounds(335, 190, 200, 20);
         menu.setBounds(0, 0, 200, 25);
+
+        addActionListnerToButtons();
+    }
+
+    public void attachGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
+
+    private void addActionListnerToButtons() {
+        buttonDOWN.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // gameMap.player.moveDown();
+                jcomp5.setText("Down Pressed");
+            }
+        });
+        buttonUP.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // gameMap.player.moveUp();
+                jcomp5.setText("Up Pressed");
+
+            }
+        });
+        buttonLEFT.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // gameMap.player.moveLeft();
+                jcomp5.setText("Left Pressed");
+
+            }
+        });
+        buttonRIGHT.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                jcomp5.setText("Right Pressed");
+                // gameMap.player.moveRight();
+            }
+        });
     }
 
     public static void main(String[] args) {
