@@ -19,7 +19,7 @@ public class TestingGraphPresenter {
     private static char[][] map = new char[][] { { X, X, X, X, X, X, X, X },
             { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
             { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { X, ' ', P , O , 'g' , X , ' '  , X },
+            { X, ' ', P , O , 'g' , 'g' , ' '  , X },
             { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
             { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
             { X, X, X, X, X, X, X, X } };

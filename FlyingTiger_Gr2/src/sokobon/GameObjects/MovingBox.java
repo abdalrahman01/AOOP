@@ -61,6 +61,9 @@ public class MovingBox extends GameObject implements GameBox {
 			default:
 				break;
 		}
+
+		GameObject gameObjectInNewPosition = gameMap.getGameObject(posRow, posCol);
+		GameObject gameObjectInOldPosition = gameMap.getGameObject(oldPosRow, oldPosCol);
 		if (!gameMap.isInRange(posRow, posCol)) { // if new position is outside of range
 			posRow = oldPosRow; // go back to place
 			posCol = oldPosCol;

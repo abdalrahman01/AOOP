@@ -82,6 +82,8 @@ public class Player extends GameObject {
 				default:
 					break;
 			}
+			gameObjectInOldPosition = gameMap.getGameObject(oldPosRow, oldPosCol);
+			gameObjectInNewPosition = gameMap.getGameObject(posRow, posCol);
 			if (!isMoved) // if crate has not moved
 			{
 				posRow = oldPosRow; // go back to place
@@ -89,16 +91,21 @@ public class Player extends GameObject {
 				return false;
 			}
 		}
-		if (gameObjectInNewPosition.getID() == 'g') // player now is stepping on marked floor
-			setID(PLAYER_STANDING_ON_GOAL); // change the id of the player, because we need an indecation that are tow
-											// objets are at the same postion
-
 		if (gameObjectInOldPosition.getID() == (PLAYER_STANDING_ON_GOAL)) // if the player was // standing on a marker
 		{
 			gameMap.setGameObject(oldPosRow, oldPosCol, new Goal());
+			setID('p');
 		} else {
 			gameMap.setGameObject(oldPosRow, oldPosCol, new Floor());
 		}
+		if (gameObjectInNewPosition.getID() == 'g')       // player now is stepping on marked floor
+		{                                                  // change the id of the player, because we need an indecation that are tow
+			setID(PLAYER_STANDING_ON_GOAL);                // objets are at the same postion
+			gameMap.setGameObject(posRow, posCol, this);
+			return true;
+		}	 
+											
+
 
 		if (!gameMap.isEmpty(posRow, posCol)) // if new pos is not empty
 		{
