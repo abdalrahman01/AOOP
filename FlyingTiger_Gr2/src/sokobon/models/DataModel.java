@@ -15,8 +15,8 @@ import sokobon.views.GameController;
 public class DataModel {
     ArrayList<ChangeListener> listeners;
     private GameObject[][] map; // data
-    private int width;
-    private int hieght;
+    private int cols;
+    private int rows;
 
     private GameMap gameMap;
     private GameController gameController;
@@ -26,31 +26,30 @@ public class DataModel {
         // store the map
         convertCharMatrixToGameObjectMatrix(map);
     }
-    
-    public void addGameMap(GameMap gameMap, char[][] map)
-    {
-    	this.gameMap = gameMap;
-    	width = map[0].length;
-        hieght = map.length;
+
+    public void addGameMap(GameMap gameMap, char[][] map) {
+        this.gameMap = gameMap;
+        cols = map[0].length;
+        rows = map.length;
         attachGameMapToGameObjects();
-        
+
     }
 
     private void attachGameMapToGameObjects() {
-		for (int row = 0; row < width-1; row++) {
-			for (int col = 0; col < hieght-1; col++) {
-				if (map[row][col].getID() == 'p') {
-					gameMap.player = new Player(row, col);
-					map[row][col] = gameMap.player;
-				}
-				map[row][col].gameMap = gameMap; // rediculas, I know					
-				
-			}
-		}
-		
-	}
+        for (int row = 0; row < cols - 1; row++) {
+            for (int col = 0; col < rows - 1; col++) {
+                if (map[row][col].getID() == 'p') {
+                    gameMap.player = new Player(row, col);
+                    map[row][col] = gameMap.player;
+                }
+                map[row][col].gameMap = gameMap; // rediculas, I know
 
-	private void convertCharMatrixToGameObjectMatrix(char[][] map) {
+            }
+        }
+
+    }
+
+    private void convertCharMatrixToGameObjectMatrix(char[][] map) {
         int rows = map.length;
         int cols = map[0].length;
 
@@ -115,9 +114,9 @@ public class DataModel {
     }
 
     public void update(GameObject[][] map) {
-        width = map[0].length;
-        hieght = map.length;
-        this.map = new GameObject[hieght][width];
+        cols = map[0].length;
+        rows = map.length;
+        this.map = new GameObject[rows][cols];
 
         // store the map
         for (int h = 0; h < map.length; h++) {
@@ -137,5 +136,13 @@ public class DataModel {
         for (ChangeListener l : listeners) {
             l.stateChanged(new ChangeEvent(this));
         }
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public int getRows() {
+        return rows;
     }
 }
