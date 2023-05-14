@@ -1,38 +1,67 @@
 package sokobon.views;
 
-import java.util.Arrays;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class GameMap {
+import sokobon.GameObject;
+import sokobon.GameObjects.MovingBox;
+import sokobon.GameObjects.Player;
+import sokobon.GameObjects.Wall;
+import sokobon.models.*;;
 
-	char[][] map;
+public class GameMap extends JComponent implements ChangeListener {
 
+	private GameObject[][] map;
+	public Player player;
 	private int width, height;
 
-	public GameMap(char[][] map) {
+	public JLabel gameMap;
+	private DataModel dataModel;
+	// private GraphicalView graphicalView;
 
-		width = map[0].length;
-		height = map.length;
-		this.map = new char[height][width];
+	public GameMap(DataModel model) {
+		dataModel = model;
+		player = new Player();
 
-		// store the map
-		for (int h = 0; h < map.length; h++) {
-			for (int w = 0; w < map[0].length; w++) {
-				this.map[h][w] = map[h][w];
-			}
-		}
+//		JFrame frame = new JFrame("Game Map");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		setMap(model.getData());
+		gameMap = new JLabel(toMultiLineHTML(map));
+//		frame.add(gameMap);
+//		frame.pack();
+//		frame.setVisible(true);
+
 	}
 
-	private int playerRow, playerCol;
-
-	private boolean isEmpty(int row, int col) {
-		return map[row][col] == ' ';
+	public void setDataModel(DataModel dm) {
+		dataModel = dm;
 	}
 
-	private boolean isWall(int row, int col) {
-		return map[row][col] == '#';
+	public GameObject getGameObject(int row, int col) {
+		return map[row][col];
 	}
 
-	private boolean isInRange(int row, int col) {
+	public void setGameObject(int row, int col, GameObject gameObject) {
+		update(row, col, gameObject);
+	}
+
+	public boolean isEmpty(int row, int col) {
+		if (!isInRange(row, col))
+			return false;
+		return map[row][col].getID() == ' ';
+	}
+
+	public boolean isWall(int row, int col) {
+		if (!isInRange(row, col))
+			return false;
+		return map[row][col].getID() == '#';
+	}
+
+	public boolean isInRange(int row, int col) {
 		if (row >= height)
 			return false;
 
@@ -46,12 +75,14 @@ public class GameMap {
 
 	}
 
-	private boolean isMovingBox(int row, int col) {
-		return map[row][col] == ' ';
+	public boolean isMovingBox(int row, int col) {
+		if (!isInRange(row, col))
+			return false;
+		return map[row][col].getID() == 'o';
 	}
 
-	private boolean isPlayer(int row, int col) {
-		return playerCol == col && playerRow == row;
+	public boolean isPlayer(int row, int col) {
+		return player.getPosRow() == row && player.getPosCol() == col;
 	}
 
 	public void addPlayer(int row, int col) {
@@ -68,10 +99,13 @@ public class GameMap {
 		if (isMovingBox(row, col))
 			return;
 
-		map[row][col] = 'P';
-		playerRow = row;
-		playerCol = col;
+		player.setPosCol(col);
+		player.setPosRow(row);
+		map[row][col] = player;
 
+		player.setPosRow(row);
+		player.setPosCol(col);
+		update(row, col, player);
 	}
 
 	public void addMovingBox(int row, int col) {
@@ -86,7 +120,7 @@ public class GameMap {
 		if (isPlayer(row, col))
 			return;
 
-		map[row][col] = 'o';
+		update(row, col, new MovingBox(row, col));
 
 	};
 
@@ -102,9 +136,13 @@ public class GameMap {
 		if (isPlayer(row, col))
 			return;
 
-		map[col][row] = '#';
+		map[row][col] = new Wall(row, col);
+		update(map);
+	}
 
-	};
+	public boolean isMarked(int row, int col) {
+		return map[row][col].getID() == 'g' || map[row][col].getID() == 'm';
+	}
 
 	public int getWidth() {
 		return width;
@@ -122,86 +160,58 @@ public class GameMap {
 		this.height = height;
 	}
 
-	public void movePlayerleft() {
-		if (playerCol - 1 > 0 && map[playerRow][playerCol - 1] == ' ') {
-			map[playerRow][playerCol] = ' ';
-			map[playerRow][playerCol - 1] = 'P';
-			playerCol--;
-		}
-	}
-
-	public void movePlayerDown() {
-		if (playerRow + 1 < height && map[playerRow + 1][playerCol] == ' ') {
-			map[playerRow][playerCol] = ' ';
-			map[playerRow + 1][playerCol] = 'P';
-			playerRow++;
-		}
-	}
-
-	public void movePlayerRight() {
-		if (playerCol < width && map[playerRow][playerCol + 1] == ' ') {
-			map[playerRow][playerCol] = ' ';
-			map[playerRow][playerCol + 1] = 'P';
-			playerCol++;
-		}
-	}
-
-	public void movePlayerUp() {
-		if (playerRow > 0 && map[playerRow - 1][playerCol] == ' ') {
-			map[playerRow][playerCol] = ' ';
-			map[playerRow - 1][playerCol] = 'P';
-			playerRow--;
-		}
-
-	}
-
-	public void moveBoxLeft(int boxRow, int boxCol) {
-		if (playerRow == boxRow && playerCol > boxCol) {
-			if (boxCol - 1 >= 0 && map[boxRow][boxCol - 1] == ' ') {
-				map[boxRow][boxCol] = ' ';
-				map[boxRow][boxCol - 1] = 'O';
-			}
-		}
-	}
-
-	public void moveBoxRight(int boxRow, int boxCol) {
-		if (playerRow == boxRow && playerCol < boxCol) {
-			if (boxCol + 1 < width && map[boxRow][boxCol + 1] == ' ') {
-				map[boxRow][boxCol] = ' ';
-				map[boxRow][boxCol + 1] = 'O';
-			}
-		}
-	}
-
-	public void moveBoxUp(int boxRow, int boxCol) {
-		if (playerCol == boxCol && playerRow > boxRow) {
-			if (boxRow - 1 >= 0 && map[boxRow - 1][boxCol] == ' ') {
-				map[boxRow][boxCol] = ' ';
-				map[boxRow - 1][boxCol] = 'O';
-			}
-		}
-	}
-
-	public void moveBoxDown(int boxRow, int boxCol) {
-		if (playerCol == boxCol && playerRow < boxRow) {
-			if (boxRow + 1 < height && map[boxRow + 1][boxCol] == ' ') {
-				map[boxRow][boxCol] = ' ';
-				map[boxRow + 1][boxCol] = 'O';
-			}
-		}
-	}
-
 	public String toString() {
 
 		String result = "";
 
-		for (int i = 0; i < map.length; i++) {
-
-			result += Arrays.toString(map[i]) + "\n";
-
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
+				result += map[row][col] + " ";
+			}
+			result += "\n";
 		}
-
 		return result;
 
 	};
+
+	public void setMap(GameObject[][] map) {
+		width = map[0].length;
+		height = map.length;
+		this.map = new GameObject[height][width];
+
+		// store the map
+		for (int h = 0; h < map.length; h++) {
+			for (int w = 0; w < map[0].length; w++) {
+				this.map[h][w] = map[h][w];
+			}
+		}
+	}
+
+	public void stateChanged(ChangeEvent arg) {
+		setMap(dataModel.getData());
+		gameMap.setText(toMultiLineHTML(map));
+		repaint();
+	}
+
+	private void update(GameObject[][] map) {
+		dataModel.update(map);
+	}
+
+	private void update(int row, int col, GameObject gameObject) {
+		dataModel.update(row, col, gameObject);
+	}
+
+	private String toMultiLineHTML(GameObject[][] text) {
+		String result = "<html><pre>";
+
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
+				result += map[row][col] + " ";
+			}
+			result += "<br>";
+		}
+
+		return result + "<pre><html/>";
+	}
+
 }

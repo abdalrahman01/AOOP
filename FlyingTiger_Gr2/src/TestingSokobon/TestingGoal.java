@@ -4,7 +4,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 
-import sokobon.Goal;
+import sokobon.GameObjects.Goal;
 public class TestingGoal {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Testing Goal");

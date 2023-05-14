@@ -4,7 +4,8 @@ package TestingSokobon;
 
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
-import sokobon.Wall;
+
+import sokobon.GameObjects.Wall;
 
 
 public class TestingWall {

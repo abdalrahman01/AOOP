@@ -2,7 +2,8 @@ package TestingSokobon;
 
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
-import sokobon.MovingBox;
+
+import sokobon.GameObjects.MovingBox;
 
 
 public class TestingMovingBox {

@@ -2,6 +2,11 @@ package TestingSokobon.views;
 
 import sokobon.models.DataModel;
 import sokobon.views.GameMap;
+import sokobon.views.ControllerWindow;
+
+import java.awt.FlowLayout;
+
+import javax.swing.JFrame;
 
 public class TestingGameMap {
 	private static final char X = '#';
@@ -11,80 +16,42 @@ public class TestingGameMap {
 	private static char[][] map = new char[][] { { X, X, X, X, X, X, X, X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
+			{ X, ' ', ' ', O, 'g', ' ', ' ', X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
 			{ X, ' ', ' ', ' ', ' ', ' ', ' ', X },
 			{ X, X, X, X, X, X, X, X } };
 
 	public static void main(String[] args) {
+		JFrame gameWindow = new JFrame("Sokoban");
+		
+		gameWindow.setLayout(new FlowLayout());
+		
 		DataModel dataModel = new DataModel(map);
 
 		GameMap gMap = new GameMap(dataModel);
+		ControllerWindow controllerWindow = new ControllerWindow();
 
 		dataModel.attach(gMap);
-		gMap.addPlayer(4, 1);
-		System.out.println(gMap);
+		dataModel.addGameMap(gMap, map);
+		controllerWindow.attachGameMap(gMap);
+		
+		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameWindow.add(gMap.gameMap);
+		gameWindow.add(controllerWindow);		
+		gameWindow.pack();
+		gameWindow.setVisible(true);
+		
+//		System.out.println(gMap);
+		gMap.addPlayer(2, 2);
+//		gMap.player.moveDown(); 
+//		gMap.player.moveRight(); 
+//		gMap.player.moveRight(); 
+//		gMap.player.moveDown(); 
+		
 
-		gMap.addMovingBox(3, 4);
-		System.out.println(gMap);
-
-		gMap.addWall(3, 5);
-		System.out.println(gMap);
-		gMap.addMovingBox(2, 3);
-		gMap.addPlayer(2, 4);
-		gMap.addMovingBox(2, 5);
-		System.out.println(gMap);
-		gMap.movePlayerDown();
-		// System.out.println(gMap);
-		gMap.movePlayerleft();
-		// System.out.println(gMap);
-		gMap.movePlayerDown();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerDown();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.pullBoxDown();
-		// System.out.println(gMap);
-		gMap.movePlayerleft();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.pullBoxLeft();
-		// System.out.println(gMap);
-		gMap.movePlayerUp();
-		// System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerDown();
-		// System.out.println(gMap);
-		gMap.pullBoxUp();
-		System.out.println(gMap);
-		gMap.movePlayerRight();
-		// System.out.println(gMap);
-		gMap.movePlayerDown();
-		System.out.println(gMap);
-		gMap.movePlayerleft();
-		System.out.println(gMap);
-		gMap.pullBoxRight();
-		System.out.println(gMap);
-		gMap.pullBoxLeft();
-		System.out.println(gMap);
 	}
 
-	public void TestingAddPlayers() {
-		//
+	public void TestingToString() {
+
 	}
 }

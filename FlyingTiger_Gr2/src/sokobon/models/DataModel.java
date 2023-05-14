@@ -6,30 +6,86 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import sokobon.GameBox;
+import sokobon.GameObject;
+import sokobon.GameObjects.*;
+
 import sokobon.views.GameMap;
-import sokobon.views.GraphicalView;
+import sokobon.views.GameController;
 
 public class DataModel {
     ArrayList<ChangeListener> listeners;
-    private char[][] map; // data
-    private int width;
-    private int hieght;
+    private GameObject[][] map; // data
+    private int cols;
+    private int rows;
 
     private GameMap gameMap;
-    private GraphicalView graphicalView;
+    private GameController gameController;
 
     public DataModel(char[][] map) {
         listeners = new ArrayList<ChangeListener>();
-        width = map[0].length;
-        hieght = map.length;
-        this.map = new char[hieght][width];
-
+        cols = map[0].length;
+        rows = map.length;
         // store the map
-        for (int h = 0; h < map.length; h++) {
-            for (int w = 0; w < map[0].length; w++) {
-                this.map[h][w] = map[h][w];
+        convertCharMatrixToGameObjectMatrix(map);
+    }
+
+    public void addGameMap(GameMap gameMap, char[][] map) {
+        this.gameMap = gameMap;
+        cols = map[0].length;
+        rows = map.length;
+        attachGameMapToGameObjects();
+
+    }
+
+    private void attachGameMapToGameObjects() {
+        for (int row = 0; row < cols - 1; row++) {
+            for (int col = 0; col < rows - 1; col++) {
+                if (map[row][col].getID() == 'p') {
+                    gameMap.player = new Player(row, col);
+                    map[row][col] = gameMap.player;
+                }
+                map[row][col].gameMap = gameMap; // rediculas, I know
+
             }
         }
+
+    }
+
+    private void convertCharMatrixToGameObjectMatrix(char[][] map) {
+        int rows = map.length;
+        int cols = map[0].length;
+
+        this.map = new GameObject[rows][cols];
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                switch (map[row][col]) {
+                    case 'p':
+                        this.map[row][col] = new Player(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        break;
+                    case '#':
+                        this.map[row][col] = new Wall(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        break;
+                    case ' ':
+                        this.map[row][col] = new Floor(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        break;
+                    case 'o':
+                        this.map[row][col] = new MovingBox(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        break;
+                    case 'g':
+                        this.map[row][col] = new Goal(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
     }
 
     /**
@@ -37,8 +93,8 @@ public class DataModel {
      * 
      * @return the map in an char[][]
      */
-    public char[][] getData() {
-        return (char[][]) (map.clone());
+    public GameObject[][] getData() {
+        return (GameObject[][]) (map);
     }
 
     /**
@@ -59,10 +115,10 @@ public class DataModel {
         }
     }
 
-    public void update(char[][] map) {
-        width = map[0].length;
-        hieght = map.length;
-        this.map = new char[hieght][width];
+    public void update(GameObject[][] map) {
+        cols = map[0].length;
+        rows = map.length;
+        this.map = new GameObject[rows][cols];
 
         // store the map
         for (int h = 0; h < map.length; h++) {
@@ -76,6 +132,19 @@ public class DataModel {
 
     }
 
-    // TODO add movePlayerUp, movePlayerDown, movePlayerRight, movePlayerLeft
-    // instead of update.
+    public void update(int row, int col, GameObject gameObject) {
+        map[row][col] = gameObject;
+        map[row][col].gameMap = gameMap;
+        for (ChangeListener l : listeners) {
+            l.stateChanged(new ChangeEvent(this));
+        }
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public int getRows() {
+        return rows;
+    }
 }
