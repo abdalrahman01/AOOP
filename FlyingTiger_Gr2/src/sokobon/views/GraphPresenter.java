@@ -9,7 +9,11 @@ import sokobon.models.DataModel;
 import sokobon.GameObject;
 
 public class GraphPresenter extends JPanel implements ChangeListener {
-    private GameObject[][] gameObjects;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private GameObject[][] gameObjects;
     private DataModel dataModel;
     private int ICON_width, ICON_height;
     private int cols, rows;
