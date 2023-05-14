@@ -93,20 +93,20 @@ public class ControllerWindow extends JPanel {
     private void addClickedListners() {
         buttonDOWN.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // gameMap.player.moveDown();
+                 gameMap.player.moveDown();
                 jcomp5.setText("Down Pressed");
             }
         });
         buttonUP.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // gameMap.player.moveUp();
+                 gameMap.player.moveUp();
                 jcomp5.setText("Up Pressed");
 
             }
         });
         buttonLEFT.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // gameMap.player.moveLeft();
+                 gameMap.player.moveLeft();
                 jcomp5.setText("Left Pressed");
 
             }
@@ -114,7 +114,7 @@ public class ControllerWindow extends JPanel {
         buttonRIGHT.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 jcomp5.setText("Right Pressed");
-                // gameMap.player.moveRight();
+                 gameMap.player.moveRight();
             }
         });
     }

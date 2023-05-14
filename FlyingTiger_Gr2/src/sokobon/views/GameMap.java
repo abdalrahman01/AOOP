@@ -26,14 +26,14 @@ public class GameMap extends JComponent implements ChangeListener {
 		dataModel = model;
 		player = new Player();
 
-		JFrame frame = new JFrame("Game Map");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		JFrame frame = new JFrame("Game Map");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setMap(model.getData());
 		gameMap = new JLabel(toMultiLineHTML(map));
-		frame.add(gameMap);
-		frame.pack();
-		frame.setVisible(true);
+//		frame.add(gameMap);
+//		frame.pack();
+//		frame.setVisible(true);
 
 	}
 
