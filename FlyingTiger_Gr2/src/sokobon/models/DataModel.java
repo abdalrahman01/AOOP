@@ -23,6 +23,8 @@ public class DataModel {
 
     public DataModel(char[][] map) {
         listeners = new ArrayList<ChangeListener>();
+        cols = map[0].length;
+        rows = map.length;
         // store the map
         convertCharMatrixToGameObjectMatrix(map);
     }
@@ -92,7 +94,7 @@ public class DataModel {
      * @return the map in an char[][]
      */
     public GameObject[][] getData() {
-        return (GameObject[][]) (map.clone());
+        return (GameObject[][]) (map);
     }
 
     /**

@@ -28,6 +28,16 @@ public abstract class GameObject {
 	protected int posCol;
 	private int width, height;
 	private JLabel icon;
+	private BufferedImage bufferedImage; 
+
+	/**
+	 * @return the bufferedImage
+	 */
+	public BufferedImage getBufferedImage() {
+		return bufferedImage;
+	}
+
+	
 
 	protected char id;
 
@@ -123,14 +133,15 @@ public abstract class GameObject {
 	 */
 	public void setIconGameObject(File img) {
 
-		BufferedImage displayedImage = null;
+		bufferedImage = null;
 		try {
-			displayedImage = ImageIO.read(img);
+			
+			bufferedImage = ImageIO.read(img);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		icon.setIcon(new ImageIcon(displayedImage)); // label
+		icon.setIcon(new ImageIcon(bufferedImage)); // label
 		icon.setText("");
 
 	}
