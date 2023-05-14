@@ -83,14 +83,14 @@ public class ControllerWindow extends JPanel {
         jcomp9.setBounds(335, 190, 200, 20);
         menu.setBounds(0, 0, 200, 25);
 
-        addActionListnerToButtons();
+        addClickedListners();
     }
 
     public void attachGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 
-    private void addActionListnerToButtons() {
+    private void addClickedListners() {
         buttonDOWN.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 // gameMap.player.moveDown();
