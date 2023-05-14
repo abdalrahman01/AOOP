@@ -22,6 +22,10 @@ public class TestingGraphPresenter {
             { X, ' ', P , O , 'g' , 'g' , ' '  , X },
             { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
             { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
+            { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
+            { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
+            { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
+            { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
             { X, X, X, X, X, X, X, X } };
 
     public static void main(String[] args) {

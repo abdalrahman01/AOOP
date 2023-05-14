@@ -38,8 +38,8 @@ public class DataModel {
     }
 
     private void attachGameMapToGameObjects() {
-        for (int row = 0; row < cols - 1; row++) {
-            for (int col = 0; col < rows - 1; col++) {
+        for (int row = 0; row < rows - 1; row++) {
+            for (int col = 0; col < cols - 1; col++) {
                 if (map[row][col].getID() == 'p') {
                     gameMap.player = new Player(row, col);
                     map[row][col] = gameMap.player;

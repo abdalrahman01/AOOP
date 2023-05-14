@@ -42,6 +42,8 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public GameObject getGameObject(int row, int col) {
+		if (row < 0 || col < 0)
+			return null; 
 		return map[row][col];
 	}
 
