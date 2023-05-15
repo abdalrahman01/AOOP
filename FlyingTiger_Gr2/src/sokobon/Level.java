@@ -2,10 +2,126 @@ package sokobon;
 
 
 /**
- * show the level of the player 
+ * show the level of the player or create a level map 
  * @author aliab
  *
  */
-public class Level {
+	public class Level {
+		//levels number
+		private static final int CountLevel = 5;
+		// height of the map
+		private static final int height = 8;
+		//width of the map
+		private static final int width = 10;
+		// Three-dimensional array to store the map and level
+		private char[][][] mapLevel;
+
+		public Level() {
+			 // Initialize the mapLevel array with these dimensions
+			mapLevel = new char[CountLevel][height][width];
+			//Create the level map
+			setLevelMaps();
+		}
+
+		private void setLevelMaps() {
+			// Level 1
+			mapLevel[0] = new char[][]{
+				{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+	            {'#', 'o', ' ', ' ', ' ', ' ', '#', 'g', ' ', '#'},
+	            {'#', '#', '#', ' ', ' ', ' ', '#', '#', ' ', '#'},
+	            {'#', ' ', ' ', 'p', ' ', '#', ' ', ' ', ' ', '#'},
+	            {'#', ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#'},
+	            {'#', ' ', '#', ' ', '#', ' ', ' ', '#', ' ', '#'},
+	            {'#', 'o', '#', ' ', ' ', ' ', ' ', '#', 'g', '#'},
+	            {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}
+			};
+
+			// Level 2
+			mapLevel[1] = new char[][]{
+	           
+	            {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+	            {'#', 'g', ' ', ' ', ' ', '#', '#', '#', ' ', '#'},
+	            {'#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'},
+	            {'#', '#', 'o', '#', '#', '#', ' ', '#', ' ', '#'},
+	            {'#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#'},
+	            {'#', ' ', ' ', '#', '#', '#', ' ', '#', ' ', '#'},
+	            {'#', 'p', ' ', '#', ' ', 'o', ' ', '#', ' ', '#'},
+	            {'#', '#', '#', '#', '#', '#', '#', '#', 'g', '#'}
+	    	};
+
+	    	// Level 3
+	    	mapLevel[2] = new char[][]{
+	    		{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+	    	    {'#', 'g', ' ', '#', ' ', ' ', '#', '#', 'g', '#'},
+	    	    {'#', '#', ' ', ' ', 'o', '#', ' ', ' ', ' ', '#'},
+	    	    {'#', ' ', 'p', '#', ' ', ' ', '#', ' ', '#', '#'},
+	    	    {'#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#'},
+	    	    {'#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#'},
+	    	    {'#', ' ', ' ', ' ', ' ', ' ', 'o', '#', 'g', '#'},
+	    	    {'#', 'o', '#', '#', '#', '#', '#', '#', '#', '#'}
+	    	};
+
+	    	// Level 4
+	    	mapLevel[3] = new char[][]{
+	    		{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+	    	    {'o', ' ', ' ', '#', ' ', ' ', ' ', '#', 'g', '#'},
+	    	    {'#', '#', 'o', ' ', ' ', '#', ' ', '#', ' ', '#'},
+	    	    {'#', 'p', '#', '#', 'o', '#', 'g', ' ', ' ', '#'},
+	    	    {'#', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', '#'},
+	    	    {'#', ' ', ' ', '#', ' ', '#', '#', '#', ' ', '#'},
+	    	    {'#', ' ', ' ', 'g', ' ', ' ', ' ', ' ', ' ', '#'},
+	    	    {'#', '#', '#', '#', '#', '#', '#', '#', 'g', '#'}
+	    	};
+	    	
+	    	// Level 5
+	    	mapLevel[4] = new char[][]{
+	            {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+	            {'#', 'g', ' ', ' ', ' ', '#', ' ', '#', 'g', '#'},
+	            {'#', '#', '#', '#', ' ', 'o', ' ', ' ', ' ', '#'},
+	            {'#', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#'},
+	            {'o', '#', ' ', '#', '#', ' ', ' ', 'o', '#', '#'},
+	            {'o', ' ', ' ', 'o', ' ', '#', ' ', ' ', ' ', 'g'},
+	            {'#', ' ', '#', ' ', '#', 'p', ' ', '#', 'g', '#'},
+	            {'#', '#', '#', '#', '#', '#', 'g', '#', '#', '#'}
+	    	};
+		}
+		
+		
+	public char[][] getMapLevel(int level) {
+		// check if the level is in the range 
+    if (level >= 0 && level < CountLevel) {
+    	//return the map level for the current level
+        return mapLevel[level];
+    	}
+    // if invalid level it return null
+    return null;
+	}
+
+	public int countLevel() {
+		// return the numbers of the avaible levels
+    return CountLevel;
+	}
+	
+	public static void main(String[] args) {
+	    Level level = new Level();
+	    int levelCounter = level.countLevel();
+
+	    for (int i = 0; i < levelCounter; i++) {
+	        char[][] mapLevel = level.getMapLevel(i);
+	        System.out.println("Level " + (i + 1) + ":");
+	        printLevelMap(mapLevel);
+	        System.out.println();
+	    }
+	}
+
+	private static void printLevelMap(char[][] mapLevel) {
+	    for (char[] row : mapLevel) {
+	        for (char cell : row) {
+	            System.out.print(cell + " ");
+	        }
+	        System.out.println();
+	    }
+	}
 
 }
+
