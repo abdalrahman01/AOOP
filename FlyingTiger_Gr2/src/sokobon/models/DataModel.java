@@ -13,7 +13,7 @@ import sokobon.views.GameMap;
 import sokobon.views.GameController;
 
 public class DataModel {
-    ArrayList<ChangeListener> listeners;
+    ArrayList<ChangeListener> listeners; // for observer pattern 
     private GameObject[][] map; // data
     private int cols;
     private int rows;
@@ -129,7 +129,6 @@ public class DataModel {
         for (ChangeListener l : listeners) {
             l.stateChanged(new ChangeEvent(this));
         }
-
     }
 
     public void update(int row, int col, GameObject gameObject) {

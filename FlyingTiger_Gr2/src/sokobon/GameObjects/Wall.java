@@ -25,7 +25,7 @@ public class Wall extends GameObject implements GameBox {
 	 */
 
 	public char getID() {
-		return '#';
+		return id;
 	}
 
 	public void setID(char id) {

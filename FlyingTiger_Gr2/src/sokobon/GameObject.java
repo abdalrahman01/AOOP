@@ -23,9 +23,10 @@ public abstract class GameObject {
 	private static final long serialVersionUID = 1L;
 
 	protected int posRow;
+	protected int posCol;
+	
 	public GameMap gameMap;
 
-	protected int posCol;
 	private int width, height;
 	private JLabel icon;
 	private BufferedImage bufferedImage; 

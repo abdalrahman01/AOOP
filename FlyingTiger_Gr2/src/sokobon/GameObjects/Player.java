@@ -63,7 +63,7 @@ public class Player extends GameObject {
 
 		GameObject gameObjectInNewPosition = gameMap.getGameObject(posRow, posCol);
 		GameObject gameObjectInOldPosition = gameMap.getGameObject(oldPosRow, oldPosCol);
-		// if new position has a crate (marked/unmarked)
+		// if new position has a crate (marked/unmarked) m: marked crate
 		if (gameObjectInNewPosition.getID() == 'o' || gameObjectInNewPosition.getID() == 'm') {
 			boolean isMoved = false;
 			switch (direction) {

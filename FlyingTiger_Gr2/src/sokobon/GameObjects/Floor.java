@@ -14,6 +14,7 @@ import sokobon.GameObject;
 public class Floor extends GameObject {
 
 	public Floor() {
+		id = ' ';
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/blank.png"));
 	}
 
@@ -24,7 +25,7 @@ public class Floor extends GameObject {
 	}
 
 	public char getID() {
-		return ' ';
+		return id;
 	}
 
 	public boolean moveUp() {
