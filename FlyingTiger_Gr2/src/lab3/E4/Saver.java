@@ -53,12 +53,25 @@ import java.util.Arrays;
 
 public class Saver {
     // The save method generates an XML representation of the given object
+    /**
+     * @param o
+     * @return
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     */
     public String save(Object o) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException  {
         // Use a StringBuilder to build the result string more efficiently
         StringBuilder resultBuilder = new StringBuilder();
         Class<?> c = o.getClass();
+
+        Element element = c.getAnnotation(Element.class);
+        
         // Iterate over all the methods of the object's class
         for(Method m : c.getDeclaredMethods()) {
+        	// Check if the method has a SubElements annotation
             // Check if the method has a SubElements annotation
             SubElements selement = m.getAnnotation(SubElements.class);
             // Check if the method has an ElementField annotation
@@ -70,16 +83,22 @@ public class Saver {
                 help = (Object[]) m.invoke(o);
             }
             // If the method has an ElementField annotation, add the node to the result string
+           
+            
+            
             if(efield != null) {
-                resultBuilder.append("<node value=\"").append(m.invoke(o)).append("\"> \n");
+                resultBuilder.append("<"+ element.name()+ " " + efield.name() +"=\"").append(m.invoke(o)).append("\"> \n");
             }
             // If the help array is not null, add the subnodes and recursively call the save method on each child
             if(help != null) {
-                resultBuilder.append("	<subnodes>\n");
+                resultBuilder.append("\t<" + selement.name() + ">\n");
+      
                 for(Object child : help) {
-                    resultBuilder.append("		").append(save(child));
+                    resultBuilder.append("\t\t").append(save(child));
+                    
                 }
-                resultBuilder.append("	</subnodes>\n").append("</node>");
+                resultBuilder.append("\t</"+ selement.name() +">\n").append("</"+ element.name() +">");
+                
             }
         }
         // Return the final result string
@@ -91,8 +110,8 @@ public class Saver {
         Tree<String> t =
                 new Tree<String>("top",
                         new Tree[] {
-                                new Tree("sub1"),
-                                new Tree("sub2"),
+                                new Tree<String>("sub1"),
+                                new Tree<String>("sub2"),
                         });
         // Create a Saver object and use it to generate the XML representation of the Tree object
         Saver s = new Saver();
