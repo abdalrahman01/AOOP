@@ -120,11 +120,11 @@ public class Player extends GameObject {
 	}
 	
 	public boolean checkWin() {
-		int width = map[0].length;
-		int height = map.length;
-		for (int i = 0; i< width; i++) {
-			for (int j = 0; j< height; j++) {
-				 GameObject gameObject = gameMap.getGameObject(i, j);
+		int cols = map[0].length;
+		int rows = map.length;
+		for (int col = 0; col< cols; col++) {
+			for (int row = 0; row< rows; row++) {
+				 GameObject gameObject = gameMap.getGameObject(row, col);
 		            
 				 //There are still boxes or box not put on the goal 
 		            if (gameObject.getID() == 'g') {
