@@ -16,6 +16,7 @@ public class Player extends GameObject {
 	private final int DOWN = 1;
 	private final int RIGHT = 2;
 	private final int LEFT = 3;
+	private GameObject[][] map;
 
 	public Player() {
 		id = 'p';
@@ -117,6 +118,23 @@ public class Player extends GameObject {
 		return true;
 
 	}
+	
+	public boolean checkWin() {
+		int cols = map[0].length;
+		int rows = map.length;
+		for (int col = 0; col< cols; col++) {
+			for (int row = 0; row< rows; row++) {
+				 GameObject gameObject = gameMap.getGameObject(row, col);
+		            
+				 //There are still boxes or box not put on the goal 
+		            if (gameObject.getID() == 'g') {
+		                return false;
+			}
+		}
+	}
+		// no boxes was found or all boxes put on the goal
+		return true;
+}
 
 	/**
 	 * Push the object using the player
