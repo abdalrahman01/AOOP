@@ -56,7 +56,7 @@ public class Player extends GameObject {
 				break;
 		}
 
-		if (!gameMap.isInRange(posRow, posCol)) { // if new position is outside of range
+		if (!gameMap.isInRange(posRow, posCol) || gameMap.isWall(posRow,posCol)) { // if new position is outside of range
 			posRow = oldPosRow; // go back to place
 			posCol = oldPosCol;
 			return false;
