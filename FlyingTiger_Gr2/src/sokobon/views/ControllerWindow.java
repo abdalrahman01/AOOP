@@ -34,10 +34,10 @@ public class ControllerWindow extends JPanel {
     private JLabel jcomp9;
     private JMenuBar menu;
 
-    private static final File ICON_UP = new File("src/sokobon/resources/imgs/sokoban_icons/up.png");
-    private static final File ICON_DOWN = new File("src/sokobon/resources/imgs/sokoban_icons/down.png");
-    private static final File ICON_LEFT = new File("src/sokobon/resources/imgs/sokoban_icons/vänster.png");
-    private static final File ICON_RIGHT = new File("src/sokobon/resources/imgs/sokoban_icons/höger.png");
+    private static final File ICON_UP = new File("src/sokobon/resources/imgs/sokoban_icons/UP.png");
+    private static final File ICON_DOWN = new File("src/sokobon/resources/imgs/sokoban_icons/DOWN.png");
+    private static final File ICON_LEFT = new File("src/sokobon/resources/imgs/sokoban_icons/LEFT.png");
+    private static final File ICON_RIGHT = new File("src/sokobon/resources/imgs/sokoban_icons/RIGHT.png");
 
     private GameMap gameMap;
 
