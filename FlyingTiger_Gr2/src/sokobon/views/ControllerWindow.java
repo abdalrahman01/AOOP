@@ -45,13 +45,13 @@ public class ControllerWindow extends JPanel {
     private GameMap gameMap;
 
     
-    private boolean buttonToggled;
+    private boolean isPullMode;
     public ControllerWindow() {
         // construct preComponents
         JMenu fileMenu = new JMenu("File");
         JMenuItem saveItem = new JMenuItem("Save");
         fileMenu.add(saveItem);
-        buttonToggled = false; 
+        isPullMode = false; 
         // construct components
         buttonUP = new JButton("Up");
         buttonLEFT = new JButton("left");
@@ -110,30 +110,51 @@ public class ControllerWindow extends JPanel {
     private void addClickedListners() {
         buttonDOWN.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                 gameMap.player.moveDown();
-                jcomp5.setText("Down Pressed");
-            }
+            	if (isPullMode)
+            		gameMap.player.moveDownAndPull();
+            	else
+            		gameMap.player.moveDown();
+                }
         });
         buttonUP.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                 gameMap.player.moveUp();
-                jcomp5.setText("Up Pressed");
+            	if (isPullMode)
+            		gameMap.player.moveUpAndPull();
+            	else
+            		gameMap.player.moveUp();
+
 
             }
         });
         buttonLEFT.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                 gameMap.player.moveLeft();
-                jcomp5.setText("Left Pressed");
+            	if (isPullMode)
+            		gameMap.player.moveLeftAndPull();
+            	else
+            		gameMap.player.moveLeft();
+           
 
             }
         });
         buttonRIGHT.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                jcomp5.setText("Right Pressed");
-                 gameMap.player.moveRight();
+            	if (isPullMode)
+            		gameMap.player.moveRightAndPull();
+            	else 
+            		gameMap.player.moveRight();
+                	 
             }
         });
+        pullButton.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		isPullMode = !isPullMode;
+        		if (isPullMode)
+        			pullButton.setText("Pull Mode: ON");
+        		else 
+        			pullButton.setText("Pull Mode: OFF");
+        	}
+        });
+        
     }
 
     public static void main(String[] args) {

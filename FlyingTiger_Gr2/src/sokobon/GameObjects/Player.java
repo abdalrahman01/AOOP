@@ -115,13 +115,15 @@ public class Player extends GameObject {
 			return false;
 		}
 		gameMap.setGameObject(posRow, posCol, this);
+		if (checkWin())
+			System.out.println("You win!");
 		return true;
 
 	}
 	
 	public boolean checkWin() {
-		int cols = map[0].length;
-		int rows = map.length;
+		int cols = gameMap.getWidth();
+		int rows = gameMap.getHeight();
 		for (int col = 0; col< cols; col++) {
 			for (int row = 0; row< rows; row++) {
 				 GameObject gameObject = gameMap.getGameObject(row, col);
@@ -163,6 +165,69 @@ public class Player extends GameObject {
 
 	public boolean moveRight() {
 		return move(RIGHT);
-	};
+	}
+
+	public void moveLeftAndPull() {
+		// TODO Auto-generated method stub
+		pull(LEFT);
+		
+	}
+	public void moveRightAndPull() {
+		// TODO Auto-generated method stub
+		pull(RIGHT);
+		
+	}
+
+	public void moveUpAndPull() {
+		// TODO Auto-generated method stub
+		pull(UP);
+		
+	}
+
+	public void moveDownAndPull() {
+		pull(DOWN);
+		
+	}
+	
+	private boolean pull(int direction) {
+		int oldPosRow = posRow;
+		int oldPosCol = posCol;
+		boolean hasMoved = false;
+		
+		GameObject movingBoxInOldPos = null;
+		
+		
+		switch (direction) {
+			case UP: // moveUp
+				movingBoxInOldPos = gameMap.getGameObject(oldPosRow +1, oldPosCol);
+				break;
+			case DOWN: // move Down
+				movingBoxInOldPos = gameMap.getGameObject(oldPosRow -1, oldPosCol);
+				break;
+			case RIGHT: // move Right
+				movingBoxInOldPos = gameMap.getGameObject(oldPosRow, oldPosCol-1);
+				break;
+			case LEFT: // move Left
+				movingBoxInOldPos = gameMap.getGameObject(oldPosRow, oldPosCol+1);
+				break;
+	
+			default:
+				break;
+	}
+		
+		if (movingBoxInOldPos == null)
+			return move(direction);
+			
+		if (movingBoxInOldPos.getID() != 'm' && movingBoxInOldPos.getID() != 'o'  )
+			return move(direction);
+		if (move(direction)) {
+			hasMoved = ((MovingBox)movingBoxInOldPos).move(direction);
+			if (checkWin())
+				System.out.println("You win!");
+			return hasMoved;
+		}
+		return false; 
+	
+	}
 
 }
