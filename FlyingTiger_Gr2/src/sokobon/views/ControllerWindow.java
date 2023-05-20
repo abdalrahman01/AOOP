@@ -27,12 +27,15 @@ public class ControllerWindow extends JPanel {
     private JButton buttonLEFT;
     private JButton buttonDOWN;
     private JButton buttonRIGHT;
+    private JButton pullButton;
     private JLabel jcomp5;
     private JLabel jcomp6;
     private JLabel jcomp7;
     private JLabel jcomp8;
     private JLabel jcomp9;
     private JMenuBar menu;
+    
+   
 
     private static final File ICON_UP = new File("src/sokobon/resources/imgs/sokoban_icons/UP.png");
     private static final File ICON_DOWN = new File("src/sokobon/resources/imgs/sokoban_icons/DOWN.png");
@@ -41,17 +44,20 @@ public class ControllerWindow extends JPanel {
 
     private GameMap gameMap;
 
+    
+    private boolean buttonToggled;
     public ControllerWindow() {
         // construct preComponents
         JMenu fileMenu = new JMenu("File");
         JMenuItem saveItem = new JMenuItem("Save");
         fileMenu.add(saveItem);
-
+        buttonToggled = false; 
         // construct components
         buttonUP = new JButton("Up");
         buttonLEFT = new JButton("left");
         buttonDOWN = new JButton("down");
         buttonRIGHT = new JButton("right");
+        pullButton = new JButton("Pull");
         jcomp5 = new JLabel("Press and hold [space] to PULL");
         jcomp6 = new JLabel("Press [Right Arrow] to move right");
         jcomp7 = new JLabel("Press [Left Arrow] to move left");
@@ -73,6 +79,7 @@ public class ControllerWindow extends JPanel {
         add(buttonLEFT);
         add(buttonDOWN);
         add(buttonRIGHT);
+        add(pullButton);
         add(jcomp5);
         add(jcomp6);
         add(jcomp7);
@@ -81,10 +88,11 @@ public class ControllerWindow extends JPanel {
         add(menu);
 
         // set component bounds (only needed by Absolute Positioning)
-        buttonUP.setBounds(145, 100, 70, 100);
-        buttonLEFT.setBounds(45, 170, 100, 70);
-        buttonDOWN.setBounds(145, 200, 70, 100);
-        buttonRIGHT.setBounds(215, 170, 100, 70);
+        buttonLEFT.setBounds (0, 110, 85, 55);
+        buttonUP.setBounds (85, 25, 55, 85);
+        buttonRIGHT.setBounds (140, 110, 85, 55);
+        buttonDOWN.setBounds (85, 165, 55, 85);
+        pullButton.setBounds (45, 260, 140, 30);
         jcomp5.setBounds(335, 245, 200, 25);
         jcomp6.setBounds(335, 135, 205, 25);
         jcomp7.setBounds(335, 150, 200, 25);
