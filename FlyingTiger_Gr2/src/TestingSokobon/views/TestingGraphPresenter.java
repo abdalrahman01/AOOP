@@ -1,6 +1,7 @@
 
 package TestingSokobon.views;
 
+import sokobon.Level;
 import sokobon.models.DataModel;
 import sokobon.views.GameMap;
 import sokobon.views.GraphPresenter;
@@ -30,12 +31,13 @@ public class TestingGraphPresenter {
             { X, X, X, X, X, X, X, X } };
 
     public static void main(String[] args) {
+    	Level levels = new Level();
         JFrame gameWindow = new JFrame("Sokoban");
         gameWindow.setPreferredSize(new Dimension (700, 700));
         
         gameWindow.setLayout(null);
 
-        DataModel dataModel = new DataModel(map);
+        DataModel dataModel = new DataModel(levels.getMapLevel(1));
 
         GameMap gMap = new GameMap(dataModel);
         ControllerWindow controllerWindow = new ControllerWindow();
@@ -44,7 +46,7 @@ public class TestingGraphPresenter {
 
         dataModel.attach(gMap);
         dataModel.attach(graphPresenter);
-        dataModel.addGameMap(gMap, map);
+        dataModel.addGameMap(gMap, levels.getMapLevel(1));
         controllerWindow.attachGameMap(gMap);
 
         
