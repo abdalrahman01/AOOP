@@ -37,7 +37,7 @@ public class TestingGraphPresenter {
         
         gameWindow.setLayout(null);
 
-        DataModel dataModel = new DataModel(map);
+        DataModel dataModel = new DataModel(levels.getMapLevel(1));
 
         GameMap gMap = new GameMap(dataModel);
         ControllerWindow controllerWindow = new ControllerWindow();
@@ -46,7 +46,7 @@ public class TestingGraphPresenter {
 
         dataModel.attach(gMap);
         dataModel.attach(graphPresenter);
-        dataModel.addGameMap(gMap, map);
+        dataModel.addGameMap(gMap, levels.getMapLevel(1));
         controllerWindow.attachGameMap(gMap);
 
         
@@ -61,16 +61,7 @@ public class TestingGraphPresenter {
         graphPresenter.setLocation(300, 0);
         gameWindow.pack();
         gameWindow.setVisible(true);
-        
 
-        // System.out.println(gMap);
-//        gMap.addPlayer(2, 2);
-        
-        
-        // gMap.player.moveDown();
-        // gMap.player.moveRight();
-        // gMap.player.moveRight();
-        // gMap.player.moveDown();
 
     }
 }
