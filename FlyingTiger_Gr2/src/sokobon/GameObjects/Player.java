@@ -136,13 +136,6 @@ public class Player extends GameObject {
 	}
 
 	/**
-	 * Push the object using the player
-	 */
-	public void push(GameBox box) {
-
-	};
-
-	/**
 	 * Pull the object using the player
 	 */
 	public void pull() {
