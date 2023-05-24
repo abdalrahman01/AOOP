@@ -8,16 +8,14 @@ import sokobon.models.DataModel;
 
 public class LevelDisplay extends JLabel implements ChangeListener {
 
-	DataModel dataModel; 
-	
-	
-	
+	DataModel dataModel;
+
 	public void attach(DataModel dataModel) {
 		this.dataModel = dataModel;
 	}
-	
+
 	public void stateChanged(ChangeEvent e) {
-//		setText(dataModel.get);
+		setText(dataModel.getCurrnetLevel() + " / " + dataModel.getLevelCount());
 	}
 
 }
