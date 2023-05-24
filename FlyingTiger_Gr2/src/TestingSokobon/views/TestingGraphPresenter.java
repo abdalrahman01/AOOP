@@ -58,7 +58,7 @@ public class TestingGraphPresenter {
         gMap.gameMap.setBounds(0, 0, 200, 200);
         controllerWindow.setBounds(0, 300, 600, 400);
         graphPresenter.setLocation(300, 0);
-        levelDisplay.setLocation(300, 200);
+        levelDisplay.setBounds(400, 200, 50, 50);
         gameWindow.pack();
         gameWindow.setVisible(true);
 
