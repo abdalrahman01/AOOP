@@ -45,7 +45,7 @@ public class GameController extends Presenter {
 		gMap = new GameMap(dataModel);
 
 		dataModel.attach((ChangeListener) gMap);
-		dataModel.addGameMap(gMap, map);
+//		dataModel.addGameMap(gMap, map);
 		gMap.addPlayer(2, 2);
 		System.out.println(gMap);
 		return null;

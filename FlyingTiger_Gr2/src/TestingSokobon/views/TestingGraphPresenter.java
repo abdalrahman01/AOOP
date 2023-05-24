@@ -8,8 +8,6 @@ import sokobon.views.GraphPresenter;
 import sokobon.views.ControllerWindow;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-
 import javax.swing.JFrame;
 
 public class TestingGraphPresenter {
@@ -20,7 +18,7 @@ public class TestingGraphPresenter {
     private static char[][] map = new char[][] { { X, X, X, X, X, X, X, X },
             { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
             { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { X, ' ', P , O , 'g' , 'g' , ' '  , X },
+            { X, ' ', P, O, 'g', 'g', ' ', X },
             { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
             { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
             { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
@@ -31,13 +29,13 @@ public class TestingGraphPresenter {
             { X, X, X, X, X, X, X, X } };
 
     public static void main(String[] args) {
-    	Level levels = new Level();
+        Level levels = new Level();
         JFrame gameWindow = new JFrame("Sokoban");
-        gameWindow.setPreferredSize(new Dimension (700, 700));
-        
+        gameWindow.setPreferredSize(new Dimension(700, 700));
+
         gameWindow.setLayout(null);
 
-        DataModel dataModel = new DataModel(levels.getMapLevel(1));
+        DataModel dataModel = new DataModel(levels);
 
         GameMap gMap = new GameMap(dataModel);
         ControllerWindow controllerWindow = new ControllerWindow();
@@ -46,22 +44,19 @@ public class TestingGraphPresenter {
 
         dataModel.attach(gMap);
         dataModel.attach(graphPresenter);
-        dataModel.addGameMap(gMap, levels.getMapLevel(1));
         controllerWindow.attachGameMap(gMap);
 
-        
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         gameWindow.add(gMap.gameMap);
         gameWindow.add(graphPresenter);
         gameWindow.add(controllerWindow);
-        
+
         gMap.gameMap.setBounds(0, 0, 200, 200);
-        controllerWindow.setBounds(0,300, 600,400);
+        controllerWindow.setBounds(0, 300, 600, 400);
         graphPresenter.setLocation(300, 0);
         gameWindow.pack();
         gameWindow.setVisible(true);
-
 
     }
 }

@@ -16,7 +16,7 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	private GameObject[][] map;
 	public Player player;
-	private int width, height;
+	private int cols, rows;
 
 	public JLabel gameMap;
 	private DataModel dataModel;
@@ -25,16 +25,9 @@ public class GameMap extends JComponent implements ChangeListener {
 	public GameMap(DataModel model) {
 		dataModel = model;
 		player = new Player();
-
-//		JFrame frame = new JFrame("Game Map");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		dataModel.addGameMap(this);
 		setMap(model.getData());
 		gameMap = new JLabel(toMultiLineHTML(map));
-//		frame.add(gameMap);
-//		frame.pack();
-//		frame.setVisible(true);
-
 	}
 
 	public void setDataModel(DataModel dm) {
@@ -43,7 +36,7 @@ public class GameMap extends JComponent implements ChangeListener {
 
 	public GameObject getGameObject(int row, int col) {
 		if (row < 0 || col < 0)
-			return null; 
+			return null;
 		return map[row][col];
 	}
 
@@ -64,10 +57,10 @@ public class GameMap extends JComponent implements ChangeListener {
 	}
 
 	public boolean isInRange(int row, int col) {
-		if (row >= height)
+		if (row >= rows)
 			return false;
 
-		if (col >= width)
+		if (col >= cols)
 			return false;
 
 		if (row < 0 || col < 0)
@@ -146,28 +139,28 @@ public class GameMap extends JComponent implements ChangeListener {
 		return map[row][col].getID() == 'g' || map[row][col].getID() == 'm';
 	}
 
-	public int getWidth() {
-		return width;
+	public int getCols() {
+		return cols;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
+	public void setCols(int width) {
+		this.cols = width;
 	}
 
-	public int getHeight() {
-		return height;
+	public int getRows() {
+		return rows;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
+	public void setRows(int height) {
+		this.rows = height;
 	}
 
 	public String toString() {
 
 		String result = "";
 
-		for (int row = 0; row < height; row++) {
-			for (int col = 0; col < width; col++) {
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
 				result += map[row][col] + " ";
 			}
 			result += "\n";
@@ -177,9 +170,9 @@ public class GameMap extends JComponent implements ChangeListener {
 	};
 
 	public void setMap(GameObject[][] map) {
-		width = map[0].length;
-		height = map.length;
-		this.map = new GameObject[height][width];
+		cols = map[0].length;
+		rows = map.length;
+		this.map = new GameObject[rows][cols];
 
 		// store the map
 		for (int h = 0; h < map.length; h++) {
@@ -206,8 +199,8 @@ public class GameMap extends JComponent implements ChangeListener {
 	private String toMultiLineHTML(GameObject[][] text) {
 		String result = "<html><pre>";
 
-		for (int row = 0; row < height; row++) {
-			for (int col = 0; col < width; col++) {
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
 				result += map[row][col] + " ";
 			}
 			result += "<br>";

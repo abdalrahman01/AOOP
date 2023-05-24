@@ -2,10 +2,9 @@ package sokobon.GameObjects;
 
 import java.io.File;
 
-import sokobon.GameBox;
 import sokobon.GameObject;
 
-public class MovingBox extends GameObject implements GameBox {
+public class MovingBox extends GameObject {
 
 	public MovingBox() {
 		id = 'o';

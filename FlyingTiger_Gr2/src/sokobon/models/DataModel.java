@@ -1,40 +1,43 @@
 package sokobon.models;
 
 import java.util.ArrayList;
-
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import sokobon.GameBox;
 import sokobon.GameObject;
 import sokobon.GameObjects.*;
-
 import sokobon.views.GameMap;
-import sokobon.views.GameController;
+import sokobon.Level;
 
 public class DataModel {
-    ArrayList<ChangeListener> listeners; // for observer pattern 
+    ArrayList<ChangeListener> listeners; // for observer pattern
     private GameObject[][] map; // data
     private int cols;
     private int rows;
-
+    private int levelCount;
+    private int currnetLevel;
+    private Level levels;
     private GameMap gameMap;
-    private GameController gameController;
 
-    public DataModel(char[][] map) {
+    public DataModel(Level lvls) {
         listeners = new ArrayList<ChangeListener>();
-        cols = map[0].length;
-        rows = map.length;
+        addLevels(lvls);
+        char[][] firstLevel = lvls.getMapLevel(currnetLevel);
+
+        cols = firstLevel[0].length;
+        rows = firstLevel.length;
         // store the map
-        convertCharMatrixToGameObjectMatrix(map);
+        convertCharMatrixToGameObjectMatrix(firstLevel);
     }
 
-    public void addGameMap(GameMap gameMap, char[][] map) {
+    public void addGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
-        cols = map[0].length;
-        rows = map.length;
         attachGameMapToGameObjects();
+    }
 
+    public void addLevels(Level lvls) {
+        levels = lvls;
+        levelCount = levels.countLevel();
+        currnetLevel = 0;
     }
 
     private void attachGameMapToGameObjects() {
@@ -107,12 +110,9 @@ public class DataModel {
     }
 
     public void update(int oldX, int oldY, int newX, int newY) {
-
         map[newY][newX] = map[oldY][oldX];
-
-        for (ChangeListener l : listeners) {
-            l.stateChanged(new ChangeEvent(this));
-        }
+        updateLevel();
+        notifyObservers();
     }
 
     public void update(GameObject[][] map) {
@@ -126,17 +126,15 @@ public class DataModel {
                 this.map[h][w] = map[h][w];
             }
         }
-        for (ChangeListener l : listeners) {
-            l.stateChanged(new ChangeEvent(this));
-        }
+        updateLevel();
+        notifyObservers();
     }
 
     public void update(int row, int col, GameObject gameObject) {
         map[row][col] = gameObject;
         map[row][col].gameMap = gameMap;
-        for (ChangeListener l : listeners) {
-            l.stateChanged(new ChangeEvent(this));
-        }
+        updateLevel();
+        notifyObservers();
     }
 
     public int getCols() {
@@ -145,5 +143,36 @@ public class DataModel {
 
     public int getRows() {
         return rows;
+    }
+
+    public boolean checkWin() {
+        int cols = gameMap.getCols();
+        int rows = gameMap.getRows();
+        for (int col = 0; col < cols; col++) {
+            for (int row = 0; row < rows; row++) {
+                GameObject gameObject = map[row][col];
+                // There are still boxes or box not put on the goal
+                if (gameObject.getID() == 'g' || gameObject.getID() == 'x' ) {
+                    return false;
+                }
+            }
+        }
+        // no boxes was found or all boxes put on the goal
+        return true;
+    }
+
+    private void notifyObservers() {
+        for (ChangeListener l : listeners) {
+            l.stateChanged(new ChangeEvent(this));
+        }
+    }
+
+    private void updateLevel() {
+        if (!checkWin())
+            return;
+
+        currnetLevel = (currnetLevel + 1) % levelCount;
+        convertCharMatrixToGameObjectMatrix(levels.getMapLevel(currnetLevel));
+
     }
 }
