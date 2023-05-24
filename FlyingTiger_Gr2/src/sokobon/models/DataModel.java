@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import sokobon.GameBox;
 import sokobon.GameObject;
 import sokobon.GameObjects.*;
 
@@ -13,13 +12,12 @@ import sokobon.views.GameMap;
 import sokobon.views.GameController;
 
 public class DataModel {
-    ArrayList<ChangeListener> listeners; // for observer pattern 
+    ArrayList<ChangeListener> listeners; // for observer pattern
     private GameObject[][] map; // data
     private int cols;
     private int rows;
 
     private GameMap gameMap;
-    private GameController gameController;
 
     public DataModel(char[][] map) {
         listeners = new ArrayList<ChangeListener>();
