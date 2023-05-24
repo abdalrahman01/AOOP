@@ -1,13 +1,10 @@
 package sokobon.models;
 
 import java.util.ArrayList;
-
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import sokobon.GameObject;
 import sokobon.GameObjects.*;
-
 import sokobon.views.GameMap;
 
 public class DataModel {
@@ -15,7 +12,7 @@ public class DataModel {
     private GameObject[][] map; // data
     private int cols;
     private int rows;
-
+    private int level;
     private GameMap gameMap;
 
     public DataModel(char[][] map) {
