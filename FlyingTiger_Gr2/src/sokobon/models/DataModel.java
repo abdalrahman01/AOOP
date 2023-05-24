@@ -15,6 +15,7 @@ public class DataModel {
     private int rows;
     private int levelCount;
     private int currnetLevel;
+
     private Level levels;
     private GameMap gameMap;
 
@@ -54,6 +55,14 @@ public class DataModel {
 
     }
 
+    public int getLevelCount() {
+        return levelCount;
+    }
+
+    public int getCurrnetLevel() {
+        return currnetLevel;
+    }
+
     private void convertCharMatrixToGameObjectMatrix(char[][] map) {
         int rows = map.length;
         int cols = map[0].length;
@@ -67,7 +76,7 @@ public class DataModel {
                         this.map[row][col] = new Player(row, col);
                         this.map[row][col].gameMap = gameMap;
                         if (gameMap != null)
-                        	gameMap.player = (Player) this.map[row][col];
+                            gameMap.player = (Player) this.map[row][col];
                         break;
                     case '#':
                         this.map[row][col] = new Wall(row, col);
