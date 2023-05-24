@@ -10,10 +10,6 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class Sokobon {
-    private static final char X = '#';
-    private static final char P = 'p';
-    private static final char O = 'o';
-
     public static void main(String[] args) {
         Level levels = new Level();
         JFrame gameWindow = new JFrame("Sokoban");
