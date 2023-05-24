@@ -2,7 +2,6 @@ package sokobon.GameObjects;
 
 import java.io.File;
 
-import sokobon.GameBox;
 import sokobon.GameObject;
 
 public class Player extends GameObject {
@@ -16,7 +15,6 @@ public class Player extends GameObject {
 	private final int DOWN = 1;
 	private final int RIGHT = 2;
 	private final int LEFT = 3;
-	private GameObject[][] map;
 
 	public Player() {
 		id = 'p';
@@ -56,7 +54,8 @@ public class Player extends GameObject {
 				break;
 		}
 
-		if (!gameMap.isInRange(posRow, posCol) || gameMap.isWall(posRow,posCol)) { // if new position is outside of range
+		if (!gameMap.isInRange(posRow, posCol) || gameMap.isWall(posRow, posCol)) { // if new position is outside of
+																					// range
 			posRow = oldPosRow; // go back to place
 			posCol = oldPosCol;
 			return false;
@@ -99,14 +98,12 @@ public class Player extends GameObject {
 		} else {
 			gameMap.setGameObject(oldPosRow, oldPosCol, new Floor());
 		}
-		if (gameObjectInNewPosition.getID() == 'g')       // player now is stepping on marked floor
-		{                                                  // change the id of the player, because we need an indecation that are tow
-			setID(PLAYER_STANDING_ON_GOAL);                // objets are at the same postion
+		if (gameObjectInNewPosition.getID() == 'g') // player now is stepping on marked floor
+		{ // change the id of the player, because we need an indecation that are tow
+			setID(PLAYER_STANDING_ON_GOAL); // objets are at the same postion
 			gameMap.setGameObject(posRow, posCol, this);
 			return true;
-		}	 
-											
-
+		}
 
 		if (!gameMap.isEmpty(posRow, posCol)) // if new pos is not empty
 		{
@@ -120,23 +117,23 @@ public class Player extends GameObject {
 		return true;
 
 	}
-	
+
 	public boolean checkWin() {
 		int cols = gameMap.getWidth();
 		int rows = gameMap.getHeight();
-		for (int col = 0; col< cols; col++) {
-			for (int row = 0; row< rows; row++) {
-				 GameObject gameObject = gameMap.getGameObject(row, col);
-		            
-				 //There are still boxes or box not put on the goal 
-		            if (gameObject.getID() == 'g') {
-		                return false;
+		for (int col = 0; col < cols; col++) {
+			for (int row = 0; row < rows; row++) {
+				GameObject gameObject = gameMap.getGameObject(row, col);
+
+				// There are still boxes or box not put on the goal
+				if (gameObject.getID() == 'g') {
+					return false;
+				}
 			}
 		}
-	}
 		// no boxes was found or all boxes put on the goal
 		return true;
-}
+	}
 
 	/**
 	 * Push the object using the player
@@ -170,64 +167,64 @@ public class Player extends GameObject {
 	public void moveLeftAndPull() {
 		// TODO Auto-generated method stub
 		pull(LEFT);
-		
+
 	}
+
 	public void moveRightAndPull() {
 		// TODO Auto-generated method stub
 		pull(RIGHT);
-		
+
 	}
 
 	public void moveUpAndPull() {
 		// TODO Auto-generated method stub
 		pull(UP);
-		
+
 	}
 
 	public void moveDownAndPull() {
 		pull(DOWN);
-		
+
 	}
-	
+
 	private boolean pull(int direction) {
 		int oldPosRow = posRow;
 		int oldPosCol = posCol;
 		boolean hasMoved = false;
-		
+
 		GameObject movingBoxInOldPos = null;
-		
-		
+
 		switch (direction) {
 			case UP: // moveUp
-				movingBoxInOldPos = gameMap.getGameObject(oldPosRow +1, oldPosCol);
+				movingBoxInOldPos = gameMap.getGameObject(oldPosRow + 1, oldPosCol);
 				break;
 			case DOWN: // move Down
-				movingBoxInOldPos = gameMap.getGameObject(oldPosRow -1, oldPosCol);
+				movingBoxInOldPos = gameMap.getGameObject(oldPosRow - 1, oldPosCol);
 				break;
 			case RIGHT: // move Right
-				movingBoxInOldPos = gameMap.getGameObject(oldPosRow, oldPosCol-1);
+				movingBoxInOldPos = gameMap.getGameObject(oldPosRow, oldPosCol - 1);
 				break;
 			case LEFT: // move Left
-				movingBoxInOldPos = gameMap.getGameObject(oldPosRow, oldPosCol+1);
+				movingBoxInOldPos = gameMap.getGameObject(oldPosRow, oldPosCol + 1);
 				break;
-	
+
 			default:
 				break;
-	}
-		
+		}
+
 		if (movingBoxInOldPos == null)
 			return move(direction);
-			
-		if (movingBoxInOldPos.getID() != 'm' && movingBoxInOldPos.getID() != 'o'  )
+
+		if (movingBoxInOldPos.getID() != 'm' && movingBoxInOldPos.getID() != 'o')
 			return move(direction);
 		if (move(direction)) {
-			hasMoved = ((MovingBox)movingBoxInOldPos).move(direction);
+			hasMoved = ((MovingBox) movingBoxInOldPos).move(direction);
 			if (checkWin())
 				System.out.println("You win!");
 			return hasMoved;
 		}
-		return false; 
-	
+		return false;
+
 	}
 
 }
