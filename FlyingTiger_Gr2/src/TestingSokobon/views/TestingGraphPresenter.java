@@ -35,7 +35,7 @@ public class TestingGraphPresenter {
 
         gameWindow.setLayout(null);
 
-        DataModel dataModel = new DataModel(levels.getMapLevel(1));
+        DataModel dataModel = new DataModel(levels);
 
         GameMap gMap = new GameMap(dataModel);
         ControllerWindow controllerWindow = new ControllerWindow();

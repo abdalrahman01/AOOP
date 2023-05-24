@@ -6,6 +6,7 @@ import javax.swing.event.ChangeListener;
 import sokobon.GameObject;
 import sokobon.GameObjects.*;
 import sokobon.views.GameMap;
+import sokobon.Level;
 
 public class DataModel {
     ArrayList<ChangeListener> listeners; // for observer pattern
@@ -13,19 +14,27 @@ public class DataModel {
     private int cols;
     private int rows;
     private int level;
+    private Level levels;
     private GameMap gameMap;
 
-    public DataModel(char[][] map) {
+    public DataModel(Level lvls) {
         listeners = new ArrayList<ChangeListener>();
-        cols = map[0].length;
-        rows = map.length;
+        addLevels(lvls);
+        char[][] firstLevel = lvls.getMapLevel(0);
+
+        cols = firstLevel[0].length;
+        rows = firstLevel.length;
         // store the map
-        convertCharMatrixToGameObjectMatrix(map);
+        convertCharMatrixToGameObjectMatrix(firstLevel);
     }
 
     public void addGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
         attachGameMapToGameObjects();
+    }
+
+    public void addLevels(Level lvls) {
+        levels = lvls;
     }
 
     private void attachGameMapToGameObjects() {
@@ -136,7 +145,6 @@ public class DataModel {
         for (int col = 0; col < cols; col++) {
             for (int row = 0; row < rows; row++) {
                 GameObject gameObject = gameMap.getGameObject(row, col);
-
                 // There are still boxes or box not put on the goal
                 if (gameObject.getID() == 'g') {
                     return false;
