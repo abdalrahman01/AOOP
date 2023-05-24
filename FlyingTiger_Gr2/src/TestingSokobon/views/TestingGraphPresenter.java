@@ -45,6 +45,7 @@ public class TestingGraphPresenter {
 
         dataModel.attach(gMap);
         dataModel.attach(graphPresenter);
+        dataModel.attach(levelDisplay);
         controllerWindow.attachGameMap(gMap);
 
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
