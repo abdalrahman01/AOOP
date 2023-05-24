@@ -8,8 +8,6 @@ import sokobon.views.GraphPresenter;
 import sokobon.views.ControllerWindow;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-
 import javax.swing.JFrame;
 
 public class TestingGraphPresenter {
@@ -46,7 +44,6 @@ public class TestingGraphPresenter {
 
         dataModel.attach(gMap);
         dataModel.attach(graphPresenter);
-        dataModel.addGameMap(gMap);
         controllerWindow.attachGameMap(gMap);
 
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

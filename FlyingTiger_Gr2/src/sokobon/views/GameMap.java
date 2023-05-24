@@ -25,6 +25,7 @@ public class GameMap extends JComponent implements ChangeListener {
 	public GameMap(DataModel model) {
 		dataModel = model;
 		player = new Player();
+		dataModel.addGameMap(this);
 		setMap(model.getData());
 		gameMap = new JLabel(toMultiLineHTML(map));
 	}
