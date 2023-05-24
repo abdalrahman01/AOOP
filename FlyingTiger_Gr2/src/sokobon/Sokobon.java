@@ -1,7 +1,5 @@
+package sokobon;
 
-package TestingSokobon.views;
-
-import sokobon.Level;
 import sokobon.models.DataModel;
 import sokobon.views.GameMap;
 import sokobon.views.GraphPresenter;
@@ -11,24 +9,7 @@ import sokobon.views.ControllerWindow;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
-public class TestingGraphPresenter {
-    private static final char X = '#';
-    private static final char P = 'p';
-    private static final char O = 'o';
-
-    private static char[][] map = new char[][] { { X, X, X, X, X, X, X, X },
-            { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { X, ' ', P, O, 'g', 'g', ' ', X },
-            { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { X, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { O, ' ', ' ', ' ', ' ', ' ', ' ', X },
-            { X, X, X, X, X, X, X, X } };
-
+public class Sokobon {
     public static void main(String[] args) {
         Level levels = new Level();
         JFrame gameWindow = new JFrame("Sokoban");
