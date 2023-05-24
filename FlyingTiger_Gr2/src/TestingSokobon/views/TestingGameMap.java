@@ -32,7 +32,7 @@ public class TestingGameMap {
 		ControllerWindow controllerWindow = new ControllerWindow();
 
 		dataModel.attach(gMap);
-		dataModel.addGameMap(gMap, map);
+//		dataModel.addGameMap(gMap, map);
 		controllerWindow.attachGameMap(gMap);
 		
 		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
