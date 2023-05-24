@@ -140,8 +140,8 @@ public class DataModel {
     }
 
     public boolean checkWin() {
-        int cols = gameMap.getWidth();
-        int rows = gameMap.getHeight();
+        int cols = gameMap.getCols();
+        int rows = gameMap.getRows();
         for (int col = 0; col < cols; col++) {
             for (int row = 0; row < rows; row++) {
                 GameObject gameObject = gameMap.getGameObject(row, col);
