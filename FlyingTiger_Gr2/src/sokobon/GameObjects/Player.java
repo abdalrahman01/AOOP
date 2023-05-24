@@ -10,7 +10,7 @@ public class Player extends GameObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private char PLAYER_STANDING_ON_GOAL = 'p' + 'g';
+	private char PLAYER_STANDING_ON_GOAL = 'x';
 	private final int UP = 0;
 	private final int DOWN = 1;
 	private final int RIGHT = 2;
