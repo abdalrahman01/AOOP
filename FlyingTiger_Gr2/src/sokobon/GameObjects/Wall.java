@@ -2,10 +2,9 @@ package sokobon.GameObjects;
 
 import java.io.File;
 
-import sokobon.GameBox;
 import sokobon.GameObject;
 
-public class Wall extends GameObject implements GameBox {
+public class Wall extends GameObject {
 
 	private static final long serialVersionUID = 1L;
 
