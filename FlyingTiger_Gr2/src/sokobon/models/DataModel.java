@@ -150,9 +150,9 @@ public class DataModel {
         int rows = gameMap.getRows();
         for (int col = 0; col < cols; col++) {
             for (int row = 0; row < rows; row++) {
-                GameObject gameObject = gameMap.getGameObject(row, col);
+                GameObject gameObject = map[row][col];
                 // There are still boxes or box not put on the goal
-                if (gameObject.getID() == 'g') {
+                if (gameObject.getID() == 'g' || gameObject.getID() == 'x' ) {
                     return false;
                 }
             }
