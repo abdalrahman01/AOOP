@@ -10,6 +10,10 @@ public class LevelDisplay extends JLabel implements ChangeListener {
 
 	DataModel dataModel;
 
+	public LevelDisplay(DataModel dataModel) {
+		attach(dataModel);
+	}
+
 	public void attach(DataModel dataModel) {
 		this.dataModel = dataModel;
 	}
