@@ -5,6 +5,7 @@ import sokobon.Level;
 import sokobon.models.DataModel;
 import sokobon.views.GameMap;
 import sokobon.views.GraphPresenter;
+import sokobon.views.LevelDisplay;
 import sokobon.views.ControllerWindow;
 
 import java.awt.Dimension;
@@ -32,13 +33,13 @@ public class TestingGraphPresenter {
         Level levels = new Level();
         JFrame gameWindow = new JFrame("Sokoban");
         gameWindow.setPreferredSize(new Dimension(700, 700));
-
         gameWindow.setLayout(null);
 
         DataModel dataModel = new DataModel(levels);
 
         GameMap gMap = new GameMap(dataModel);
         ControllerWindow controllerWindow = new ControllerWindow();
+        LevelDisplay levelDisplay = new LevelDisplay(dataModel);
 
         GraphPresenter graphPresenter = new GraphPresenter(dataModel);
 
@@ -51,10 +52,12 @@ public class TestingGraphPresenter {
         gameWindow.add(gMap.gameMap);
         gameWindow.add(graphPresenter);
         gameWindow.add(controllerWindow);
+        gameWindow.add(levelDisplay);
 
         gMap.gameMap.setBounds(0, 0, 200, 200);
         controllerWindow.setBounds(0, 300, 600, 400);
         graphPresenter.setLocation(300, 0);
+        levelDisplay.setLocation(300, 200);
         gameWindow.pack();
         gameWindow.setVisible(true);
 
