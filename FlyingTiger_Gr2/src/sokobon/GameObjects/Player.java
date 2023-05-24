@@ -112,27 +112,8 @@ public class Player extends GameObject {
 			return false;
 		}
 		gameMap.setGameObject(posRow, posCol, this);
-		if (checkWin())
-			System.out.println("You win!");
 		return true;
 
-	}
-
-	public boolean checkWin() {
-		int cols = gameMap.getWidth();
-		int rows = gameMap.getHeight();
-		for (int col = 0; col < cols; col++) {
-			for (int row = 0; row < rows; row++) {
-				GameObject gameObject = gameMap.getGameObject(row, col);
-
-				// There are still boxes or box not put on the goal
-				if (gameObject.getID() == 'g') {
-					return false;
-				}
-			}
-		}
-		// no boxes was found or all boxes put on the goal
-		return true;
 	}
 
 	/**
@@ -212,8 +193,6 @@ public class Player extends GameObject {
 			return move(direction);
 		if (move(direction)) {
 			hasMoved = ((MovingBox) movingBoxInOldPos).move(direction);
-			if (checkWin())
-				System.out.println("You win!");
 			return hasMoved;
 		}
 		return false;
