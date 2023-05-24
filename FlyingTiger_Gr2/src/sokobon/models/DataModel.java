@@ -9,7 +9,6 @@ import sokobon.GameObject;
 import sokobon.GameObjects.*;
 
 import sokobon.views.GameMap;
-import sokobon.views.GameController;
 
 public class DataModel {
     ArrayList<ChangeListener> listeners; // for observer pattern
