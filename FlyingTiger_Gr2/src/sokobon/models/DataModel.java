@@ -98,12 +98,8 @@ public class DataModel {
     }
 
     public void update(int oldX, int oldY, int newX, int newY) {
-
         map[newY][newX] = map[oldY][oldX];
-
-        for (ChangeListener l : listeners) {
-            l.stateChanged(new ChangeEvent(this));
-        }
+        notifyObservers();
     }
 
     public void update(GameObject[][] map) {
@@ -117,17 +113,13 @@ public class DataModel {
                 this.map[h][w] = map[h][w];
             }
         }
-        for (ChangeListener l : listeners) {
-            l.stateChanged(new ChangeEvent(this));
-        }
+        notifyObservers();
     }
 
     public void update(int row, int col, GameObject gameObject) {
         map[row][col] = gameObject;
         map[row][col].gameMap = gameMap;
-        for (ChangeListener l : listeners) {
-            l.stateChanged(new ChangeEvent(this));
-        }
+        notifyObservers();
     }
 
     public int getCols() {
@@ -136,5 +128,28 @@ public class DataModel {
 
     public int getRows() {
         return rows;
+    }
+
+    public boolean checkWin() {
+        int cols = gameMap.getWidth();
+        int rows = gameMap.getHeight();
+        for (int col = 0; col < cols; col++) {
+            for (int row = 0; row < rows; row++) {
+                GameObject gameObject = gameMap.getGameObject(row, col);
+
+                // There are still boxes or box not put on the goal
+                if (gameObject.getID() == 'g') {
+                    return false;
+                }
+            }
+        }
+        // no boxes was found or all boxes put on the goal
+        return true;
+    }
+
+    private void notifyObservers() {
+        for (ChangeListener l : listeners) {
+            l.stateChanged(new ChangeEvent(this));
+        }
     }
 }
