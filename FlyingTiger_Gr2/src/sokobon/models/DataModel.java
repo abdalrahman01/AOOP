@@ -66,6 +66,8 @@ public class DataModel {
                     case 'p':
                         this.map[row][col] = new Player(row, col);
                         this.map[row][col].gameMap = gameMap;
+                        if (gameMap != null)
+                        	gameMap.player = (Player) this.map[row][col];
                         break;
                     case '#':
                         this.map[row][col] = new Wall(row, col);
@@ -152,7 +154,7 @@ public class DataModel {
             for (int row = 0; row < rows; row++) {
                 GameObject gameObject = map[row][col];
                 // There are still boxes or box not put on the goal
-                if (gameObject.getID() == 'g' || gameObject.getID() == 'x' ) {
+                if (gameObject.getID() == 'g' || gameObject.getID() == 'x') {
                     return false;
                 }
             }
