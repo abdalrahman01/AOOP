@@ -12,6 +12,9 @@ public class LevelDisplay extends JLabel implements ChangeListener {
 
 	public LevelDisplay(DataModel dataModel) {
 		attach(dataModel);
+		setSize(WIDTH, HEIGHT);
+		setText("current level [" + (dataModel.getCurrnetLevel()+1) + " / " + dataModel.getLevelCount() +  "]");
+		
 	}
 
 	public void attach(DataModel dataModel) {
@@ -19,7 +22,7 @@ public class LevelDisplay extends JLabel implements ChangeListener {
 	}
 
 	public void stateChanged(ChangeEvent e) {
-		setText(dataModel.getCurrnetLevel() + " / " + dataModel.getLevelCount());
+		setText("current level [" + (dataModel.getCurrnetLevel()+1) + " / " + dataModel.getLevelCount() +  "]");
 	}
 
 }
