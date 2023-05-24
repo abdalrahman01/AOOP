@@ -23,12 +23,9 @@ public class DataModel {
         convertCharMatrixToGameObjectMatrix(map);
     }
 
-    public void addGameMap(GameMap gameMap, char[][] map) {
+    public void addGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
-        cols = map[0].length;
-        rows = map.length;
         attachGameMapToGameObjects();
-
     }
 
     private void attachGameMapToGameObjects() {
