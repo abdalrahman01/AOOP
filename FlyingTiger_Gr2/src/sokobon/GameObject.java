@@ -17,29 +17,49 @@ import javax.swing.JLabel;
 import sokobon.views.GameMap;
 
 public abstract class GameObject {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	protected int posRow;
-	protected int posCol;
-	
-	public GameMap gameMap;
-
-	private int width, height;
-	private JLabel icon;
-	private BufferedImage bufferedImage; 
+	/**
+	 * store the postion of the game object from game map. the row = y position, the
+	 * col = x position
+	 */
+	protected int posRow, posCol;
 
 	/**
+	 * Each game object has a reference to game map. This will make the game object
+	 * aware of its neighbors.
+	 */
+	public GameMap gameMap;
+
+	/**
+	 * The size of the GameObject
+	 */
+	private int width, height;
+
+	/**
+	 * The design of the GameObject
+	 */
+	private JLabel icon;
+
+	/**
+	 * The GraphPresenter.java need a BufferedImage to paint the GameObject.
+	 */
+	private BufferedImage bufferedImage;
+
+	/**
+	 * Only used by GraphPresenter.java to paint the GameObject with swing
+	 * framework.
+	 * 
 	 * @return the bufferedImage
 	 */
 	public BufferedImage getBufferedImage() {
 		return bufferedImage;
 	}
 
-	
-
+	/**
+	 * Very important! this is used by the whole game engine and logic to
+	 * distinguish between GameObject without the need of use (instancof)
+	 */
 	protected char id;
 
 	public GameMap getGameObjectFromGameMap(int row, int col) {
@@ -136,7 +156,7 @@ public abstract class GameObject {
 
 		bufferedImage = null;
 		try {
-			
+
 			bufferedImage = ImageIO.read(img);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -162,8 +182,6 @@ public abstract class GameObject {
 	public void setID(char id) {
 		this.id = id;
 	}
-
-	
 
 	public abstract boolean moveUp();
 
