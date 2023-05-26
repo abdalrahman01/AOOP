@@ -1,5 +1,11 @@
 package sokobon;
 
+/**
+ * @author Abd Alrahman
+ * The starting point of the Game Sokobon
+ * 
+ */
+
 import sokobon.models.DataModel;
 import sokobon.views.GameMap;
 import sokobon.views.GraphPresenter;
@@ -9,9 +15,20 @@ import sokobon.views.ControllerWindow;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
+/**
+ * The starting point of the Game Sokobon
+ */
 public class Sokobon {
+    private static int numlevels = 0;
+
+    /**
+     * starts the game
+     * 
+     * @param args not used
+     */
     public static void main(String[] args) {
         Level levels = new Level();
+        numlevels = levels.countLevel();
         JFrame gameWindow = new JFrame("Sokoban");
         gameWindow.setPreferredSize(new Dimension(700, 700));
         gameWindow.setLayout(null);
@@ -43,5 +60,11 @@ public class Sokobon {
         gameWindow.pack();
         gameWindow.setVisible(true);
 
+    }
+
+    @Override
+    public String toString() {
+        String session = "the game window has Dimension(700, 700) \nthe number of levels: " + numlevels;
+        return session;
     }
 }
