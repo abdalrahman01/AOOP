@@ -1,6 +1,10 @@
 package sokobon.models;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import sokobon.GameObject;
@@ -242,6 +246,8 @@ public class DataModel {
         for (int col = 0; col < cols; col++) {
             for (int row = 0; row < rows; row++) {
                 GameObject gameObject = map[row][col];
+                if (gameObject == null)
+                	return false;
                 // There are still boxes or box not put on the goal
                 if (gameObject.getID() == 'g' || gameObject.getID() == 'x') {
                     return false;
@@ -270,6 +276,63 @@ public class DataModel {
 
         currnetLevel = (currnetLevel + 1) % levelCount;
         convertCharMatrixToGameObjectMatrix(levels.getMapLevel(currnetLevel));
+
+    }
+
+    public void loadState(String reletivePath) {
+        // read the first line of the file, it has the number of rows and cols seperated
+        // by a comma
+        // using Scanner
+    	System.out.println(reletivePath);
+    	File filePath = new File(reletivePath);
+        Scanner scanner = null;
+		try {
+			scanner = new Scanner(filePath);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        String[] rowsAndCols = scanner.nextLine().split(" ");
+        int newRows = Integer.parseInt(rowsAndCols[0]);
+        int newCols = Integer.parseInt(rowsAndCols[1]);
+
+        // read the rest of the file, it has the map
+        // convert the map to GameObjects using a swith case
+        this.map = new GameObject[newRows][newCols];
+        for (int row = 0; row < newRows; row++) {
+            String line = scanner.nextLine();
+            for (int col = 0; col < newCols; col++) {
+                switch (line.charAt(col)) {
+                    case 'p':
+                        this.map[row][col] = new Player(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        if (gameMap != null)
+                            gameMap.player = (Player) this.map[row][col];
+                        break;
+                    case '#':
+                        this.map[row][col] = new Wall(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        break;
+                    case ' ':
+                        this.map[row][col] = new Floor(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        break;
+                    case 'o':
+                        this.map[row][col] = new MovingBox(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        break;
+                    case 'g':
+                        this.map[row][col] = new Goal(row, col);
+                        this.map[row][col].gameMap = gameMap;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        scanner.close();
+//        updateLevel();
+        notifyObservers();
 
     }
 }
