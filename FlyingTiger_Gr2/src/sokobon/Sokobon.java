@@ -10,6 +10,7 @@ import sokobon.models.DataModel;
 import sokobon.views.GameMap;
 import sokobon.views.GraphPresenter;
 import sokobon.views.LevelDisplay;
+import sokobon.views.menuBarView;
 import sokobon.views.ControllerWindow;
 
 import java.awt.Dimension;
@@ -29,13 +30,15 @@ public class Sokobon {
     public static void main(String[] args) {
         Level levels = new Level();
         numlevels = levels.countLevel();
-        JFrame gameWindow = new JFrame("Sokoban");
+        menuBarView gameWindow = new menuBarView("Sokoban");
         gameWindow.setPreferredSize(new Dimension(700, 700));
         gameWindow.setLayout(null);
 
         DataModel dataModel = new DataModel(levels);
 
         GameMap gMap = new GameMap(dataModel);
+
+        gameWindow.setDataModel(dataModel);
         ControllerWindow controllerWindow = new ControllerWindow();
         LevelDisplay levelDisplay = new LevelDisplay(dataModel);
 
