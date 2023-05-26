@@ -9,16 +9,48 @@ import sokobon.views.GameMap;
 import sokobon.Level;
 
 public class DataModel {
-    ArrayList<ChangeListener> listeners; // for observer pattern
+
+    /**
+     * saves all listners. for observer pattern.
+     * 
+     */
+    ArrayList<ChangeListener> listeners;
+
+    /**
+     * Saves the current state of the game
+     */
     private GameObject[][] map; // data
-    private int cols;
-    private int rows;
+
+    /**
+     * the size of the current game.
+     */
+    private int cols, rows;
+
+    /**
+     * How many level the has
+     */
     private int levelCount;
+
+    /**
+     * indecates the index of current game.
+     */
     private int currnetLevel;
 
+    /**
+     * To get access to the actual levels
+     */
     private Level levels;
+
+    /**
+     * The interface between DataModel and the GameObjects
+     */
     private GameMap gameMap;
 
+    /**
+     * Contructs the DataModel from Level
+     * 
+     * @param lvls
+     */
     public DataModel(Level lvls) {
         listeners = new ArrayList<ChangeListener>();
         addLevels(lvls);
@@ -30,17 +62,31 @@ public class DataModel {
         convertCharMatrixToGameObjectMatrix(firstLevel);
     }
 
+    /**
+     * Save a reference to GameMap
+     * 
+     * @param gameMap GameMap.java
+     */
     public void addGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
         attachGameMapToGameObjects();
     }
 
+    /**
+     * saves the Level object, gets the number of levels, clears the curentLevel
+     * 
+     * @param lvls Level Object
+     */
     public void addLevels(Level lvls) {
         levels = lvls;
         levelCount = levels.countLevel();
         currnetLevel = 0;
     }
 
+    /**
+     * Loops through the matrix of GameObjects and save reference to GameMap in each
+     * GameObject
+     */
     private void attachGameMapToGameObjects() {
         for (int row = 0; row < rows - 1; row++) {
             for (int col = 0; col < cols - 1; col++) {
@@ -55,14 +101,26 @@ public class DataModel {
 
     }
 
+    /**
+     * @return how many levels in this dataModel.
+     */
     public int getLevelCount() {
         return levelCount;
     }
 
+    /**
+     * @return the current level in int
+     */
     public int getCurrnetLevel() {
         return currnetLevel;
     }
 
+    /**
+     * converts a char[][] map to GameObject[][] each char in map corresonds to an
+     * ID for a GameObject. Then stores GameObject map[][].
+     * 
+     * @param map matrix[row][col]
+     */
     private void convertCharMatrixToGameObjectMatrix(char[][] map) {
         int rows = map.length;
         int cols = map[0].length;
@@ -103,7 +161,7 @@ public class DataModel {
     }
 
     /**
-     * Constructs a DataModel object
+     * The data is returned, it's called be the oberservs
      * 
      * @return the map in an char[][]
      */
@@ -120,12 +178,11 @@ public class DataModel {
         listeners.add(c);
     }
 
-    public void update(int oldX, int oldY, int newX, int newY) {
-        map[newY][newX] = map[oldY][oldX];
-        updateLevel();
-        notifyObservers();
-    }
-
+    /**
+     * Get a new map. It is used when switching levels.
+     * 
+     * @param map GameObjects[][]. The
+     */
     public void update(GameObject[][] map) {
         cols = map[0].length;
         rows = map.length;
@@ -148,14 +205,32 @@ public class DataModel {
         notifyObservers();
     }
 
+    public void checkIfListnerExists(ChangeListener l) {
+
+    }
+
+    /**
+     * 
+     * @return the number of columns in the map, i.e the width
+     */
     public int getCols() {
         return cols;
     }
 
+    /**
+     * 
+     * @return the number of rows in the map, i.e the height
+     */
     public int getRows() {
         return rows;
     }
 
+    /**
+     * Checks if the player has won the game
+     * It returns true if there are no empty goals left.
+     * 
+     * @return true if the player has won the game
+     */
     public boolean checkWin() {
         int cols = gameMap.getCols();
         int rows = gameMap.getRows();
@@ -172,12 +247,18 @@ public class DataModel {
         return true;
     }
 
+    /**
+     * Notifies the observers that the data has changed
+     */
     private void notifyObservers() {
         for (ChangeListener l : listeners) {
             l.stateChanged(new ChangeEvent(this));
         }
     }
 
+    /**
+     * Updates the level if the player has won the game
+     */
     private void updateLevel() {
         if (!checkWin())
             return;
