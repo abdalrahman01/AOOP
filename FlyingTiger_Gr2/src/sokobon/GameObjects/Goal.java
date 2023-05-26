@@ -13,18 +13,24 @@ import sokobon.GameObject;
 // RedDots
 public class Goal extends GameObject {
 
+	/**
+	 * Defines the id and the icon of the Goal object
+	 */
 	public Goal() {
 		id = 'g';
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/blankmarked.png"));
 	}
 
+	/**
+	 * the row and col refers to the position in GameMap.java
+	 * 
+	 * @param row the y position
+	 * @param col the x position
+	 */
 	public Goal(int row, int col) {
 		this();
 		posCol = col;
 		posRow = row;
-	}
-
-	public void notifyObserver() {
 	}
 
 	public boolean moveUp() {
