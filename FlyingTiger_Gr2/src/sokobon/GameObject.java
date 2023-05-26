@@ -6,13 +6,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import javax.swing.ImageIcon;
-
 /**
 Super class for the whole code
  */
-
-import javax.swing.JLabel;
 
 import sokobon.views.GameMap;
 
