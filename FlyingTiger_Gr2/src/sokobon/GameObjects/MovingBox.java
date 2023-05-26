@@ -6,11 +6,20 @@ import sokobon.GameObject;
 
 public class MovingBox extends GameObject {
 
+	/**
+	 * Defines the id and the icon of the MovingBox object
+	 */
 	public MovingBox() {
 		id = 'o';
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/crate.png"));
 	}
 
+	/**
+	 * the row and col refers to the position in GameMap.java
+	 * 
+	 * @param row the y position
+	 * @param col the x position
+	 */
 	public MovingBox(int row, int col) {
 		this();
 		setPosCol(col);
@@ -98,24 +107,24 @@ public class MovingBox extends GameObject {
 		return true;
 	}
 
+	/**
+	 * Change the type of the MovingBox when it reached a Goal destination. It
+	 * chages the icon for the GameObject and its id.
+	 */
 	private void convertToMarked() {
 		setIconGameObject(
 				new File("src\\sokobon\\resources\\imgs\\sokoban_icons\\cratemarked.png"));
 		setID('m');
 	}
 
+	/**
+	 * Change the type of the MovingBox when it step out of a Goal destination. It
+	 * chages the icon for the GameObject and its id.
+	 */
 	private void convertToUnMarked() {
 		setIconGameObject(
 				new File("src\\sokobon\\resources\\imgs\\sokoban_icons\\crate.png"));
 		setID('o');
 	}
 
-	// /**
-	// * If the box has Reached the the right place
-	// *
-	// * @return
-	// */
-	// public boolean hasReachedRedDot() {
-	// return true;
-	// }
 }
