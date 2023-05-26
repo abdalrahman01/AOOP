@@ -1,6 +1,7 @@
 package sokobon.models;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -245,6 +246,8 @@ public class DataModel {
         for (int col = 0; col < cols; col++) {
             for (int row = 0; row < rows; row++) {
                 GameObject gameObject = map[row][col];
+                if (gameObject == null)
+                	return false;
                 // There are still boxes or box not put on the goal
                 if (gameObject.getID() == 'g' || gameObject.getID() == 'x') {
                     return false;
@@ -280,7 +283,15 @@ public class DataModel {
         // read the first line of the file, it has the number of rows and cols seperated
         // by a comma
         // using Scanner
-        Scanner scanner = new Scanner(reletivePath);
+    	System.out.println(reletivePath);
+    	File filePath = new File(reletivePath);
+        Scanner scanner = null;
+		try {
+			scanner = new Scanner(filePath);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         String[] rowsAndCols = scanner.nextLine().split(" ");
         int newRows = Integer.parseInt(rowsAndCols[0]);
         int newCols = Integer.parseInt(rowsAndCols[1]);
@@ -320,7 +331,7 @@ public class DataModel {
             }
         }
         scanner.close();
-        updateLevel();
+//        updateLevel();
         notifyObservers();
 
     }

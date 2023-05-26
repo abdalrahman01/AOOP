@@ -152,7 +152,7 @@ public class menuBarView extends JFrame {
         if (result != JFileChooser.APPROVE_OPTION) {
             return;
         }
-        dataModel.loadState(fileChooser.getSelectedFile().getAbsolutePath());
+        dataModel.loadState(fileChooser.getSelectedFile().getPath());
 
     }
 
