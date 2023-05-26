@@ -1,23 +1,32 @@
 /**
- * 
+ * @author Abd Alrahman
+ *
  */
 package sokobon.GameObjects;
 
 import java.io.File;
-
 import sokobon.GameObject;
 
 /**
- * @author Abd Alrahman
- *
+ * This class is used to define the Floor object, inherits from GameObject.java
+ * with id = ' ' and icon = blank.png
  */
 public class Floor extends GameObject {
 
+	/**
+	 * Defines the id and the icon of the Floor object
+	 */
 	public Floor() {
 		id = ' ';
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/blank.png"));
 	}
 
+	/**
+	 * the row and col refers to the position in GameMap.java
+	 * 
+	 * @param row the y position
+	 * @param col the x position
+	 */
 	public Floor(int row, int col) {
 		this();
 		posCol = col;
