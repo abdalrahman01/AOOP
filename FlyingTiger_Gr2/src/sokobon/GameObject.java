@@ -32,11 +32,6 @@ public abstract class GameObject {
 	public GameMap gameMap;
 
 	/**
-	 * The design of the GameObject
-	 */
-	private JLabel icon;
-
-	/**
 	 * The GraphPresenter.java need a BufferedImage to paint the GameObject.
 	 */
 	private BufferedImage bufferedImage;
@@ -57,48 +52,50 @@ public abstract class GameObject {
 	 */
 	protected char id;
 
+	/**
+	 * GameMap acts as the interface between GameObject and DataModel.java
+	 * 
+	 * @param gameMap A GameMap.java object
+	 */
 	public void setGameMap(GameMap gameMap) {
 		this.gameMap = gameMap;
 	}
 
+	/**
+	 * the row number = the position in the y-axes
+	 * 
+	 * @return the row number
+	 */
 	public int getPosRow() {
 		return posRow;
 	}
 
-	public GameObject() {
-		icon = new JLabel("Empty");
-	}
-
 	/**
-	 * Set the y coordinate for the object
+	 * Set the y coordinate for the GameObject
 	 * 
-	 * @param posRow
+	 * @param posRow int must be between (0-[height/rows])
 	 */
 	public void setPosRow(int posRow) {
 		this.posRow = posRow;
 	}
 
 	/**
-	 * Set the x coordinate for the object
+	 * get the x coordinate for the object
 	 * 
-	 * @return
+	 * @return the col number
 	 */
 	public int getPosCol() {
 		return posCol;
 	}
 
+	/**
+	 * Set the x coordinate for the GameObject
+	 * 
+	 * @param posCol int must be between (0-[width/cols])
+	 */
 	public void setPosCol(int posCol) {
 
 		this.posCol = posCol;
-	}
-
-	/**
-	 * Get the image or icon of the object
-	 * 
-	 * @return
-	 */
-	public JLabel getIcon() {
-		return icon;
 	}
 
 	/**
@@ -115,10 +112,6 @@ public abstract class GameObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		icon.setIcon(new ImageIcon(bufferedImage)); // label
-		icon.setText("");
-
 	}
 
 	public String toString() {
