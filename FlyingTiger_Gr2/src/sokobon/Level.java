@@ -3,19 +3,36 @@ package sokobon;
 /**
  * show the level of the player or create a level map
  * 
- * @author aliab
+ * @author aliab and Abd Alrahman Atieh
  *
  */
 public class Level {
-	// levels number
+
+	/**
+	 * The number of levels
+	 */
 	private static final int CountLevel = 6;
-	// height of the map
+
+	/**
+	 * The height of map = how many rows
+	 */
 	private static final int height = 8;
-	// width of the map
+
+	/**
+	 * The width of map = how many cols
+	 */
 	private static final int width = 10;
-	// Three-dimensional array to store the map and level
+
+	/**
+	 * Three-dimensional array to store the map and level
+	 * [level number][row number][col number]
+	 */
 	private char[][][] mapLevel;
 
+	/**
+	 * Initializes the mapLevel array with these dimensions. Define the different
+	 * levels
+	 */
 	public Level() {
 		// Initialize the mapLevel array with these dimensions
 		mapLevel = new char[CountLevel][height][width];
@@ -23,6 +40,9 @@ public class Level {
 		setLevelMaps();
 	}
 
+	/**
+	 * Define the different levels
+	 */
 	private void setLevelMaps() {
 
 		mapLevel[0] = new char[][] {
@@ -95,6 +115,12 @@ public class Level {
 		};
 	}
 
+	/**
+	 * Get the level layout
+	 * 
+	 * @param specifies which level you want.
+	 * @return char[][] a matrix of game map, [row][col] = (y, x)
+	 */
 	public char[][] getMapLevel(int level) {
 		// check if the level is in the range
 		if (level >= 0 && level < CountLevel) {
@@ -105,6 +131,9 @@ public class Level {
 		return null;
 	}
 
+	/**
+	 * @return int: how many levels are defined
+	 */
 	public int countLevel() {
 		// return the numbers of the avaible levels
 		return CountLevel;
@@ -113,7 +142,6 @@ public class Level {
 	public static void main(String[] args) {
 		Level level = new Level();
 		int levelCounter = level.countLevel();
-
 		for (int i = 0; i < levelCounter; i++) {
 			char[][] mapLevel = level.getMapLevel(i);
 			System.out.println("Level " + (i + 1) + ":");
@@ -122,6 +150,11 @@ public class Level {
 		}
 	}
 
+	/**
+	 * Print the level to system out print
+	 * 
+	 * @param mapLevel the level number need to print
+	 */
 	private static void printLevelMap(char[][] mapLevel) {
 		for (char[] row : mapLevel) {
 			for (char cell : row) {
@@ -130,5 +163,4 @@ public class Level {
 			System.out.println();
 		}
 	}
-
 }
