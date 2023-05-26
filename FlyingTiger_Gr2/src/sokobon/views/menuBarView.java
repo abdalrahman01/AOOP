@@ -117,7 +117,7 @@ public class menuBarView extends JFrame {
             // save the the file in dir
 
             // save the number of rows and cols in the first line
-            writer.write(dataModel.getRows() + "," + dataModel.getCols() + "\n");
+            writer.write(dataModel.getRows() + " " + dataModel.getCols() + "\n");
             for (int row = 0; row < dataModel.getRows(); row++) {
                 for (int col = 0; col < dataModel.getCols(); col++) {
                     writer.write(map[row][col].getID());

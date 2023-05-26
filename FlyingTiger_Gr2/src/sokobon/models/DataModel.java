@@ -281,7 +281,7 @@ public class DataModel {
         // by a comma
         // using Scanner
         Scanner scanner = new Scanner(reletivePath);
-        String[] rowsAndCols = scanner.nextLine().split(",");
+        String[] rowsAndCols = scanner.nextLine().split(" ");
         int newRows = Integer.parseInt(rowsAndCols[0]);
         int newCols = Integer.parseInt(rowsAndCols[1]);
 
