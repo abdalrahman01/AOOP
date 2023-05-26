@@ -41,17 +41,34 @@ public class menuBarView extends JFrame {
         // set component bounds (only needed by Absolute Positioning)
         menuBarFile.setBounds(0, 0, 200, 25);
 
-        // add mouse clicked listener to the load a state menu item using mouse adapter
-        load_a_stateItem.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                load_a_stateItem();
+        // // add mouse clicked listener to the load a state menu item using mouse
+        // adapter
+        // load_a_stateItem.addMouseListener(new MouseAdapter() {
+        // public void mouseClicked(MouseEvent evt) {
+        // load_a_stateItem();
+        // }
+        // });
+        // // add mouse clicked listener to the save current state menu item using mouse
+        // // adapter
+        // save_current_stateItem.addMouseListener(new MouseAdapter() {
+        // public void mouseClicked(MouseEvent evt) {
+        // save_current_stateItem(dataModel.getData());
+        // }
+        // });
+
+        // when selecting save_current_stateItem from the menu bar, the
+        // save_current_stateItem method is called
+        save_current_stateItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                save_current_stateItem(dataModel.getData());
             }
         });
-        // add mouse clicked listener to the save current state menu item using mouse
-        // adapter
-        save_current_stateItem.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                save_current_stateItem(dataModel.getData());
+
+        // when selecting load_a_stateItem from the menu bar, the load_a_stateItem
+        // method is called
+        load_a_stateItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                load_a_stateItem();
             }
         });
     }
