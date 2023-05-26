@@ -1,6 +1,5 @@
 package sokobon.views;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -12,17 +11,29 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
-
 public class GraphPresenter extends JPanel implements ChangeListener {
+
+    private static final long serialVersionUID = 1L;
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private GameObject[][] gameObjects;
+     * Stores the current state of the game
+     */
+    private GameObject[][] gameObjects;
+
+    /**
+     * the data model
+     */
     private DataModel dataModel;
+
+    /**
+     * a size for all icons
+     */
     private int ICON_width, ICON_height;
+
+    /**
+     * the size of the current game.
+     */
     private int cols, rows;
-	
 
     public GraphPresenter(DataModel dataModel) {
         ICON_width = 30;
@@ -38,38 +49,43 @@ public class GraphPresenter extends JPanel implements ChangeListener {
 
     }
 
+    /**
+     * on state change, update the map. and repaint
+     */
     public void stateChanged(ChangeEvent e) {
-    	setMap(this.dataModel.getData());
+        setMap(this.dataModel.getData());
         repaint();
-    
+
     }
+
+    /**
+     * Copy the given map to the map in this class
+     * 
+     * @param map the map to copy
+     */
     public void setMap(GameObject[][] map) {
-		cols = map[0].length;
-		rows = map.length;
-		
+        cols = map[0].length;
+        rows = map.length;
 
-		// store the map
-		for (int h = 0; h < map.length; h++) {
-			for (int w = 0; w < map[0].length; w++) {
-				this.gameObjects[h][w] = map[h][w];
-			}
-		}
-	}
-
-  
-    
-    public void paintComponent(Graphics g) {
-        // Let UI Delegate paint first, which 
-        // includes background filling since 
-        // this component is opaque.
-    	Graphics2D g2 = (Graphics2D) g;
-    	for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-            	g2.drawImage((Image) gameObjects[row][col].getBufferedImage(),col * ICON_width, row * ICON_height, ICON_width, ICON_height, null );
+        // store the map
+        for (int h = 0; h < map.length; h++) {
+            for (int w = 0; w < map[0].length; w++) {
+                this.gameObjects[h][w] = map[h][w];
             }
         }
-        
-//        g.drawImage(null, ICON_height, ICON_height, ICON_height, ICON_height, rows, cols, ICON_width, ICON_height, getFocusCycleRootAncestor())
-    } 
+    }
+
+    /**
+     * Paint the map
+     */
+    public void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                g2.drawImage((Image) gameObjects[row][col].getBufferedImage(), col * ICON_width, row * ICON_height,
+                        ICON_width, ICON_height, null);
+            }
+        }
+    }
 
 }
