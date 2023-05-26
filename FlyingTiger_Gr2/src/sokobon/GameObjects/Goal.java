@@ -6,11 +6,13 @@ import sokobon.GameObject;
 
 /**
  * The Red circle that the boxes must come to or occur
+ * This class is used to define the Goal object, inherits from GameObject.java
+ * with id = 'g' and icon = blankmarked.png
  * 
  * @author aliab
  *
  */
-// RedDots
+
 public class Goal extends GameObject {
 
 	/**

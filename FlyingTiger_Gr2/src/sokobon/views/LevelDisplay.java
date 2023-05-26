@@ -1,8 +1,4 @@
-/**
- * @author: Abd Alrahman Atieh
- * 
- * this class is used to display the current level, and the total number of levels in a JLabel. 
- */
+
 package sokobon.views;
 
 import javax.swing.JLabel;
@@ -11,6 +7,12 @@ import javax.swing.event.ChangeListener;
 
 import sokobon.models.DataModel;
 
+/**
+ * @author: Abd Alrahman Atieh
+ * 
+ *          this class is used to display the current level, and the total
+ *          number of levels in a JLabel.
+ */
 public class LevelDisplay extends JLabel implements ChangeListener {
 
 	/**

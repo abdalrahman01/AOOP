@@ -4,12 +4,13 @@ import java.io.File;
 
 import sokobon.GameObject;
 
+/**
+ * The Player object that the user controls. this class is used to define the
+ * Player object, inherits from GameObject.java
+ * with two ids {p: player, x: player standing on goal} and icon = player.png
+ */
 public class Player extends GameObject {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private char PLAYER_STANDING_ON_GOAL = 'x';
 	private final int UP = 0;
 	private final int DOWN = 1;

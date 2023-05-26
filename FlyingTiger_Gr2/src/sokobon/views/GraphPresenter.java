@@ -11,6 +11,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+/**
+ * This class is used to display current map of the game in a graphical way.
+ * it is an observer of the data model. each time the data model changes, it
+ * repaints the whole map.
+ */
 public class GraphPresenter extends JPanel implements ChangeListener {
 
     private static final long serialVersionUID = 1L;

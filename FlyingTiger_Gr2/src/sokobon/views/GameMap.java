@@ -12,6 +12,11 @@ import sokobon.GameObjects.Player;
 import sokobon.GameObjects.Wall;
 import sokobon.models.*;;
 
+/**
+ * Thi GameMap is an interface between the GameObjects and the DataModel. It is
+ * an observer of the DataModel. it let's the GameObjects to update the
+ * DataModel
+ */
 public class GameMap extends JComponent implements ChangeListener {
 
 	/**

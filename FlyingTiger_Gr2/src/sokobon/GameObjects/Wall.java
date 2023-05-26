@@ -4,6 +4,12 @@ import java.io.File;
 
 import sokobon.GameObject;
 
+/*
+ * this class defines the Wall object, inherits from GameObject.java
+ * with id = '#' and icon = wall.png
+ * Wall is stationary doesn't move
+ *
+ */
 public class Wall extends GameObject {
 
 	private static final long serialVersionUID = 1L;

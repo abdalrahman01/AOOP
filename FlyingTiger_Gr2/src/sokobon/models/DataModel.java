@@ -8,6 +8,11 @@ import sokobon.GameObjects.*;
 import sokobon.views.GameMap;
 import sokobon.Level;
 
+/**
+ * This class is used to store the data of the game. and to update the observers
+ * whenever the data changes.
+ * 
+ */
 public class DataModel {
 
     /**

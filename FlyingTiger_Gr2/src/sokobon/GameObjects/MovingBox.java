@@ -4,6 +4,12 @@ import java.io.File;
 
 import sokobon.GameObject;
 
+/**
+ * This class is used to define the MovingBox object, inherits from
+ * GameObject.java
+ * with id = 'o' and icon = crate.png
+ * 
+ */
 public class MovingBox extends GameObject {
 
 	/**

@@ -7,6 +7,10 @@ package sokobon.GameObjects;
 import java.io.File;
 import sokobon.GameObject;
 
+/**
+ * This class is used to define the Floor object, inherits from GameObject.java
+ * with id = ' ' and icon = blank.png
+ */
 public class Floor extends GameObject {
 
 	/**
