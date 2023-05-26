@@ -30,6 +30,11 @@ public class ControllerWindow extends JPanel {
     private static final File ICON_LEFT = new File("src/sokobon/resources/imgs/sokoban_icons/LEFT.png");
     private static final File ICON_RIGHT = new File("src/sokobon/resources/imgs/sokoban_icons/RIGHT.png");
 
+    /**
+     * To test the GUI
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game Controller");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,7 +57,14 @@ public class ControllerWindow extends JPanel {
 
     private JMenuBar menu;
 
+    /**
+     * this is needed to get to the player in gameMap
+     */
     private GameMap gameMap;
+
+    /**
+     * when the player is in pull mode, he can pull boxes
+     */
     private boolean isPullMode;
 
     public ControllerWindow() {
@@ -112,11 +124,23 @@ public class ControllerWindow extends JPanel {
         addClickedListners();
     }
 
+    /**
+     * Get a reference to the gameMap in order to controll the player.
+     * 
+     * @param button
+     * @param icon
+     * @param width
+     * @param height
+     */
     public void attachGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 
+    /**
+     * add clicked listners to the buttons
+     */
     private void addClickedListners() {
+        // moves down, but also pulls if in pull mode
         buttonDOWN.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (isPullMode)
@@ -125,6 +149,7 @@ public class ControllerWindow extends JPanel {
                     gameMap.player.moveDown();
             }
         });
+        // moves up, but also pulls if in pull mode
         buttonUP.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (isPullMode)
@@ -134,6 +159,7 @@ public class ControllerWindow extends JPanel {
 
             }
         });
+        // moves the player left, but also pulls if in pull mode
         buttonLEFT.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (isPullMode)
@@ -143,6 +169,7 @@ public class ControllerWindow extends JPanel {
 
             }
         });
+        // moves right, but also pulls if in pull mode
         buttonRIGHT.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (isPullMode)
@@ -152,6 +179,7 @@ public class ControllerWindow extends JPanel {
 
             }
         });
+        // pull button is a toggle button
         pullButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 isPullMode = !isPullMode;
@@ -164,6 +192,16 @@ public class ControllerWindow extends JPanel {
 
     }
 
+    /**
+     * Set the design of the button. the button will be resized to the width and.
+     * 
+     * @param button        which button to set the design
+     * @param imageIconFile the Game Icon file, should be in the
+     *                      resources/imgs/sokoban_icons folder and with extinsion
+     *                      .png/.jpg
+     * @param width         the width of the painted image
+     * @param height        the height of the painted image
+     */
     private void setDesignButton(JButton button, File imageIconFile, int width, int height) {
         try {
             BufferedImage mainImage = ImageIO.read(imageIconFile);
