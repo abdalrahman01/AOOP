@@ -32,11 +32,6 @@ public abstract class GameObject {
 	public GameMap gameMap;
 
 	/**
-	 * The size of the GameObject
-	 */
-	private int width, height;
-
-	/**
 	 * The design of the GameObject
 	 */
 	private JLabel icon;
@@ -61,11 +56,6 @@ public abstract class GameObject {
 	 * distinguish between GameObject without the need of use (instancof)
 	 */
 	protected char id;
-
-	public GameMap getGameObjectFromGameMap(int row, int col) {
-
-		return gameMap;
-	}
 
 	public void setGameMap(GameMap gameMap) {
 		this.gameMap = gameMap;
@@ -103,42 +93,6 @@ public abstract class GameObject {
 	}
 
 	/**
-	 * Get the width of the object
-	 * 
-	 * @return
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * Set the width for the object
-	 * 
-	 * @param width
-	 */
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	/**
-	 * Get the height of the object
-	 * 
-	 * @return
-	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/**
-	 * Set the height for the object
-	 * 
-	 * @param height
-	 */
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	/**
 	 * Get the image or icon of the object
 	 * 
 	 * @return
@@ -148,9 +102,9 @@ public abstract class GameObject {
 	}
 
 	/**
-	 * Set the icon or image for the object
+	 * Set the icon and bufferd image for the GameObject
 	 * 
-	 * @param icon
+	 * @param the file should be of type .png or .jpeg
 	 */
 	public void setIconGameObject(File img) {
 
@@ -167,28 +121,60 @@ public abstract class GameObject {
 
 	}
 
-	@Override
 	public String toString() {
 		return "" + getID();
 	}
 
 	/**
-	 * These four class move the object in the four direction
+	 * @return the id of the GameObject of type char
 	 */
 	public char getID() {
 		return id;
 	}
 
+	/**
+	 * change id of GameObject
+	 * 
+	 * @param id char value:
+	 */
 	public void setID(char id) {
 		this.id = id;
 	}
 
+	/**
+	 * must return true if GameObject has moved in that direction, the
+	 * movement is defined by the user.
+	 * 
+	 * @return true if GameObject has moved
+	 *         false otherwise
+	 */
 	public abstract boolean moveUp();
 
+	/**
+	 * must return true if GameObject has moved in that direction, the
+	 * movement is defined by the user.
+	 * 
+	 * @return true if GameObject has moved
+	 *         false otherwise
+	 */
 	public abstract boolean moveDown();
 
+	/**
+	 * must return true if GameObject has moved in that direction, the
+	 * movement is defined by the user.
+	 * 
+	 * @return true if GameObject has moved
+	 *         false otherwise
+	 */
 	public abstract boolean moveLeft();
 
+	/**
+	 * must return true if GameObject has moved in that direction, the
+	 * movement is defined by the user.
+	 * 
+	 * @return true if GameObject has moved
+	 *         false otherwise
+	 */
 	public abstract boolean moveRight();
 
 }
