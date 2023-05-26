@@ -16,11 +16,20 @@ public class Player extends GameObject {
 	private final int RIGHT = 2;
 	private final int LEFT = 3;
 
+	/**
+	 * Defines the id and the icon of the Player object
+	 */
 	public Player() {
 		id = 'p';
 		setIconGameObject(new File("src/sokobon/resources/imgs/sokoban_icons/player.png"));
 	}
 
+	/**
+	 * the row and col refers to the position in GameMap.java
+	 * 
+	 * @param row the y position
+	 * @param col the x position
+	 */
 	public Player(int row, int col) {
 		this();
 		setPosRow(row);
@@ -116,12 +125,6 @@ public class Player extends GameObject {
 
 	}
 
-	/**
-	 * Pull the object using the player
-	 */
-	public void pull() {
-	}
-
 	public boolean moveUp() {
 		return move(UP);
 	}
@@ -139,19 +142,16 @@ public class Player extends GameObject {
 	}
 
 	public void moveLeftAndPull() {
-		// TODO Auto-generated method stub
 		pull(LEFT);
 
 	}
 
 	public void moveRightAndPull() {
-		// TODO Auto-generated method stub
 		pull(RIGHT);
 
 	}
 
 	public void moveUpAndPull() {
-		// TODO Auto-generated method stub
 		pull(UP);
 
 	}
@@ -161,6 +161,13 @@ public class Player extends GameObject {
 
 	}
 
+	/**
+	 * turns on pull mode, if there is a box behind it will pull it and Player
+	 * moves, or Player moves only.
+	 * 
+	 * @param direction int {0: Up, 1: Down, 2; Rightm 3: left}
+	 * @return true if box pulled successfully.
+	 */
 	private boolean pull(int direction) {
 		int oldPosRow = posRow;
 		int oldPosCol = posCol;
